@@ -1,0 +1,955 @@
+<toc label="Travaux pratiques de langage C" topic="index.html">
+  <topic label="Modules" href="modules.html">
+    <topic label="Application main functions" href="group__App.html">
+      <topic label="App_run" href="group__App.html#ga564bea34c350b6eb513aa2ac2e512c5f"/>
+      <topic label="MainWindow_create" href="group__App.html#ga0f92704dd268924f59a056459a53d495"/>
+    </topic>
+    <topic label="Catalog related stuff" href="group__Catalog.html">
+      <topic label="A specialized treeview model backed by our data structure instead of GTK+ ones" href="group__GtkCatalogModel.html">
+        <topic label="GtkCatalogModel" href="struct__GtkCatalogModel.html">
+          <topic label="catalogDB" href="struct__GtkCatalogModel.html#a4d7999b935b08c419f385e5beddde6ee"/>
+          <topic label="parent" href="struct__GtkCatalogModel.html#a119e262dd6f86f1488d00a7ce2d28abf"/>
+          <topic label="shouldCloseDB" href="struct__GtkCatalogModel.html#aa9ba3ae86adc8c2b1efe995e7d600ea8"/>
+          <topic label="stamp" href="struct__GtkCatalogModel.html#a0fa107e460911891fac8f819b2e7220b"/>
+        </topic>
+        <topic label="GtkCatalogModelClass" href="struct__GtkCatalogModelClass.html">
+          <topic label="parent_class" href="struct__GtkCatalogModelClass.html#af6eccf80858ff5e5b9385f80ccdefa7c"/>
+        </topic>
+        <topic label="GTKCATALOGMODEL" href="group__GtkCatalogModel.html#gae20c3776e6a9c1f237a4adfd9a202643"/>
+        <topic label="GTKCATALOGMODEL_CLASS" href="group__GtkCatalogModel.html#ga5155181f239fffb41b864cbcb8115313"/>
+        <topic label="GTKCATALOGMODEL_IS_LIST" href="group__GtkCatalogModel.html#gae2d2483fb0f8cf8eebd036ec4c1fbb83"/>
+        <topic label="GTKCATALOGMODEL_IS_LIST_CLASS" href="group__GtkCatalogModel.html#ga088837c11ecf641cdb1c271481305c55"/>
+        <topic label="GTKCATALOGMODEL_LIST_GET_CLASS" href="group__GtkCatalogModel.html#ga551b0e3f6729f6b4b03e84f7d7edad41"/>
+        <topic label="GTKCATALOGMODEL_TYPE_LIST" href="group__GtkCatalogModel.html#ga825c3b586d7014198a6521d52688a5f5"/>
+        <topic label="GtkCatalogModel_append_record" href="group__GtkCatalogModel.html#ga9db2d80542fb498f24a7a98a3c8b37b4"/>
+        <topic label="GtkCatalogModel_change_record" href="group__GtkCatalogModel.html#ga15ca1d2f9b1eb7ae6577ea17846a1367"/>
+        <topic label="GtkCatalogModel_get_type" href="group__GtkCatalogModel.html#ga2085390f66b0f2353e043cedc7037a2d"/>
+        <topic label="GtkCatalogModel_insert_record" href="group__GtkCatalogModel.html#ga98ffaceae96f8457675f7fd025842f6c"/>
+        <topic label="GtkCatalogModel_new" href="group__GtkCatalogModel.html#ga113f141feccff1fd3c4ab9581ee92fe6"/>
+        <topic label="GtkCatalogModel_remove_record" href="group__GtkCatalogModel.html#gaaa18696a43ce08985f84ce2a406933d5"/>
+      </topic>
+      <topic label="Catalog database" href="group__CatalogDB.html">
+        <topic label="CatalogDB" href="structCatalogDB.html">
+          <topic label="CatalogDB_appendRecord" href="group__CatalogDB.html#ga15dd74b3632f41346fd6511b542dd8db"/>
+          <topic label="CatalogDB_close" href="group__CatalogDB.html#ga38e2b6b2af8873e53d615cd74ca08575"/>
+          <topic label="CatalogDB_create" href="group__CatalogDB.html#ga9eabf29012eaa7fc83709f1c492a7849"/>
+          <topic label="CatalogDB_getFieldValueAsString" href="group__CatalogDB.html#ga7affd757b1f1624c10516e7e282246c6"/>
+          <topic label="CatalogDB_getRecordCount" href="group__CatalogDB.html#ga8ca1cfcd9c0a9ef4d99738df0ddd8686"/>
+          <topic label="CatalogDB_insertRecord" href="group__CatalogDB.html#ga59814201ea83f6629d44a1fe9ac547da"/>
+          <topic label="CatalogDB_open" href="group__CatalogDB.html#ga454701ee6684d6de516e5838a2132bdb"/>
+          <topic label="CatalogDB_openOrCreate" href="group__CatalogDB.html#ga4357d02bee0824bd809e698163d88ffe"/>
+          <topic label="CatalogDB_readRecord" href="group__CatalogDB.html#gaef9df9236eac0f50bea19d2a437c815c"/>
+          <topic label="CatalogDB_removeRecord" href="group__CatalogDB.html#ga668d5d1f38dac241f858814aaa18c2b6"/>
+          <topic label="CatalogDB_writeRecord" href="group__CatalogDB.html#gaa95720b08873d3f03aa1097a592d7efe"/>
+          <topic label="file" href="structCatalogDB.html#a702945180aa732857b380a007a7e2a21"/>
+          <topic label="recordCount" href="structCatalogDB.html#af2b3801705d4d78cc1f2ede923a177e6"/>
+        </topic>
+        <topic label="CatalogDB_appendRecord" href="group__CatalogDB.html#ga15dd74b3632f41346fd6511b542dd8db"/>
+        <topic label="CatalogDB_close" href="group__CatalogDB.html#ga38e2b6b2af8873e53d615cd74ca08575"/>
+        <topic label="CatalogDB_create" href="group__CatalogDB.html#ga9eabf29012eaa7fc83709f1c492a7849"/>
+        <topic label="CatalogDB_getFieldValueAsString" href="group__CatalogDB.html#ga7affd757b1f1624c10516e7e282246c6"/>
+        <topic label="CatalogDB_getRecordCount" href="group__CatalogDB.html#ga8ca1cfcd9c0a9ef4d99738df0ddd8686"/>
+        <topic label="CatalogDB_insertRecord" href="group__CatalogDB.html#ga59814201ea83f6629d44a1fe9ac547da"/>
+        <topic label="CatalogDB_open" href="group__CatalogDB.html#ga454701ee6684d6de516e5838a2132bdb"/>
+        <topic label="CatalogDB_openOrCreate" href="group__CatalogDB.html#ga4357d02bee0824bd809e698163d88ffe"/>
+        <topic label="CatalogDB_readRecord" href="group__CatalogDB.html#gaef9df9236eac0f50bea19d2a437c815c"/>
+        <topic label="CatalogDB_removeRecord" href="group__CatalogDB.html#ga668d5d1f38dac241f858814aaa18c2b6"/>
+        <topic label="CatalogDB_writeRecord" href="group__CatalogDB.html#gaa95720b08873d3f03aa1097a592d7efe"/>
+        <topic label="CATALOGDB_FILENAME" href="group__CatalogDB.html#ga663c03a2f2748da8c7a572f17cf06ef1"/>
+      </topic>
+      <topic label="Catalog records" href="group__CatalogRecord.html">
+        <topic label="CatalogRecord" href="structCatalogRecord.html">
+          <topic label="CatalogRecord_edit" href="group__CatalogRecordEditor.html#ga2176fd095ada54d514f19126bc05cea1"/>
+          <topic label="CatalogRecord_finalize" href="group__CatalogRecord.html#ga8823e779dd4b448e11870843c2f26f4d"/>
+          <topic label="CatalogRecord_getFieldProperties" href="group__CatalogRecordEditor.html#ga64e48fd820803b196a1b1e2aa1aeb16b"/>
+          <topic label="CatalogRecord_init" href="group__CatalogRecord.html#ga9691e16a453bb09d3bd4d0533be22371"/>
+          <topic label="CatalogRecord_read" href="group__CatalogRecord.html#ga9b77150a2daa458456bdc0d37769ff3a"/>
+          <topic label="CatalogRecord_write" href="group__CatalogRecord.html#ga645558a1fce53f1160a05a0dd93f6d09"/>
+          <topic label="basePrice" href="structCatalogRecord.html#aa202ff7ac9da4792e13c732cecd057cd"/>
+          <topic label="code" href="structCatalogRecord.html#a5b9e1322ebc26e12c192f03bccba2770"/>
+          <topic label="designation" href="structCatalogRecord.html#a238af89adb357ae219950bae456a4d07"/>
+          <topic label="rateOfVAT" href="structCatalogRecord.html#a9b94cceae6d68929f7e6065540058f1d"/>
+          <topic label="sellingPrice" href="structCatalogRecord.html#a3ba5a6e4bf38bba226358967cfa33302"/>
+          <topic label="unity" href="structCatalogRecord.html#a9e8ebe5266edb99433e33a7e8b8956ce"/>
+        </topic>
+        <topic label="CATALOGRECORD_BASEPRICE_SIZE" href="group__CatalogRecord.html#ga8cba57b0349aa39f25f4045c3265b565"/>
+        <topic label="CATALOGRECORD_CODE_SIZE" href="group__CatalogRecord.html#gae956f89c18cfd0827de08aa5f085c469"/>
+        <topic label="CATALOGRECORD_DESIGNATION_SIZE" href="group__CatalogRecord.html#gad1a4b447cc7cb551c46107a30ebb976d"/>
+        <topic label="CATALOGRECORD_MAXSTRING_SIZE" href="group__CatalogRecord.html#ga27759839e5e939fd24482caa85d43248"/>
+        <topic label="CATALOGRECORD_RATEOFVAT_SIZE" href="group__CatalogRecord.html#ga5c33824e0196b66137d2352d6dda5d66"/>
+        <topic label="CATALOGRECORD_SELLINGPRICE_SIZE" href="group__CatalogRecord.html#ga6f7b339d4828c8351a78c436dbeb907c"/>
+        <topic label="CATALOGRECORD_SIZE" href="group__CatalogRecord.html#ga1dd6da61c893e0ee8f798e8ce72c3698"/>
+        <topic label="CATALOGRECORD_UNITY_SIZE" href="group__CatalogRecord.html#ga59b416c0023f88bd9ffa58449ae37919"/>
+        <topic label="CatalogRecord_finalize" href="group__CatalogRecord.html#ga8823e779dd4b448e11870843c2f26f4d"/>
+        <topic label="CatalogRecord_getValue_basePrice" href="group__CatalogRecord.html#ga4742e9230111b8a692013b3d47e470b6"/>
+        <topic label="CatalogRecord_getValue_code" href="group__CatalogRecord.html#gafcafd99c3d08b34ebd0b92e4a2a655c0"/>
+        <topic label="CatalogRecord_getValue_designation" href="group__CatalogRecord.html#ga588e8fe39d8653cd9c4bd1dcb098ac82"/>
+        <topic label="CatalogRecord_getValue_rateOfVAT" href="group__CatalogRecord.html#gaa5b25b15d8cec570c6f9b260488b91df"/>
+        <topic label="CatalogRecord_getValue_sellingPrice" href="group__CatalogRecord.html#ga637f0697b591384b32e757a9c64df877"/>
+        <topic label="CatalogRecord_getValue_unity" href="group__CatalogRecord.html#ga4394b55731a78be99f4559aae9f0d05f"/>
+        <topic label="CatalogRecord_init" href="group__CatalogRecord.html#ga9691e16a453bb09d3bd4d0533be22371"/>
+        <topic label="CatalogRecord_isValueValid_code" href="group__CatalogRecord.html#gab3208e5d1d0eb1809e5bc131e5ea7b3f"/>
+        <topic label="CatalogRecord_isValueValid_positiveNumber" href="group__CatalogRecord.html#gae683eee41f4412e8aca7de9315ddad4a"/>
+        <topic label="CatalogRecord_read" href="group__CatalogRecord.html#ga9b77150a2daa458456bdc0d37769ff3a"/>
+        <topic label="CatalogRecord_setValue_basePrice" href="group__CatalogRecord.html#gad8abecdcea62c1080810a4a6a7c66ff4"/>
+        <topic label="CatalogRecord_setValue_code" href="group__CatalogRecord.html#ga7249287e27ce879033fe61286a2dee83"/>
+        <topic label="CatalogRecord_setValue_designation" href="group__CatalogRecord.html#ga3e90278bd5e98ef2de93f320bc296469"/>
+        <topic label="CatalogRecord_setValue_rateOfVAT" href="group__CatalogRecord.html#ga95c45d2a1453d964a367ee47ca7270c4"/>
+        <topic label="CatalogRecord_setValue_sellingPrice" href="group__CatalogRecord.html#gad0dc66f5db2ddb1ad9880066588cb478"/>
+        <topic label="CatalogRecord_setValue_unity" href="group__CatalogRecord.html#gac9b4a719fb92942bc0810438f63355ca"/>
+        <topic label="CatalogRecord_write" href="group__CatalogRecord.html#ga645558a1fce53f1160a05a0dd93f6d09"/>
+      </topic>
+      <topic label="Catalog records editing" href="group__CatalogRecordEditor.html">
+        <topic label="CatalogRecord_FieldProperties" href="structCatalogRecord__FieldProperties.html">
+          <topic label="alignment" href="structCatalogRecord__FieldProperties.html#a9b609437b0a9c5266747f6a31b8bf90e"/>
+          <topic label="getValue" href="structCatalogRecord__FieldProperties.html#ad53bd3d6ee0adf92c1dc67658025b0a5"/>
+          <topic label="isValueValid" href="structCatalogRecord__FieldProperties.html#abc0ac9dcb88ba42aa8b9e0848afce887"/>
+          <topic label="maxlength" href="structCatalogRecord__FieldProperties.html#a601639a266b6cd1b91eddacff854c9ac"/>
+          <topic label="minDisplayWidth" href="structCatalogRecord__FieldProperties.html#a0e040e466cb33f8dfab26c9a85b66278"/>
+          <topic label="name" href="structCatalogRecord__FieldProperties.html#a8f8f80d37794cde9472343e4487ba3eb"/>
+          <topic label="setValue" href="structCatalogRecord__FieldProperties.html#a47e2b0ee0b755beb799b8e36251b4ad8"/>
+          <topic label="size" href="structCatalogRecord__FieldProperties.html#a439227feff9d7f55384e8780cfc2eb82"/>
+        </topic>
+        <topic label="CatalogRecord_Function_getValue" href="group__CatalogRecordEditor.html#ga3826ca5da1fb53cdf75f281eae9b0ab1"/>
+        <topic label="CatalogRecord_Function_isValueValid" href="group__CatalogRecordEditor.html#gab832f2a689f761a8ff2020e3c4d6ce55"/>
+        <topic label="CatalogRecord_Function_setValue" href="group__CatalogRecordEditor.html#ga7c354a53cd523ca272071eec0cb14110"/>
+        <topic label="CatalogRecord_FieldIdentifier" href="group__CatalogRecordEditor.html#ga3833ced63c1c0a11655447e5136c2ca7">
+          <topic label="CATALOGRECORD_CODE_FIELD" href="group__CatalogRecordEditor.html#gga3833ced63c1c0a11655447e5136c2ca7a4d204dd316dccc3a199567e3dc36f2eb"/>
+          <topic label="CATALOGRECORD_DESIGNATION_FIELD" href="group__CatalogRecordEditor.html#gga3833ced63c1c0a11655447e5136c2ca7a02bda3b6ab5088442000ebdb7253a9c0"/>
+          <topic label="CATALOGRECORD_UNITY_FIELD" href="group__CatalogRecordEditor.html#gga3833ced63c1c0a11655447e5136c2ca7adf423818130c55d573b79b4438ac27a1"/>
+          <topic label="CATALOGRECORD_BASEPRICE_FIELD" href="group__CatalogRecordEditor.html#gga3833ced63c1c0a11655447e5136c2ca7a5cdf683f1a32c539d62b89ef592875b8"/>
+          <topic label="CATALOGRECORD_SELLINGPRICE_FIELD" href="group__CatalogRecordEditor.html#gga3833ced63c1c0a11655447e5136c2ca7a2064e6e10b7184e6f28ee31d8f11e631"/>
+          <topic label="CATALOGRECORD_RATEOFVAT_FIELD" href="group__CatalogRecordEditor.html#gga3833ced63c1c0a11655447e5136c2ca7a7279207f2d7305e062cbde8e6d9e5437"/>
+          <topic label="CATALOGRECORD_FIELDCOUNT" href="group__CatalogRecordEditor.html#gga3833ced63c1c0a11655447e5136c2ca7a4020258654f2faee99043dda081dedbd"/>
+        </topic>
+        <topic label="CatalogRecord_edit" href="group__CatalogRecordEditor.html#ga2176fd095ada54d514f19126bc05cea1"/>
+        <topic label="CatalogRecord_getFieldProperties" href="group__CatalogRecordEditor.html#ga64e48fd820803b196a1b1e2aa1aeb16b"/>
+      </topic>
+      <topic label="Management of the catalog of products" href="group__CatalogUI.html">
+        <topic label="Catalog_manage" href="group__CatalogUI.html#ga4f49a78c4cd51535ec3a4666e0c955a0"/>
+        <topic label="Catalog_select" href="group__CatalogUI.html#ga25b664096a6743c0cdd8268de24d0545"/>
+      </topic>
+    </topic>
+    <topic label="Customers related stuff" href="group__Customer.html">
+      <topic label="A specialized treeview model backed by our data structure instead of GTK+ ones" href="group__GtkCustomerModel.html">
+        <topic label="GtkCustomerModel" href="struct__GtkCustomerModel.html">
+          <topic label="clientDB" href="struct__GtkCustomerModel.html#a2dfd227c0e9e9c42c12424b48e9ce0ba"/>
+          <topic label="parent" href="struct__GtkCustomerModel.html#a119e262dd6f86f1488d00a7ce2d28abf"/>
+          <topic label="shouldCloseDB" href="struct__GtkCustomerModel.html#aa9ba3ae86adc8c2b1efe995e7d600ea8"/>
+          <topic label="stamp" href="struct__GtkCustomerModel.html#a0fa107e460911891fac8f819b2e7220b"/>
+        </topic>
+        <topic label="GtkCustomerModelClass" href="struct__GtkCustomerModelClass.html">
+          <topic label="parent_class" href="struct__GtkCustomerModelClass.html#af6eccf80858ff5e5b9385f80ccdefa7c"/>
+        </topic>
+        <topic label="GTKCUSTOMERMODEL" href="group__GtkCustomerModel.html#ga75031bb34535282b4906531c39578f7c"/>
+        <topic label="GTKCUSTOMERMODEL_CLASS" href="group__GtkCustomerModel.html#ga441697cc5a5077a1f89454fedb485630"/>
+        <topic label="GTKCUSTOMERMODEL_IS_LIST" href="group__GtkCustomerModel.html#ga4a41fa000b3bc76fd69d73d8fa8cf648"/>
+        <topic label="GTKCUSTOMERMODEL_IS_LIST_CLASS" href="group__GtkCustomerModel.html#ga8ed58a5019ae446da16f8649d53609ad"/>
+        <topic label="GTKCUSTOMERMODEL_LIST_GET_CLASS" href="group__GtkCustomerModel.html#gaa253327a2960ff5ecbfced4490595e12"/>
+        <topic label="GTKCUSTOMERMODEL_TYPE_LIST" href="group__GtkCustomerModel.html#ga9da64829312943c283a175c04fb6fc1d"/>
+        <topic label="GtkCustomerModel_append_record" href="group__GtkCustomerModel.html#ga740f604e984c1a1bdcf8686f77a1641b"/>
+        <topic label="GtkCustomerModel_change_record" href="group__GtkCustomerModel.html#ga6dc833e658a293271ddf8f44e5bc528a"/>
+        <topic label="GtkCustomerModel_get_type" href="group__GtkCustomerModel.html#gac5cc050a4867bff4661c6b69d0cc4c69"/>
+        <topic label="GtkCustomerModel_insert_record" href="group__GtkCustomerModel.html#ga684fad5cef4f73d6d92488ebad0acf57"/>
+        <topic label="GtkCustomerModel_new" href="group__GtkCustomerModel.html#ga97b902acd6f4166b4b2661fd6aa21f1a"/>
+        <topic label="GtkCustomerModel_remove_record" href="group__GtkCustomerModel.html#ga99592941d1c02172bcdca1712027e564"/>
+      </topic>
+      <topic label="Customer database" href="group__CustomerDB.html">
+        <topic label="CustomerDB" href="structCustomerDB.html">
+          <topic label="CustomerDB_appendRecord" href="group__CustomerDB.html#gaefaa5cc0e3b64b57babf177350809419"/>
+          <topic label="CustomerDB_close" href="group__CustomerDB.html#ga49ad4472c10433a5bcb111ddf7a5d56b"/>
+          <topic label="CustomerDB_create" href="group__CustomerDB.html#gab40e45188e169da65e44e8e278486e29"/>
+          <topic label="CustomerDB_getFieldValueAsString" href="group__CustomerDB.html#ga989a5870ad30ebf203409d34b1c2432e"/>
+          <topic label="CustomerDB_getRecordCount" href="group__CustomerDB.html#ga7229666153701e0e44c7522e7b848613"/>
+          <topic label="CustomerDB_insertRecord" href="group__CustomerDB.html#gada390c313707bb7e184036e438872651"/>
+          <topic label="CustomerDB_open" href="group__CustomerDB.html#ga1c2b5cee888f572992b21f323039ef18"/>
+          <topic label="CustomerDB_openOrCreate" href="group__CustomerDB.html#gaafca52f13d030d9f2096064ab5efb444"/>
+          <topic label="CustomerDB_readRecord" href="group__CustomerDB.html#ga03605b3b1a76149b39e2d9aa72a508d5"/>
+          <topic label="CustomerDB_removeRecord" href="group__CustomerDB.html#ga5bdc043ab31737fc0aa136dc26080946"/>
+          <topic label="CustomerDB_writeRecord" href="group__CustomerDB.html#ga4f052abd0c61e5ee1b188bbe01fe2fd7"/>
+          <topic label="file" href="structCustomerDB.html#a702945180aa732857b380a007a7e2a21"/>
+          <topic label="recordCount" href="structCustomerDB.html#af2b3801705d4d78cc1f2ede923a177e6"/>
+        </topic>
+        <topic label="CustomerDB_appendRecord" href="group__CustomerDB.html#gaefaa5cc0e3b64b57babf177350809419"/>
+        <topic label="CustomerDB_close" href="group__CustomerDB.html#ga49ad4472c10433a5bcb111ddf7a5d56b"/>
+        <topic label="CustomerDB_create" href="group__CustomerDB.html#gab40e45188e169da65e44e8e278486e29"/>
+        <topic label="CustomerDB_getFieldValueAsString" href="group__CustomerDB.html#ga989a5870ad30ebf203409d34b1c2432e"/>
+        <topic label="CustomerDB_getRecordCount" href="group__CustomerDB.html#ga7229666153701e0e44c7522e7b848613"/>
+        <topic label="CustomerDB_insertRecord" href="group__CustomerDB.html#gada390c313707bb7e184036e438872651"/>
+        <topic label="CustomerDB_open" href="group__CustomerDB.html#ga1c2b5cee888f572992b21f323039ef18"/>
+        <topic label="CustomerDB_openOrCreate" href="group__CustomerDB.html#gaafca52f13d030d9f2096064ab5efb444"/>
+        <topic label="CustomerDB_readRecord" href="group__CustomerDB.html#ga03605b3b1a76149b39e2d9aa72a508d5"/>
+        <topic label="CustomerDB_removeRecord" href="group__CustomerDB.html#ga5bdc043ab31737fc0aa136dc26080946"/>
+        <topic label="CustomerDB_writeRecord" href="group__CustomerDB.html#ga4f052abd0c61e5ee1b188bbe01fe2fd7"/>
+        <topic label="CUSTOMERDB_FILENAME" href="group__CustomerDB.html#gad5f7d3454b595fab6dbd14470e96098b"/>
+      </topic>
+      <topic label="Customer record" href="group__CustomerRecord.html">
+        <topic label="CustomerRecord" href="structCustomerRecord.html">
+          <topic label="CustomerRecord_edit" href="group__CustomerRecordEditor.html#ga54cbf0b508d808fd6665248f83240455"/>
+          <topic label="CustomerRecord_finalize" href="group__CustomerRecord.html#ga6c43ed660b9e3789cca3b7fe87a5b235"/>
+          <topic label="CustomerRecord_getFieldProperties" href="group__CustomerRecordEditor.html#ga65de9a142281fa3532e85d3c09b6f523"/>
+          <topic label="CustomerRecord_init" href="group__CustomerRecord.html#ga8ebf543722d2f309b318f87e591e86ae"/>
+          <topic label="CustomerRecord_read" href="group__CustomerRecord.html#ga12270b2635140d7a72cc2a7aaa49169d"/>
+          <topic label="CustomerRecord_write" href="group__CustomerRecord.html#ga0d3a15ee68f0bddf5e24940230ea737d"/>
+          <topic label="address" href="structCustomerRecord.html#a666f073c79b58211733013b9e7217567"/>
+          <topic label="name" href="structCustomerRecord.html#a479b51f76b74245617707fc5e9f38da0"/>
+          <topic label="postalCode" href="structCustomerRecord.html#abc78132ec841694bdd43cd0033dc4c3f"/>
+          <topic label="town" href="structCustomerRecord.html#a30a63918799464a65616e4b159126e66"/>
+        </topic>
+        <topic label="CUSTOMERRECORD_ADDRESS_SIZE" href="group__CustomerRecord.html#gaa1c5142e057859f4aa496131b6dead5c"/>
+        <topic label="CUSTOMERRECORD_MAXSTRINGSIZE" href="group__CustomerRecord.html#ga8901a6175e600036c54c90518f43848a"/>
+        <topic label="CUSTOMERRECORD_NAME_SIZE" href="group__CustomerRecord.html#gafe4ea2957d8d23b3c8bf309fc41b1901"/>
+        <topic label="CUSTOMERRECORD_POSTALCODE_SIZE" href="group__CustomerRecord.html#ga7c2ac6812da96759fc909463123c5c19"/>
+        <topic label="CUSTOMERRECORD_SIZE" href="group__CustomerRecord.html#gaf359391f87ea55e7cf63cb9ef42f63cc"/>
+        <topic label="CUSTOMERRECORD_TOWN_SIZE" href="group__CustomerRecord.html#gacd17caaed5693965ab12d2f8cea12bcd"/>
+        <topic label="CustomerRecord_finalize" href="group__CustomerRecord.html#ga6c43ed660b9e3789cca3b7fe87a5b235"/>
+        <topic label="CustomerRecord_getValue_address" href="group__CustomerRecord.html#gacf7239876efaea2e754f3ebdc6d0102d"/>
+        <topic label="CustomerRecord_getValue_name" href="group__CustomerRecord.html#ga4fd38725877c07e763cd77652cc811cc"/>
+        <topic label="CustomerRecord_getValue_postalCode" href="group__CustomerRecord.html#ga6ea3c5988b11d7765dba4abaef7111ce"/>
+        <topic label="CustomerRecord_getValue_town" href="group__CustomerRecord.html#ga766ee9957ada3bdaa490c8a3db4d3600"/>
+        <topic label="CustomerRecord_init" href="group__CustomerRecord.html#ga8ebf543722d2f309b318f87e591e86ae"/>
+        <topic label="CustomerRecord_read" href="group__CustomerRecord.html#ga12270b2635140d7a72cc2a7aaa49169d"/>
+        <topic label="CustomerRecord_setValue_address" href="group__CustomerRecord.html#ga3e9bbd84873279519efe454b05c73bec"/>
+        <topic label="CustomerRecord_setValue_name" href="group__CustomerRecord.html#ga5216bf82c1fda694a626dd9edddb89e7"/>
+        <topic label="CustomerRecord_setValue_postalCode" href="group__CustomerRecord.html#ga9c008df440b7bf6791dd9d2cf11ae14e"/>
+        <topic label="CustomerRecord_setValue_town" href="group__CustomerRecord.html#gaf55e35d212a9b882e4b25658afec3b87"/>
+        <topic label="CustomerRecord_write" href="group__CustomerRecord.html#ga0d3a15ee68f0bddf5e24940230ea737d"/>
+      </topic>
+      <topic label="Customer record editing" href="group__CustomerRecordEditor.html">
+        <topic label="CustomerRecord_FieldProperties" href="structCustomerRecord__FieldProperties.html">
+          <topic label="alignment" href="structCustomerRecord__FieldProperties.html#a9b609437b0a9c5266747f6a31b8bf90e"/>
+          <topic label="getValue" href="structCustomerRecord__FieldProperties.html#aee711177146c0cf48beda373745591a0"/>
+          <topic label="isValueValid" href="structCustomerRecord__FieldProperties.html#a9260f4c76d4534d92365e49a32012e87"/>
+          <topic label="maxlength" href="structCustomerRecord__FieldProperties.html#a601639a266b6cd1b91eddacff854c9ac"/>
+          <topic label="minDisplayWidth" href="structCustomerRecord__FieldProperties.html#a0e040e466cb33f8dfab26c9a85b66278"/>
+          <topic label="name" href="structCustomerRecord__FieldProperties.html#a8f8f80d37794cde9472343e4487ba3eb"/>
+          <topic label="setValue" href="structCustomerRecord__FieldProperties.html#a8112f8b1f9d6e4af99e861890bd4d61a"/>
+          <topic label="size" href="structCustomerRecord__FieldProperties.html#a439227feff9d7f55384e8780cfc2eb82"/>
+        </topic>
+        <topic label="CustomerRecord_Function_getValue" href="group__CustomerRecordEditor.html#gaff30aa90df250fcd6482914495a38cde"/>
+        <topic label="CustomerRecord_Function_isValueValid" href="group__CustomerRecordEditor.html#ga72bc69531600cf9e624b9e9a15669ca0"/>
+        <topic label="CustomerRecord_Function_setValue" href="group__CustomerRecordEditor.html#gabc8423c0b3b39f9f4faedcdb050d5a2a"/>
+        <topic label="CustomerRecord_FieldIdentifier" href="group__CustomerRecordEditor.html#gaf7d20c2811247cc46892396dd8594389">
+          <topic label="CUSTOMERRECORD_NAME_FIELD" href="group__CustomerRecordEditor.html#ggaf7d20c2811247cc46892396dd8594389a7a2e070b01f18928ea53b0fd64275aee"/>
+          <topic label="CUSTOMERRECORD_ADDRESS_FIELD" href="group__CustomerRecordEditor.html#ggaf7d20c2811247cc46892396dd8594389a0590a1a05f570ee1c3dd3622b6be71a7"/>
+          <topic label="CUSTOMERRECORD_POSTALCODE_FIELD" href="group__CustomerRecordEditor.html#ggaf7d20c2811247cc46892396dd8594389a3e4dfeaab52a5d4a6d13449a5a985241"/>
+          <topic label="CUSTOMERRECORD_TOWN_FIELD" href="group__CustomerRecordEditor.html#ggaf7d20c2811247cc46892396dd8594389a8a47be87596e842f07416c23f1311cfc"/>
+          <topic label="CUSTOMERRECORD_FIELDCOUNT" href="group__CustomerRecordEditor.html#ggaf7d20c2811247cc46892396dd8594389acd4a93c9bbd1a38a083d0dd23bc50420"/>
+        </topic>
+        <topic label="CustomerRecord_edit" href="group__CustomerRecordEditor.html#ga54cbf0b508d808fd6665248f83240455"/>
+        <topic label="CustomerRecord_getFieldProperties" href="group__CustomerRecordEditor.html#ga65de9a142281fa3532e85d3c09b6f523"/>
+      </topic>
+      <topic label="Management of the customers" href="group__CustomerUI.html">
+        <topic label="Customer_manage" href="group__CustomerUI.html#gad0a68d1f54ac35f9c42de96ca832bd6e"/>
+        <topic label="Customer_select" href="group__CustomerUI.html#ga3e50d0392f66722076c8474e8b99a286"/>
+      </topic>
+    </topic>
+    <topic label="Documents relates stuff" href="group__Documents.html">
+      <topic label="Documents" href="group__Document.html">
+        <topic label="Document" href="structDocument.html">
+          <topic label="customer" href="structDocument.html#ae09cf2ecc5299bb3926980664c473fd3"/>
+          <topic label="docNumber" href="structDocument.html#a1606cdf3e0822d63297a546f4f0172dc"/>
+          <topic label="editDate" href="structDocument.html#a312899691f7ecdb742ca28504d7238c5"/>
+          <topic label="expiryDate" href="structDocument.html#ad473f0686021470bca3be3ceae698139"/>
+          <topic label="object" href="structDocument.html#a698139783a57ed0223f42bff714b914b"/>
+          <topic label="operator" href="structDocument.html#a4929e9d61af65aab9bcf3eae097f2555"/>
+          <topic label="rows" href="structDocument.html#afb959b3b54681ede558d5e86b9990661"/>
+          <topic label="typeDocument" href="structDocument.html#ad2e6abc5a91c6708161b80bba3facc28"/>
+        </topic>
+        <topic label="TypeDocument" href="group__Document.html#ga69c49c41d38ae1dcaa0f31a22b1efee6">
+          <topic label="QUOTATION" href="group__Document.html#gga69c49c41d38ae1dcaa0f31a22b1efee6a356b4a530320c31af5a30367b5d390ea"/>
+          <topic label="BILL" href="group__Document.html#gga69c49c41d38ae1dcaa0f31a22b1efee6ac0f09f1fa0d8fde763958ffed01d6708"/>
+        </topic>
+        <topic label="Document_finalize" href="group__Document.html#gacd07ee9b169977b74bcd8b5256042f8e"/>
+        <topic label="Document_init" href="group__Document.html#ga103dd74efd5e151c551abbdc398e810d"/>
+        <topic label="Document_loadFromFile" href="group__Document.html#ga7fdd2a2812aa902e090469075e802028"/>
+        <topic label="Document_saveToFile" href="group__Document.html#ga6bfc6a1d00c1a093a670392bc81a58d9"/>
+      </topic>
+      <topic label="Functions for bill management" href="group__Bill.html">
+        <topic label="Bill_display" href="group__Bill.html#ga5669bf10066d2f7dd6c7272620961eec"/>
+        <topic label="Bill_load" href="group__Bill.html#ga0328070d7678d062b2b1acec17bd2b8d"/>
+        <topic label="Bill_new" href="group__Bill.html#ga62d9c83a8ba17a3150a27e595dede22a"/>
+        <topic label="Bill_open" href="group__Bill.html#gab29e20b6cf63c266f73f9683cb069347"/>
+        <topic label="Bill_save" href="group__Bill.html#ga01c210e84863e05985aa7aa064471e53"/>
+      </topic>
+      <topic label="Functions for editing documents" href="group__DocumentEditor.html">
+        <topic label="TypeAction" href="group__DocumentEditor.html#gac02d640352b5046fac70aa514ef3ffa5">
+          <topic label="NEW_DOCUMENT" href="group__DocumentEditor.html#ggac02d640352b5046fac70aa514ef3ffa5a3780f381b44ad22db195fa9c673fab3a"/>
+          <topic label="DISPLAY_DOCUMENT" href="group__DocumentEditor.html#ggac02d640352b5046fac70aa514ef3ffa5ac85fa0a5349bb01ba45d56e1fe0aed10"/>
+          <topic label="MODIFY_DOCUMENT" href="group__DocumentEditor.html#ggac02d640352b5046fac70aa514ef3ffa5a9f8fed1017add5b018cbe6a4ee43a4cb"/>
+        </topic>
+        <topic label="DocumentEditor_edit" href="group__DocumentEditor.html#ga81e9796adf3183dbc2126507265e510a"/>
+      </topic>
+      <topic label="Functions for quotation management" href="group__Quotation.html">
+        <topic label="Quotation_convertToBill" href="group__Quotation.html#gab94d323d46e6eb1c4f29ce8af4abe3f2"/>
+        <topic label="Quotation_display" href="group__Quotation.html#ga3e69cced2caba9255cd3534d3198087e"/>
+        <topic label="Quotation_load" href="group__Quotation.html#ga8b96d36eba53f240787601e99330b728"/>
+        <topic label="Quotation_new" href="group__Quotation.html#ga949073ac775dbfbfe2beabcd705d88b2"/>
+        <topic label="Quotation_open" href="group__Quotation.html#ga2d735e0cb5f3ee786c6c21dfda2976ad"/>
+        <topic label="Quotation_save" href="group__Quotation.html#ga9c63283cb7fe9b966d6d0111823fd441"/>
+      </topic>
+      <topic label="List of rows of a document" href="group__DocumentRowList.html">
+        <topic label="DocumentRow" href="structDocumentRow.html">
+          <topic label="basePrice" href="structDocumentRow.html#aa202ff7ac9da4792e13c732cecd057cd"/>
+          <topic label="code" href="structDocumentRow.html#a5b9e1322ebc26e12c192f03bccba2770"/>
+          <topic label="designation" href="structDocumentRow.html#a238af89adb357ae219950bae456a4d07"/>
+          <topic label="discount" href="structDocumentRow.html#a53313c66e4ab6acce975994de1d9c097"/>
+          <topic label="next" href="structDocumentRow.html#ab8e4a43b29c4ba6631b64a7172297c3c"/>
+          <topic label="quantity" href="structDocumentRow.html#a42a7cbf17ad499bb36ad798c4bb46973"/>
+          <topic label="rateOfVAT" href="structDocumentRow.html#a9b94cceae6d68929f7e6065540058f1d"/>
+          <topic label="sellingPrice" href="structDocumentRow.html#a3ba5a6e4bf38bba226358967cfa33302"/>
+          <topic label="unity" href="structDocumentRow.html#a9e8ebe5266edb99433e33a7e8b8956ce"/>
+        </topic>
+        <topic label="DocumentRow_create" href="group__DocumentRowList.html#gaaac900c5bc48cdc51ada7f2573287d7e"/>
+        <topic label="DocumentRow_destroy" href="group__DocumentRowList.html#gac4ea8d51b1cf52ff7a9588ba018290c3"/>
+        <topic label="DocumentRow_finalize" href="group__DocumentRowList.html#gaf672c86f788aeaafdd41137d4999ec2d"/>
+        <topic label="DocumentRow_init" href="group__DocumentRowList.html#ga01fe276cfc8fde8d96b60a336995db21"/>
+        <topic label="DocumentRow_readRow" href="group__DocumentRowList.html#ga1841d6f7739d2aeb68667f42eaa56c52"/>
+        <topic label="DocumentRow_writeRow" href="group__DocumentRowList.html#gacae6ed61a2548d1532ad4c290bc3b3a3"/>
+        <topic label="DocumentRowList_finalize" href="group__DocumentRowList.html#gad122b2143ad355340f1793b9f8d5a057"/>
+        <topic label="DocumentRowList_get" href="group__DocumentRowList.html#gac15557719c72aeb2e8d5c3d7a0574f97"/>
+        <topic label="DocumentRowList_getRowCount" href="group__DocumentRowList.html#gaaef8bf84762b5502e9d3c27dd84f4bfd"/>
+        <topic label="DocumentRowList_init" href="group__DocumentRowList.html#ga4cc2903a36a9f2b0436ca154d15ce673"/>
+        <topic label="DocumentRowList_insertAfter" href="group__DocumentRowList.html#gaf49d517e8ccde05a90acd567f03d61d9"/>
+        <topic label="DocumentRowList_insertBefore" href="group__DocumentRowList.html#gacb4efb0a2afca928f543d6ffd9750a48"/>
+        <topic label="DocumentRowList_pushBack" href="group__DocumentRowList.html#ga4baa6fdf84d69c7f8711f0c598337a6c"/>
+        <topic label="DocumentRowList_removeRow" href="group__DocumentRowList.html#ga65426a102209330b2a100f754744bf87"/>
+      </topic>
+      <topic label="Utility functions for documents" href="group__DocumentUtil.html">
+        <topic label="computeDocumentNumber" href="group__DocumentUtil.html#ga71c5eeffedf48e921edac2c8e802b6a7"/>
+        <topic label="formatDate" href="group__DocumentUtil.html#ga5c14603f3e92d6210df73843247d828c"/>
+        <topic label="readString" href="group__DocumentUtil.html#ga8b95856984309ee3bb50c4caa7259d63"/>
+        <topic label="writeString" href="group__DocumentUtil.html#ga348551b99f417ea31489dabc3a7e1779"/>
+      </topic>
+    </topic>
+    <topic label="Encryption related stuff" href="group__EncryptDecrypts.html">
+      <topic label="Encryption and decryption functions" href="group__EncryptDecrypt.html">
+        <topic label="decrypt" href="group__EncryptDecrypt.html#gac6351339416ca66ee8dbf7bef4a42b12"/>
+        <topic label="encrypt" href="group__EncryptDecrypt.html#ga9d05b6d7df1ce9fdeecbc4e53736872f"/>
+        <topic label="OperatorCryptKey" href="group__EncryptDecrypt.html#gacb4e1ddd95447fb47f84c9e621d2f1a6"/>
+      </topic>
+    </topic>
+    <topic label="Operator related stuff" href="group__Operators.html">
+      <topic label="Management of the operators" href="group__Operator.html">
+        <topic label="Operator_identify" href="group__Operator.html#ga2fadfdfb6628763e4688d163f61e294a"/>
+        <topic label="Operator_manage" href="group__Operator.html#ga8433c15a18c9ec1c7bcc0ac157ea6365"/>
+      </topic>
+      <topic label="Operator database" href="group__OperatorTable.html">
+        <topic label="OperatorTable" href="structOperatorTable.html">
+          <topic label="OperatorTable_create" href="group__OperatorTable.html#ga0946083652409c446ea726955f3cdb19"/>
+          <topic label="OperatorTable_destroy" href="group__OperatorTable.html#ga093ffd7811f1c2a89ab635507c4bba96"/>
+          <topic label="OperatorTable_findOperator" href="group__OperatorTable.html#gace3423bb62bb53c82246a7b0836aba1f"/>
+          <topic label="OperatorTable_getName" href="group__OperatorTable.html#ga54c88fb068c98e5a1bc9434a6c4c996c"/>
+          <topic label="OperatorTable_getPassword" href="group__OperatorTable.html#ga013c78a66e05f18f9c61e3c855a1316e"/>
+          <topic label="OperatorTable_getRecordCount" href="group__OperatorTable.html#gaa672bf09dd0fa4fb2e2f96c55499524f"/>
+          <topic label="OperatorTable_loadFromFile" href="group__OperatorTable.html#gaa4bb5af08622744acd8b8d41336a0aa7"/>
+          <topic label="OperatorTable_removeRecord" href="group__OperatorTable.html#ga60bf15e24a5ffd31ddbcb6fa37ffcde3"/>
+          <topic label="OperatorTable_saveToFile" href="group__OperatorTable.html#ga360f5666fbbcb6f5723c155b888ad8a8"/>
+          <topic label="OperatorTable_setOperator" href="group__OperatorTable.html#ga46c75a5c2c8b1eeb06b24f7cbc60c229"/>
+          <topic label="recordCount" href="structOperatorTable.html#af2b3801705d4d78cc1f2ede923a177e6"/>
+          <topic label="records" href="structOperatorTable.html#a2b8fec4d9fcfdf4fc51875d37a0e44e2"/>
+        </topic>
+        <topic label="OPERATORTABLE_MAXNAMESIZE" href="group__OperatorTable.html#ga4744ce294a17b76a8760c09a88f2058a"/>
+        <topic label="OPERATORTABLE_MAXPASSWORDSIZE" href="group__OperatorTable.html#ga04cde054f97d7582da84e36b759c6856"/>
+        <topic label="OperatorTable_create" href="group__OperatorTable.html#ga0946083652409c446ea726955f3cdb19"/>
+        <topic label="OperatorTable_destroy" href="group__OperatorTable.html#ga093ffd7811f1c2a89ab635507c4bba96"/>
+        <topic label="OperatorTable_findOperator" href="group__OperatorTable.html#gace3423bb62bb53c82246a7b0836aba1f"/>
+        <topic label="OperatorTable_getName" href="group__OperatorTable.html#ga54c88fb068c98e5a1bc9434a6c4c996c"/>
+        <topic label="OperatorTable_getPassword" href="group__OperatorTable.html#ga013c78a66e05f18f9c61e3c855a1316e"/>
+        <topic label="OperatorTable_getRecordCount" href="group__OperatorTable.html#gaa672bf09dd0fa4fb2e2f96c55499524f"/>
+        <topic label="OperatorTable_loadFromFile" href="group__OperatorTable.html#gaa4bb5af08622744acd8b8d41336a0aa7"/>
+        <topic label="OperatorTable_removeRecord" href="group__OperatorTable.html#ga60bf15e24a5ffd31ddbcb6fa37ffcde3"/>
+        <topic label="OperatorTable_saveToFile" href="group__OperatorTable.html#ga360f5666fbbcb6f5723c155b888ad8a8"/>
+        <topic label="OperatorTable_setOperator" href="group__OperatorTable.html#ga46c75a5c2c8b1eeb06b24f7cbc60c229"/>
+        <topic label="OPERATORDB_FILENAME" href="group__OperatorTable.html#gac2d35b6fa759c767fcd18df44b8bc13a"/>
+      </topic>
+    </topic>
+    <topic label="String related stuffs" href="group__Strings.html">
+      <topic label="String utility functions" href="group__String.html">
+        <topic label="compareString" href="group__String.html#ga4b46ba5548144c504541e44984e653e5"/>
+        <topic label="concatenateString" href="group__String.html#gaa720b9d342564aec0b8efcd0745e1c68"/>
+        <topic label="copyString" href="group__String.html#gaef359aab543339a378d8247e661e36ac"/>
+        <topic label="copyStringWithLength" href="group__String.html#ga3ba088cb15769ef98b5e1ed2e616e71a"/>
+        <topic label="duplicateString" href="group__String.html#gad2854302f1c0bf1ba2ac7641b8d4bf24"/>
+        <topic label="icaseCompareString" href="group__String.html#ga1634dfbc4cda450105bfda7559bd7822"/>
+        <topic label="icaseEndWith" href="group__String.html#ga0acbcf159197d2a7712ab8d971eb7167"/>
+        <topic label="icaseStartWith" href="group__String.html#ga9c72da87ac0cc63c1bb220736fcd0f60"/>
+        <topic label="indexOfChar" href="group__String.html#ga075e7e4f03a915360b1544ec3889cda6"/>
+        <topic label="indexOfString" href="group__String.html#ga89d6145d45edcbd7e2f63766761dbac7"/>
+        <topic label="insertString" href="group__String.html#ga3131b6ede1444bb8a37b873c1fd12596"/>
+        <topic label="makeLowerCaseString" href="group__String.html#ga24474e839219f968eb6703cc91890448"/>
+        <topic label="makeUpperCaseString" href="group__String.html#ga94cb2e274b32093588f987e530249f68"/>
+        <topic label="stringLength" href="group__String.html#ga8f17f5657bf553c530528f6bce3b38bb"/>
+        <topic label="subString" href="group__String.html#ga12dc12edb22fe03d1359ff45ae149271"/>
+        <topic label="toLowerChar" href="group__String.html#ga4e545641f98651d4fb8299b407721f9b"/>
+        <topic label="toUpperChar" href="group__String.html#ga1e11de02c22aeef39426d501072c678f"/>
+      </topic>
+    </topic>
+    <topic label="Template based formatting of documents" href="group__Format.html">
+      <topic label="Dictionary based formatting functions" href="group__Dictionary.html">
+        <topic label="Dictionary" href="structDictionary.html">
+          <topic label="count" href="structDictionary.html#ad43c3812e6d13e0518d9f8b8f463ffcf"/>
+          <topic label="entries" href="structDictionary.html#a004fd00597fc71cffde7e5ad5d34c4d7"/>
+        </topic>
+        <topic label="DictionaryEntry" href="structDictionaryEntry.html">
+          <topic label="name" href="structDictionaryEntry.html#a5ac083a645d964373f022d03df4849c8"/>
+          <topic label="numberValue" href="structDictionaryEntry.html#aa5be9b9b70ba596fdb532a82d1a0647a"/>
+          <topic label="stringValue" href="structDictionaryEntry.html#aed9e532713eec5e9729ebd0959d230c3"/>
+          <topic label="type" href="structDictionaryEntry.html#a0b0cbec2271fe5a078a0e9a2eaec792a"/>
+          <topic label="value" href="structDictionaryEntry.html#a7bd22536baf6a8650c128868c374713a"/>
+        </topic>
+        <topic label="DictionaryEntryType" href="group__Dictionary.html#ga5214a8d7dc24ea08107746367d87bcf5">
+          <topic label="UNDEFINED_ENTRY" href="group__Dictionary.html#gga5214a8d7dc24ea08107746367d87bcf5adacf2705e5fbf7709a8e3442661f991c"/>
+          <topic label="NUMBER_ENTRY" href="group__Dictionary.html#gga5214a8d7dc24ea08107746367d87bcf5aeab05e6cdb654edc01ab22ab6234cf5c"/>
+          <topic label="STRING_ENTRY" href="group__Dictionary.html#gga5214a8d7dc24ea08107746367d87bcf5a3876b394e48e8b65f1a8ea60aabf597f"/>
+        </topic>
+        <topic label="Dictionary_create" href="group__Dictionary.html#gae815a95f3fb6d1d61f72e395e65dda41"/>
+        <topic label="Dictionary_destroy" href="group__Dictionary.html#ga3a1606923fafcf228ea67cb75947fab8"/>
+        <topic label="Dictionary_format" href="group__Dictionary.html#ga8cfb4fc69b034c758cd0dd62235b1357"/>
+        <topic label="Dictionary_getEntry" href="group__Dictionary.html#ga929d74c13e8d3eb63ac56ad468bf93b4"/>
+        <topic label="Dictionary_setNumberEntry" href="group__Dictionary.html#ga98c0094297f891804961d8cb056c30bc"/>
+        <topic label="Dictionary_setStringEntry" href="group__Dictionary.html#gab222ae16091015a68652bf2ff38d5dcf"/>
+      </topic>
+      <topic label="Print format model management" href="group__PrintFormat.html">
+        <topic label="PrintFormat" href="structPrintFormat.html">
+          <topic label="footer" href="structPrintFormat.html#accec40ba2ef7b5747c909005cd1e66dd"/>
+          <topic label="header" href="structPrintFormat.html#a2363a05c36ad2d4313f665fade072374"/>
+          <topic label="name" href="structPrintFormat.html#a5ac083a645d964373f022d03df4849c8"/>
+          <topic label="row" href="structPrintFormat.html#a4d6d80134097f21720b5f89c534135a2"/>
+        </topic>
+        <topic label="PrintFormat_finalize" href="group__PrintFormat.html#gae5ac9cc9187e65c1a5dfa470babdec02"/>
+        <topic label="PrintFormat_init" href="group__PrintFormat.html#ga23df39266d2dd7a9c58b24582c2649db"/>
+        <topic label="PrintFormat_loadFromFile" href="group__PrintFormat.html#gab24280d4ce22865b9de5e6811a396faa"/>
+      </topic>
+      <topic label="Print preview of a document" href="group__Print.html">
+        <topic label="Print_preview" href="group__Print.html#gad98ad0399c2fee28e9e7c6d2f74525dd"/>
+        <topic label="PrintFormat_format" href="group__Print.html#ga439f9d07cf972958a4258d9b9b0ca164"/>
+      </topic>
+    </topic>
+    <topic label="Unit tests" href="group__UnitTest.html">
+      <topic label="ASSERT" href="group__UnitTest.html#ga0966b817b229d48e5ffc7feab19a0be6"/>
+      <topic label="ASSERT_EQUAL" href="group__UnitTest.html#ga07fc9e3c2fa55f275fe572e4bb251316"/>
+      <topic label="ASSERT_EQUAL_DOUBLE" href="group__UnitTest.html#gac0d4e17fdbe3f5ff8259f519d8a83973"/>
+      <topic label="ASSERT_EQUAL_STRING" href="group__UnitTest.html#gadc6e9fd7e1a6de46fe249b6acc1ea809"/>
+      <topic label="ASSERT_NOT_EQUAL" href="group__UnitTest.html#gab5429200bb3a859fbfa99b52ec314883"/>
+      <topic label="ASSERT_NOT_EQUAL_STRING" href="group__UnitTest.html#gab4c0e748e5a9f7ac2c7f6f1fcd332fc4"/>
+      <topic label="BEGIN_TESTS" href="group__UnitTest.html#gac5bac33688f7989a651226752508d64f"/>
+      <topic label="END_TESTS" href="group__UnitTest.html#ga6fb525f503f98aa262cf08158d924a1f"/>
+      <topic label="RUN_TEST" href="group__UnitTest.html#ga6d22b2e20a26b0d72b5c15912b4e211e"/>
+      <topic label="endtest" href="group__UnitTest.html#ga290914cb7b61339efbd93ff591435fbd"/>
+      <topic label="packageTestsEnabled" href="group__UnitTest.html#ga6c3e03858ed655eaf5f8880bc8156dbf"/>
+      <topic label="runtest" href="group__UnitTest.html#ga4a1df91db551d0a4f51a7239911e28fc"/>
+    </topic>
+  </topic>
+  <topic label="Data Structures" href="annotated.html">
+    <topic label="Data Structures" href="annotated.html">
+      <topic label="GtkCatalogModel" href="struct__GtkCatalogModel.html">
+        <topic label="catalogDB" href="struct__GtkCatalogModel.html#a4d7999b935b08c419f385e5beddde6ee"/>
+        <topic label="parent" href="struct__GtkCatalogModel.html#a119e262dd6f86f1488d00a7ce2d28abf"/>
+        <topic label="shouldCloseDB" href="struct__GtkCatalogModel.html#aa9ba3ae86adc8c2b1efe995e7d600ea8"/>
+        <topic label="stamp" href="struct__GtkCatalogModel.html#a0fa107e460911891fac8f819b2e7220b"/>
+      </topic>
+      <topic label="GtkCatalogModelClass" href="struct__GtkCatalogModelClass.html">
+        <topic label="parent_class" href="struct__GtkCatalogModelClass.html#af6eccf80858ff5e5b9385f80ccdefa7c"/>
+      </topic>
+      <topic label="GtkCustomerModel" href="struct__GtkCustomerModel.html">
+        <topic label="clientDB" href="struct__GtkCustomerModel.html#a2dfd227c0e9e9c42c12424b48e9ce0ba"/>
+        <topic label="parent" href="struct__GtkCustomerModel.html#a119e262dd6f86f1488d00a7ce2d28abf"/>
+        <topic label="shouldCloseDB" href="struct__GtkCustomerModel.html#aa9ba3ae86adc8c2b1efe995e7d600ea8"/>
+        <topic label="stamp" href="struct__GtkCustomerModel.html#a0fa107e460911891fac8f819b2e7220b"/>
+      </topic>
+      <topic label="GtkCustomerModelClass" href="struct__GtkCustomerModelClass.html">
+        <topic label="parent_class" href="struct__GtkCustomerModelClass.html#af6eccf80858ff5e5b9385f80ccdefa7c"/>
+      </topic>
+      <topic label="CatalogDB" href="structCatalogDB.html">
+        <topic label="CatalogDB_appendRecord" href="group__CatalogDB.html#ga15dd74b3632f41346fd6511b542dd8db"/>
+        <topic label="CatalogDB_close" href="group__CatalogDB.html#ga38e2b6b2af8873e53d615cd74ca08575"/>
+        <topic label="CatalogDB_create" href="group__CatalogDB.html#ga9eabf29012eaa7fc83709f1c492a7849"/>
+        <topic label="CatalogDB_getFieldValueAsString" href="group__CatalogDB.html#ga7affd757b1f1624c10516e7e282246c6"/>
+        <topic label="CatalogDB_getRecordCount" href="group__CatalogDB.html#ga8ca1cfcd9c0a9ef4d99738df0ddd8686"/>
+        <topic label="CatalogDB_insertRecord" href="group__CatalogDB.html#ga59814201ea83f6629d44a1fe9ac547da"/>
+        <topic label="CatalogDB_open" href="group__CatalogDB.html#ga454701ee6684d6de516e5838a2132bdb"/>
+        <topic label="CatalogDB_openOrCreate" href="group__CatalogDB.html#ga4357d02bee0824bd809e698163d88ffe"/>
+        <topic label="CatalogDB_readRecord" href="group__CatalogDB.html#gaef9df9236eac0f50bea19d2a437c815c"/>
+        <topic label="CatalogDB_removeRecord" href="group__CatalogDB.html#ga668d5d1f38dac241f858814aaa18c2b6"/>
+        <topic label="CatalogDB_writeRecord" href="group__CatalogDB.html#gaa95720b08873d3f03aa1097a592d7efe"/>
+        <topic label="file" href="structCatalogDB.html#a702945180aa732857b380a007a7e2a21"/>
+        <topic label="recordCount" href="structCatalogDB.html#af2b3801705d4d78cc1f2ede923a177e6"/>
+      </topic>
+      <topic label="CatalogRecord" href="structCatalogRecord.html">
+        <topic label="CatalogRecord_edit" href="group__CatalogRecordEditor.html#ga2176fd095ada54d514f19126bc05cea1"/>
+        <topic label="CatalogRecord_finalize" href="group__CatalogRecord.html#ga8823e779dd4b448e11870843c2f26f4d"/>
+        <topic label="CatalogRecord_getFieldProperties" href="group__CatalogRecordEditor.html#ga64e48fd820803b196a1b1e2aa1aeb16b"/>
+        <topic label="CatalogRecord_init" href="group__CatalogRecord.html#ga9691e16a453bb09d3bd4d0533be22371"/>
+        <topic label="CatalogRecord_read" href="group__CatalogRecord.html#ga9b77150a2daa458456bdc0d37769ff3a"/>
+        <topic label="CatalogRecord_write" href="group__CatalogRecord.html#ga645558a1fce53f1160a05a0dd93f6d09"/>
+        <topic label="basePrice" href="structCatalogRecord.html#aa202ff7ac9da4792e13c732cecd057cd"/>
+        <topic label="code" href="structCatalogRecord.html#a5b9e1322ebc26e12c192f03bccba2770"/>
+        <topic label="designation" href="structCatalogRecord.html#a238af89adb357ae219950bae456a4d07"/>
+        <topic label="rateOfVAT" href="structCatalogRecord.html#a9b94cceae6d68929f7e6065540058f1d"/>
+        <topic label="sellingPrice" href="structCatalogRecord.html#a3ba5a6e4bf38bba226358967cfa33302"/>
+        <topic label="unity" href="structCatalogRecord.html#a9e8ebe5266edb99433e33a7e8b8956ce"/>
+      </topic>
+      <topic label="CatalogRecord_FieldProperties" href="structCatalogRecord__FieldProperties.html">
+        <topic label="alignment" href="structCatalogRecord__FieldProperties.html#a9b609437b0a9c5266747f6a31b8bf90e"/>
+        <topic label="getValue" href="structCatalogRecord__FieldProperties.html#ad53bd3d6ee0adf92c1dc67658025b0a5"/>
+        <topic label="isValueValid" href="structCatalogRecord__FieldProperties.html#abc0ac9dcb88ba42aa8b9e0848afce887"/>
+        <topic label="maxlength" href="structCatalogRecord__FieldProperties.html#a601639a266b6cd1b91eddacff854c9ac"/>
+        <topic label="minDisplayWidth" href="structCatalogRecord__FieldProperties.html#a0e040e466cb33f8dfab26c9a85b66278"/>
+        <topic label="name" href="structCatalogRecord__FieldProperties.html#a8f8f80d37794cde9472343e4487ba3eb"/>
+        <topic label="setValue" href="structCatalogRecord__FieldProperties.html#a47e2b0ee0b755beb799b8e36251b4ad8"/>
+        <topic label="size" href="structCatalogRecord__FieldProperties.html#a439227feff9d7f55384e8780cfc2eb82"/>
+      </topic>
+      <topic label="CustomerDB" href="structCustomerDB.html">
+        <topic label="CustomerDB_appendRecord" href="group__CustomerDB.html#gaefaa5cc0e3b64b57babf177350809419"/>
+        <topic label="CustomerDB_close" href="group__CustomerDB.html#ga49ad4472c10433a5bcb111ddf7a5d56b"/>
+        <topic label="CustomerDB_create" href="group__CustomerDB.html#gab40e45188e169da65e44e8e278486e29"/>
+        <topic label="CustomerDB_getFieldValueAsString" href="group__CustomerDB.html#ga989a5870ad30ebf203409d34b1c2432e"/>
+        <topic label="CustomerDB_getRecordCount" href="group__CustomerDB.html#ga7229666153701e0e44c7522e7b848613"/>
+        <topic label="CustomerDB_insertRecord" href="group__CustomerDB.html#gada390c313707bb7e184036e438872651"/>
+        <topic label="CustomerDB_open" href="group__CustomerDB.html#ga1c2b5cee888f572992b21f323039ef18"/>
+        <topic label="CustomerDB_openOrCreate" href="group__CustomerDB.html#gaafca52f13d030d9f2096064ab5efb444"/>
+        <topic label="CustomerDB_readRecord" href="group__CustomerDB.html#ga03605b3b1a76149b39e2d9aa72a508d5"/>
+        <topic label="CustomerDB_removeRecord" href="group__CustomerDB.html#ga5bdc043ab31737fc0aa136dc26080946"/>
+        <topic label="CustomerDB_writeRecord" href="group__CustomerDB.html#ga4f052abd0c61e5ee1b188bbe01fe2fd7"/>
+        <topic label="file" href="structCustomerDB.html#a702945180aa732857b380a007a7e2a21"/>
+        <topic label="recordCount" href="structCustomerDB.html#af2b3801705d4d78cc1f2ede923a177e6"/>
+      </topic>
+      <topic label="CustomerRecord" href="structCustomerRecord.html">
+        <topic label="CustomerRecord_edit" href="group__CustomerRecordEditor.html#ga54cbf0b508d808fd6665248f83240455"/>
+        <topic label="CustomerRecord_finalize" href="group__CustomerRecord.html#ga6c43ed660b9e3789cca3b7fe87a5b235"/>
+        <topic label="CustomerRecord_getFieldProperties" href="group__CustomerRecordEditor.html#ga65de9a142281fa3532e85d3c09b6f523"/>
+        <topic label="CustomerRecord_init" href="group__CustomerRecord.html#ga8ebf543722d2f309b318f87e591e86ae"/>
+        <topic label="CustomerRecord_read" href="group__CustomerRecord.html#ga12270b2635140d7a72cc2a7aaa49169d"/>
+        <topic label="CustomerRecord_write" href="group__CustomerRecord.html#ga0d3a15ee68f0bddf5e24940230ea737d"/>
+        <topic label="address" href="structCustomerRecord.html#a666f073c79b58211733013b9e7217567"/>
+        <topic label="name" href="structCustomerRecord.html#a479b51f76b74245617707fc5e9f38da0"/>
+        <topic label="postalCode" href="structCustomerRecord.html#abc78132ec841694bdd43cd0033dc4c3f"/>
+        <topic label="town" href="structCustomerRecord.html#a30a63918799464a65616e4b159126e66"/>
+      </topic>
+      <topic label="CustomerRecord_FieldProperties" href="structCustomerRecord__FieldProperties.html">
+        <topic label="alignment" href="structCustomerRecord__FieldProperties.html#a9b609437b0a9c5266747f6a31b8bf90e"/>
+        <topic label="getValue" href="structCustomerRecord__FieldProperties.html#aee711177146c0cf48beda373745591a0"/>
+        <topic label="isValueValid" href="structCustomerRecord__FieldProperties.html#a9260f4c76d4534d92365e49a32012e87"/>
+        <topic label="maxlength" href="structCustomerRecord__FieldProperties.html#a601639a266b6cd1b91eddacff854c9ac"/>
+        <topic label="minDisplayWidth" href="structCustomerRecord__FieldProperties.html#a0e040e466cb33f8dfab26c9a85b66278"/>
+        <topic label="name" href="structCustomerRecord__FieldProperties.html#a8f8f80d37794cde9472343e4487ba3eb"/>
+        <topic label="setValue" href="structCustomerRecord__FieldProperties.html#a8112f8b1f9d6e4af99e861890bd4d61a"/>
+        <topic label="size" href="structCustomerRecord__FieldProperties.html#a439227feff9d7f55384e8780cfc2eb82"/>
+      </topic>
+      <topic label="Dictionary" href="structDictionary.html">
+        <topic label="count" href="structDictionary.html#ad43c3812e6d13e0518d9f8b8f463ffcf"/>
+        <topic label="entries" href="structDictionary.html#a004fd00597fc71cffde7e5ad5d34c4d7"/>
+      </topic>
+      <topic label="DictionaryEntry" href="structDictionaryEntry.html">
+        <topic label="name" href="structDictionaryEntry.html#a5ac083a645d964373f022d03df4849c8"/>
+        <topic label="numberValue" href="structDictionaryEntry.html#aa5be9b9b70ba596fdb532a82d1a0647a"/>
+        <topic label="stringValue" href="structDictionaryEntry.html#aed9e532713eec5e9729ebd0959d230c3"/>
+        <topic label="type" href="structDictionaryEntry.html#a0b0cbec2271fe5a078a0e9a2eaec792a"/>
+        <topic label="value" href="structDictionaryEntry.html#a7bd22536baf6a8650c128868c374713a"/>
+      </topic>
+      <topic label="Document" href="structDocument.html">
+        <topic label="customer" href="structDocument.html#ae09cf2ecc5299bb3926980664c473fd3"/>
+        <topic label="docNumber" href="structDocument.html#a1606cdf3e0822d63297a546f4f0172dc"/>
+        <topic label="editDate" href="structDocument.html#a312899691f7ecdb742ca28504d7238c5"/>
+        <topic label="expiryDate" href="structDocument.html#ad473f0686021470bca3be3ceae698139"/>
+        <topic label="object" href="structDocument.html#a698139783a57ed0223f42bff714b914b"/>
+        <topic label="operator" href="structDocument.html#a4929e9d61af65aab9bcf3eae097f2555"/>
+        <topic label="rows" href="structDocument.html#afb959b3b54681ede558d5e86b9990661"/>
+        <topic label="typeDocument" href="structDocument.html#ad2e6abc5a91c6708161b80bba3facc28"/>
+      </topic>
+      <topic label="DocumentRow" href="structDocumentRow.html">
+        <topic label="basePrice" href="structDocumentRow.html#aa202ff7ac9da4792e13c732cecd057cd"/>
+        <topic label="code" href="structDocumentRow.html#a5b9e1322ebc26e12c192f03bccba2770"/>
+        <topic label="designation" href="structDocumentRow.html#a238af89adb357ae219950bae456a4d07"/>
+        <topic label="discount" href="structDocumentRow.html#a53313c66e4ab6acce975994de1d9c097"/>
+        <topic label="next" href="structDocumentRow.html#ab8e4a43b29c4ba6631b64a7172297c3c"/>
+        <topic label="quantity" href="structDocumentRow.html#a42a7cbf17ad499bb36ad798c4bb46973"/>
+        <topic label="rateOfVAT" href="structDocumentRow.html#a9b94cceae6d68929f7e6065540058f1d"/>
+        <topic label="sellingPrice" href="structDocumentRow.html#a3ba5a6e4bf38bba226358967cfa33302"/>
+        <topic label="unity" href="structDocumentRow.html#a9e8ebe5266edb99433e33a7e8b8956ce"/>
+      </topic>
+      <topic label="OperatorTable" href="structOperatorTable.html">
+        <topic label="OperatorTable_create" href="group__OperatorTable.html#ga0946083652409c446ea726955f3cdb19"/>
+        <topic label="OperatorTable_destroy" href="group__OperatorTable.html#ga093ffd7811f1c2a89ab635507c4bba96"/>
+        <topic label="OperatorTable_findOperator" href="group__OperatorTable.html#gace3423bb62bb53c82246a7b0836aba1f"/>
+        <topic label="OperatorTable_getName" href="group__OperatorTable.html#ga54c88fb068c98e5a1bc9434a6c4c996c"/>
+        <topic label="OperatorTable_getPassword" href="group__OperatorTable.html#ga013c78a66e05f18f9c61e3c855a1316e"/>
+        <topic label="OperatorTable_getRecordCount" href="group__OperatorTable.html#gaa672bf09dd0fa4fb2e2f96c55499524f"/>
+        <topic label="OperatorTable_loadFromFile" href="group__OperatorTable.html#gaa4bb5af08622744acd8b8d41336a0aa7"/>
+        <topic label="OperatorTable_removeRecord" href="group__OperatorTable.html#ga60bf15e24a5ffd31ddbcb6fa37ffcde3"/>
+        <topic label="OperatorTable_saveToFile" href="group__OperatorTable.html#ga360f5666fbbcb6f5723c155b888ad8a8"/>
+        <topic label="OperatorTable_setOperator" href="group__OperatorTable.html#ga46c75a5c2c8b1eeb06b24f7cbc60c229"/>
+        <topic label="recordCount" href="structOperatorTable.html#af2b3801705d4d78cc1f2ede923a177e6"/>
+        <topic label="records" href="structOperatorTable.html#a2b8fec4d9fcfdf4fc51875d37a0e44e2"/>
+      </topic>
+      <topic label="PrintFormat" href="structPrintFormat.html">
+        <topic label="footer" href="structPrintFormat.html#accec40ba2ef7b5747c909005cd1e66dd"/>
+        <topic label="header" href="structPrintFormat.html#a2363a05c36ad2d4313f665fade072374"/>
+        <topic label="name" href="structPrintFormat.html#a5ac083a645d964373f022d03df4849c8"/>
+        <topic label="row" href="structPrintFormat.html#a4d6d80134097f21720b5f89c534135a2"/>
+      </topic>
+    </topic>
+    <topic label="Data Structure Index" href="classes.html"/>
+    <topic label="Data Fields" href="functions.html">
+      <topic label="All" href="functions.html"/>
+      <topic label="Functions" href="functions_func.html"/>
+      <topic label="Variables" href="functions_vars.html"/>
+    </topic>
+  </topic>
+  <topic label="Files">
+    <topic label="File List" href="files.html">
+      <topic label="App.h" href="App_8h.html">
+        <topic label="App_run" href="group__App.html#ga564bea34c350b6eb513aa2ac2e512c5f"/>
+      </topic>
+      <topic label="Bill.h" href="Bill_8h.html">
+        <topic label="Bill_display" href="group__Bill.html#ga5669bf10066d2f7dd6c7272620961eec"/>
+        <topic label="Bill_load" href="group__Bill.html#ga0328070d7678d062b2b1acec17bd2b8d"/>
+        <topic label="Bill_new" href="group__Bill.html#ga62d9c83a8ba17a3150a27e595dede22a"/>
+        <topic label="Bill_open" href="group__Bill.html#gab29e20b6cf63c266f73f9683cb069347"/>
+        <topic label="Bill_save" href="group__Bill.html#ga01c210e84863e05985aa7aa064471e53"/>
+      </topic>
+      <topic label="Catalog.h" href="Catalog_8h.html">
+        <topic label="Catalog_manage" href="group__CatalogUI.html#ga4f49a78c4cd51535ec3a4666e0c955a0"/>
+        <topic label="Catalog_select" href="group__CatalogUI.html#ga25b664096a6743c0cdd8268de24d0545"/>
+      </topic>
+      <topic label="CatalogDB.h" href="CatalogDB_8h.html">
+        <topic label="CATALOGDB_FILENAME" href="group__CatalogDB.html#ga663c03a2f2748da8c7a572f17cf06ef1"/>
+      </topic>
+      <topic label="CatalogDBUnit.h" href="CatalogDBUnit_8h.html">
+        <topic label="test_CatalogDB" href="CatalogDBUnit_8h.html#aa591628ce3892dbf68f910835a22b684"/>
+      </topic>
+      <topic label="CatalogRecord.h" href="CatalogRecord_8h.html">
+        <topic label="CATALOGRECORD_BASEPRICE_SIZE" href="group__CatalogRecord.html#ga8cba57b0349aa39f25f4045c3265b565"/>
+        <topic label="CATALOGRECORD_CODE_SIZE" href="group__CatalogRecord.html#gae956f89c18cfd0827de08aa5f085c469"/>
+        <topic label="CATALOGRECORD_DESIGNATION_SIZE" href="group__CatalogRecord.html#gad1a4b447cc7cb551c46107a30ebb976d"/>
+        <topic label="CATALOGRECORD_MAXSTRING_SIZE" href="group__CatalogRecord.html#ga27759839e5e939fd24482caa85d43248"/>
+        <topic label="CATALOGRECORD_RATEOFVAT_SIZE" href="group__CatalogRecord.html#ga5c33824e0196b66137d2352d6dda5d66"/>
+        <topic label="CATALOGRECORD_SELLINGPRICE_SIZE" href="group__CatalogRecord.html#ga6f7b339d4828c8351a78c436dbeb907c"/>
+        <topic label="CATALOGRECORD_SIZE" href="group__CatalogRecord.html#ga1dd6da61c893e0ee8f798e8ce72c3698"/>
+        <topic label="CATALOGRECORD_UNITY_SIZE" href="group__CatalogRecord.html#ga59b416c0023f88bd9ffa58449ae37919"/>
+        <topic label="CatalogRecord_getValue_basePrice" href="group__CatalogRecord.html#ga4742e9230111b8a692013b3d47e470b6"/>
+        <topic label="CatalogRecord_getValue_code" href="group__CatalogRecord.html#gafcafd99c3d08b34ebd0b92e4a2a655c0"/>
+        <topic label="CatalogRecord_getValue_designation" href="group__CatalogRecord.html#ga588e8fe39d8653cd9c4bd1dcb098ac82"/>
+        <topic label="CatalogRecord_getValue_rateOfVAT" href="group__CatalogRecord.html#gaa5b25b15d8cec570c6f9b260488b91df"/>
+        <topic label="CatalogRecord_getValue_sellingPrice" href="group__CatalogRecord.html#ga637f0697b591384b32e757a9c64df877"/>
+        <topic label="CatalogRecord_getValue_unity" href="group__CatalogRecord.html#ga4394b55731a78be99f4559aae9f0d05f"/>
+        <topic label="CatalogRecord_isValueValid_code" href="group__CatalogRecord.html#gab3208e5d1d0eb1809e5bc131e5ea7b3f"/>
+        <topic label="CatalogRecord_isValueValid_positiveNumber" href="group__CatalogRecord.html#gae683eee41f4412e8aca7de9315ddad4a"/>
+        <topic label="CatalogRecord_setValue_basePrice" href="group__CatalogRecord.html#gad8abecdcea62c1080810a4a6a7c66ff4"/>
+        <topic label="CatalogRecord_setValue_code" href="group__CatalogRecord.html#ga7249287e27ce879033fe61286a2dee83"/>
+        <topic label="CatalogRecord_setValue_designation" href="group__CatalogRecord.html#ga3e90278bd5e98ef2de93f320bc296469"/>
+        <topic label="CatalogRecord_setValue_rateOfVAT" href="group__CatalogRecord.html#ga95c45d2a1453d964a367ee47ca7270c4"/>
+        <topic label="CatalogRecord_setValue_sellingPrice" href="group__CatalogRecord.html#gad0dc66f5db2ddb1ad9880066588cb478"/>
+        <topic label="CatalogRecord_setValue_unity" href="group__CatalogRecord.html#gac9b4a719fb92942bc0810438f63355ca"/>
+      </topic>
+      <topic label="CatalogRecordEditor.h" href="CatalogRecordEditor_8h.html">
+        <topic label="CatalogRecord_Function_getValue" href="group__CatalogRecordEditor.html#ga3826ca5da1fb53cdf75f281eae9b0ab1"/>
+        <topic label="CatalogRecord_Function_isValueValid" href="group__CatalogRecordEditor.html#gab832f2a689f761a8ff2020e3c4d6ce55"/>
+        <topic label="CatalogRecord_Function_setValue" href="group__CatalogRecordEditor.html#ga7c354a53cd523ca272071eec0cb14110"/>
+        <topic label="CatalogRecord_FieldIdentifier" href="group__CatalogRecordEditor.html#ga3833ced63c1c0a11655447e5136c2ca7">
+          <topic label="CATALOGRECORD_CODE_FIELD" href="group__CatalogRecordEditor.html#gga3833ced63c1c0a11655447e5136c2ca7a4d204dd316dccc3a199567e3dc36f2eb"/>
+          <topic label="CATALOGRECORD_DESIGNATION_FIELD" href="group__CatalogRecordEditor.html#gga3833ced63c1c0a11655447e5136c2ca7a02bda3b6ab5088442000ebdb7253a9c0"/>
+          <topic label="CATALOGRECORD_UNITY_FIELD" href="group__CatalogRecordEditor.html#gga3833ced63c1c0a11655447e5136c2ca7adf423818130c55d573b79b4438ac27a1"/>
+          <topic label="CATALOGRECORD_BASEPRICE_FIELD" href="group__CatalogRecordEditor.html#gga3833ced63c1c0a11655447e5136c2ca7a5cdf683f1a32c539d62b89ef592875b8"/>
+          <topic label="CATALOGRECORD_SELLINGPRICE_FIELD" href="group__CatalogRecordEditor.html#gga3833ced63c1c0a11655447e5136c2ca7a2064e6e10b7184e6f28ee31d8f11e631"/>
+          <topic label="CATALOGRECORD_RATEOFVAT_FIELD" href="group__CatalogRecordEditor.html#gga3833ced63c1c0a11655447e5136c2ca7a7279207f2d7305e062cbde8e6d9e5437"/>
+          <topic label="CATALOGRECORD_FIELDCOUNT" href="group__CatalogRecordEditor.html#gga3833ced63c1c0a11655447e5136c2ca7a4020258654f2faee99043dda081dedbd"/>
+        </topic>
+      </topic>
+      <topic label="CatalogRecordUnit.h" href="CatalogRecordUnit_8h.html">
+        <topic label="test_CatalogRecord" href="CatalogRecordUnit_8h.html#a3ff741ba2d068398b6ec035e45f7c150"/>
+      </topic>
+      <topic label="Config.h" href="Config_8h.html">
+        <topic label="BASEPATH" href="Config_8h.html#a617d5cce29915439bd7b51852c71e5ed"/>
+        <topic label="extern" href="Config_8h.html#a2a624a765564411c0db3a2bee940f8bc"/>
+        <topic label="fatalError" href="Config_8h.html#ae16aac0ba57287421b17ec5b85812c3e"/>
+        <topic label="goto" href="Config_8h.html#af89de7e1e95cb373208dae93b2b8a303"/>
+        <topic label="IMPLEMENT" href="Config_8h.html#a6268a7076dbbc325138c8a4cae8f6eee"/>
+        <topic label="index" href="Config_8h.html#a8227c495a4fdf3385a170810f90c2b78"/>
+        <topic label="MAXVALUE" href="Config_8h.html#a305e727a769118647a7609e79221d7dd"/>
+        <topic label="OVERRIDABLE" href="Config_8h.html#ab53aaf867a7d82116bd677a29fd1b628"/>
+        <topic label="strcasecmp" href="Config_8h.html#ac99ec3f1036620727a68aa8c25a8963c"/>
+        <topic label="strcat" href="Config_8h.html#ad140927f9ba5dc16bf8d64b9fb92c187"/>
+        <topic label="strcmp" href="Config_8h.html#a6b5d9a1031ac2602e31df1ba551bfafe"/>
+        <topic label="strcpy" href="Config_8h.html#a3c76c079d1e0dea93d871d02e407150e"/>
+        <topic label="strdup" href="Config_8h.html#a9254b089d435892385cf14d0ab4a7a2d"/>
+        <topic label="strlen" href="Config_8h.html#a417fef1b5cd577cfc9a2836bb40fa885"/>
+        <topic label="strncat" href="Config_8h.html#ac0ecd4d94f75ab9d2dd33590287fec50"/>
+        <topic label="strncpy" href="Config_8h.html#a5ad0cad79c46e9a6e2bc4b77ac50e271"/>
+        <topic label="strstr" href="Config_8h.html#a9e20198f75426f8c60549aedccb455d7"/>
+        <topic label="tolower" href="Config_8h.html#a0ce4bb6a1988a03e508025a3a52a70c0"/>
+        <topic label="toupper" href="Config_8h.html#ad14f1a210985c7c556e5e0959b091913"/>
+        <topic label="UNUSED" href="Config_8h.html#a0bdd8a945caf2eb28640128d1fed930c"/>
+        <topic label="calloc" href="Config_8h.html#a35006a6ab2bc59d2c5da1985eb89f1c5"/>
+        <topic label="Config_init" href="Config_8h.html#a75875d4a18ca6c40fe14ec54c2337011"/>
+        <topic label="debugFatalError" href="Config_8h.html#a23875c54fb78fb983a41534f44dcf04f"/>
+        <topic label="fgets" href="Config_8h.html#add73e897d06fa0bdd9cf6426a3a5d141"/>
+        <topic label="fopen" href="Config_8h.html#a68f1a3c301ed35660c38e15b954ca669"/>
+        <topic label="fread" href="Config_8h.html#a126311dc9b227366f89d157c5008ef3d"/>
+        <topic label="fwrite" href="Config_8h.html#a2415a94555eb3dc73e5da905fb9adf5a"/>
+        <topic label="isSpecified" href="Config_8h.html#a3e9443fe5fdc63bf78030835dfbf6070"/>
+        <topic label="malloc" href="Config_8h.html#abea984d1fd4c0b19f0d70615ea64e2a1"/>
+        <topic label="memmove" href="Config_8h.html#a802c986820d3866639922b6bc9484f90"/>
+        <topic label="memset" href="Config_8h.html#ace6ee45c30e71865e6eb635200379db9"/>
+        <topic label="realloc" href="Config_8h.html#abe7615fd849ef7294c8f9c12ce7c515d"/>
+        <topic label="setupOverridable" href="Config_8h.html#a567c428a4f5e99fba34da14717f5cebb"/>
+        <topic label="snprintf" href="Config_8h.html#ad76145a6edfc98981ded8815a760e0cd"/>
+        <topic label="STUDENT_FIRSTNAME" href="Config_8h.html#adc9cf14c8bbf4334fb13b69dda6c4363"/>
+        <topic label="STUDENT_GROUP" href="Config_8h.html#aff606adba116f3e72b21016f6ca3b597"/>
+        <topic label="STUDENT_LASTNAME" href="Config_8h.html#ac95487aad188046708a85c8818a89a33"/>
+        <topic label="STUDENT_YEARS" href="Config_8h.html#a438fd4f2d488a820b815ff38cad87b99"/>
+      </topic>
+      <topic label="Customer.h" href="Customer_8h.html">
+        <topic label="Customer_manage" href="group__CustomerUI.html#gad0a68d1f54ac35f9c42de96ca832bd6e"/>
+        <topic label="Customer_select" href="group__CustomerUI.html#ga3e50d0392f66722076c8474e8b99a286"/>
+      </topic>
+      <topic label="CustomerDB.h" href="CustomerDB_8h.html">
+        <topic label="CUSTOMERDB_FILENAME" href="group__CustomerDB.html#gad5f7d3454b595fab6dbd14470e96098b"/>
+      </topic>
+      <topic label="CustomerDBUnit.h" href="CustomerDBUnit_8h.html">
+        <topic label="test_CustomerDB" href="CustomerDBUnit_8h.html#a2527d969f6e365b715a935fe396328ab"/>
+      </topic>
+      <topic label="CustomerRecord.h" href="CustomerRecord_8h.html">
+        <topic label="CUSTOMERRECORD_ADDRESS_SIZE" href="group__CustomerRecord.html#gaa1c5142e057859f4aa496131b6dead5c"/>
+        <topic label="CUSTOMERRECORD_MAXSTRINGSIZE" href="group__CustomerRecord.html#ga8901a6175e600036c54c90518f43848a"/>
+        <topic label="CUSTOMERRECORD_NAME_SIZE" href="group__CustomerRecord.html#gafe4ea2957d8d23b3c8bf309fc41b1901"/>
+        <topic label="CUSTOMERRECORD_POSTALCODE_SIZE" href="group__CustomerRecord.html#ga7c2ac6812da96759fc909463123c5c19"/>
+        <topic label="CUSTOMERRECORD_SIZE" href="group__CustomerRecord.html#gaf359391f87ea55e7cf63cb9ef42f63cc"/>
+        <topic label="CUSTOMERRECORD_TOWN_SIZE" href="group__CustomerRecord.html#gacd17caaed5693965ab12d2f8cea12bcd"/>
+        <topic label="CustomerRecord_getValue_address" href="group__CustomerRecord.html#gacf7239876efaea2e754f3ebdc6d0102d"/>
+        <topic label="CustomerRecord_getValue_name" href="group__CustomerRecord.html#ga4fd38725877c07e763cd77652cc811cc"/>
+        <topic label="CustomerRecord_getValue_postalCode" href="group__CustomerRecord.html#ga6ea3c5988b11d7765dba4abaef7111ce"/>
+        <topic label="CustomerRecord_getValue_town" href="group__CustomerRecord.html#ga766ee9957ada3bdaa490c8a3db4d3600"/>
+        <topic label="CustomerRecord_setValue_address" href="group__CustomerRecord.html#ga3e9bbd84873279519efe454b05c73bec"/>
+        <topic label="CustomerRecord_setValue_name" href="group__CustomerRecord.html#ga5216bf82c1fda694a626dd9edddb89e7"/>
+        <topic label="CustomerRecord_setValue_postalCode" href="group__CustomerRecord.html#ga9c008df440b7bf6791dd9d2cf11ae14e"/>
+        <topic label="CustomerRecord_setValue_town" href="group__CustomerRecord.html#gaf55e35d212a9b882e4b25658afec3b87"/>
+      </topic>
+      <topic label="CustomerRecordEditor.h" href="CustomerRecordEditor_8h.html">
+        <topic label="CustomerRecord_Function_getValue" href="group__CustomerRecordEditor.html#gaff30aa90df250fcd6482914495a38cde"/>
+        <topic label="CustomerRecord_Function_isValueValid" href="group__CustomerRecordEditor.html#ga72bc69531600cf9e624b9e9a15669ca0"/>
+        <topic label="CustomerRecord_Function_setValue" href="group__CustomerRecordEditor.html#gabc8423c0b3b39f9f4faedcdb050d5a2a"/>
+        <topic label="CustomerRecord_FieldIdentifier" href="group__CustomerRecordEditor.html#gaf7d20c2811247cc46892396dd8594389">
+          <topic label="CUSTOMERRECORD_NAME_FIELD" href="group__CustomerRecordEditor.html#ggaf7d20c2811247cc46892396dd8594389a7a2e070b01f18928ea53b0fd64275aee"/>
+          <topic label="CUSTOMERRECORD_ADDRESS_FIELD" href="group__CustomerRecordEditor.html#ggaf7d20c2811247cc46892396dd8594389a0590a1a05f570ee1c3dd3622b6be71a7"/>
+          <topic label="CUSTOMERRECORD_POSTALCODE_FIELD" href="group__CustomerRecordEditor.html#ggaf7d20c2811247cc46892396dd8594389a3e4dfeaab52a5d4a6d13449a5a985241"/>
+          <topic label="CUSTOMERRECORD_TOWN_FIELD" href="group__CustomerRecordEditor.html#ggaf7d20c2811247cc46892396dd8594389a8a47be87596e842f07416c23f1311cfc"/>
+          <topic label="CUSTOMERRECORD_FIELDCOUNT" href="group__CustomerRecordEditor.html#ggaf7d20c2811247cc46892396dd8594389acd4a93c9bbd1a38a083d0dd23bc50420"/>
+        </topic>
+      </topic>
+      <topic label="CustomerRecordUnit.h" href="CustomerRecordUnit_8h.html">
+        <topic label="test_CustomerRecord" href="CustomerRecordUnit_8h.html#a037b6b3a057be54fb6364bff3c5c0f54"/>
+      </topic>
+      <topic label="Dictionary.h" href="Dictionary_8h.html">
+        <topic label="DictionaryEntryType" href="group__Dictionary.html#ga5214a8d7dc24ea08107746367d87bcf5">
+          <topic label="UNDEFINED_ENTRY" href="group__Dictionary.html#gga5214a8d7dc24ea08107746367d87bcf5adacf2705e5fbf7709a8e3442661f991c"/>
+          <topic label="NUMBER_ENTRY" href="group__Dictionary.html#gga5214a8d7dc24ea08107746367d87bcf5aeab05e6cdb654edc01ab22ab6234cf5c"/>
+          <topic label="STRING_ENTRY" href="group__Dictionary.html#gga5214a8d7dc24ea08107746367d87bcf5a3876b394e48e8b65f1a8ea60aabf597f"/>
+        </topic>
+        <topic label="Dictionary_create" href="group__Dictionary.html#gae815a95f3fb6d1d61f72e395e65dda41"/>
+        <topic label="Dictionary_destroy" href="group__Dictionary.html#ga3a1606923fafcf228ea67cb75947fab8"/>
+        <topic label="Dictionary_format" href="group__Dictionary.html#ga8cfb4fc69b034c758cd0dd62235b1357"/>
+        <topic label="Dictionary_getEntry" href="group__Dictionary.html#ga929d74c13e8d3eb63ac56ad468bf93b4"/>
+        <topic label="Dictionary_setNumberEntry" href="group__Dictionary.html#ga98c0094297f891804961d8cb056c30bc"/>
+        <topic label="Dictionary_setStringEntry" href="group__Dictionary.html#gab222ae16091015a68652bf2ff38d5dcf"/>
+      </topic>
+      <topic label="DictionaryUnit.h" href="DictionaryUnit_8h.html">
+        <topic label="test_Dictionary" href="DictionaryUnit_8h.html#a5f36a28d63abdda9e2840bca59c0f8ec"/>
+      </topic>
+      <topic label="Document.h" href="Document_8h.html">
+        <topic label="TypeDocument" href="group__Document.html#ga69c49c41d38ae1dcaa0f31a22b1efee6">
+          <topic label="QUOTATION" href="group__Document.html#gga69c49c41d38ae1dcaa0f31a22b1efee6a356b4a530320c31af5a30367b5d390ea"/>
+          <topic label="BILL" href="group__Document.html#gga69c49c41d38ae1dcaa0f31a22b1efee6ac0f09f1fa0d8fde763958ffed01d6708"/>
+        </topic>
+        <topic label="Document_finalize" href="group__Document.html#gacd07ee9b169977b74bcd8b5256042f8e"/>
+        <topic label="Document_init" href="group__Document.html#ga103dd74efd5e151c551abbdc398e810d"/>
+        <topic label="Document_loadFromFile" href="group__Document.html#ga7fdd2a2812aa902e090469075e802028"/>
+        <topic label="Document_saveToFile" href="group__Document.html#ga6bfc6a1d00c1a093a670392bc81a58d9"/>
+      </topic>
+      <topic label="DocumentEditor.h" href="DocumentEditor_8h.html">
+        <topic label="TypeAction" href="group__DocumentEditor.html#gac02d640352b5046fac70aa514ef3ffa5">
+          <topic label="NEW_DOCUMENT" href="group__DocumentEditor.html#ggac02d640352b5046fac70aa514ef3ffa5a3780f381b44ad22db195fa9c673fab3a"/>
+          <topic label="DISPLAY_DOCUMENT" href="group__DocumentEditor.html#ggac02d640352b5046fac70aa514ef3ffa5ac85fa0a5349bb01ba45d56e1fe0aed10"/>
+          <topic label="MODIFY_DOCUMENT" href="group__DocumentEditor.html#ggac02d640352b5046fac70aa514ef3ffa5a9f8fed1017add5b018cbe6a4ee43a4cb"/>
+        </topic>
+        <topic label="DocumentEditor_edit" href="group__DocumentEditor.html#ga81e9796adf3183dbc2126507265e510a"/>
+      </topic>
+      <topic label="DocumentRowList.h" href="DocumentRowList_8h.html">
+        <topic label="DocumentRow_create" href="group__DocumentRowList.html#gaaac900c5bc48cdc51ada7f2573287d7e"/>
+        <topic label="DocumentRow_destroy" href="group__DocumentRowList.html#gac4ea8d51b1cf52ff7a9588ba018290c3"/>
+        <topic label="DocumentRow_finalize" href="group__DocumentRowList.html#gaf672c86f788aeaafdd41137d4999ec2d"/>
+        <topic label="DocumentRow_init" href="group__DocumentRowList.html#ga01fe276cfc8fde8d96b60a336995db21"/>
+        <topic label="DocumentRow_readRow" href="group__DocumentRowList.html#ga1841d6f7739d2aeb68667f42eaa56c52"/>
+        <topic label="DocumentRow_writeRow" href="group__DocumentRowList.html#gacae6ed61a2548d1532ad4c290bc3b3a3"/>
+        <topic label="DocumentRowList_finalize" href="group__DocumentRowList.html#gad122b2143ad355340f1793b9f8d5a057"/>
+        <topic label="DocumentRowList_get" href="group__DocumentRowList.html#gac15557719c72aeb2e8d5c3d7a0574f97"/>
+        <topic label="DocumentRowList_getRowCount" href="group__DocumentRowList.html#gaaef8bf84762b5502e9d3c27dd84f4bfd"/>
+        <topic label="DocumentRowList_init" href="group__DocumentRowList.html#ga4cc2903a36a9f2b0436ca154d15ce673"/>
+        <topic label="DocumentRowList_insertAfter" href="group__DocumentRowList.html#gaf49d517e8ccde05a90acd567f03d61d9"/>
+        <topic label="DocumentRowList_insertBefore" href="group__DocumentRowList.html#gacb4efb0a2afca928f543d6ffd9750a48"/>
+        <topic label="DocumentRowList_pushBack" href="group__DocumentRowList.html#ga4baa6fdf84d69c7f8711f0c598337a6c"/>
+        <topic label="DocumentRowList_removeRow" href="group__DocumentRowList.html#ga65426a102209330b2a100f754744bf87"/>
+      </topic>
+      <topic label="DocumentRowListUnit.h" href="DocumentRowListUnit_8h.html">
+        <topic label="test_DocumentRowList" href="DocumentRowListUnit_8h.html#a00bc1fee3d9df56e074869547ebbefbc"/>
+      </topic>
+      <topic label="DocumentUnit.h" href="DocumentUnit_8h.html">
+        <topic label="test_Document" href="DocumentUnit_8h.html#a4e5571c06a51827cebe0eaf429deca1f"/>
+      </topic>
+      <topic label="DocumentUtil.h" href="DocumentUtil_8h.html">
+        <topic label="computeDocumentNumber" href="group__DocumentUtil.html#ga71c5eeffedf48e921edac2c8e802b6a7"/>
+        <topic label="formatDate" href="group__DocumentUtil.html#ga5c14603f3e92d6210df73843247d828c"/>
+        <topic label="readString" href="group__DocumentUtil.html#ga8b95856984309ee3bb50c4caa7259d63"/>
+        <topic label="writeString" href="group__DocumentUtil.html#ga348551b99f417ea31489dabc3a7e1779"/>
+      </topic>
+      <topic label="DocumentUtilUnit.h" href="DocumentUtilUnit_8h.html">
+        <topic label="test_DocumentUtil" href="DocumentUtilUnit_8h.html#a1c44a901b4403f34e2e3163806e02168"/>
+      </topic>
+      <topic label="EncryptDecrypt.h" href="EncryptDecrypt_8h.html">
+        <topic label="decrypt" href="group__EncryptDecrypt.html#gac6351339416ca66ee8dbf7bef4a42b12"/>
+        <topic label="encrypt" href="group__EncryptDecrypt.html#ga9d05b6d7df1ce9fdeecbc4e53736872f"/>
+        <topic label="OperatorCryptKey" href="group__EncryptDecrypt.html#gacb4e1ddd95447fb47f84c9e621d2f1a6"/>
+      </topic>
+      <topic label="EncryptDecryptUnit.h" href="EncryptDecryptUnit_8h.html">
+        <topic label="test_EncryptDecrypt" href="EncryptDecryptUnit_8h.html#ae947295a2909aefadaa452c84a332aa3"/>
+      </topic>
+      <topic label="GtkCatalogModel.h" href="GtkCatalogModel_8h.html">
+        <topic label="GTKCATALOGMODEL" href="group__GtkCatalogModel.html#gae20c3776e6a9c1f237a4adfd9a202643"/>
+        <topic label="GTKCATALOGMODEL_CLASS" href="group__GtkCatalogModel.html#ga5155181f239fffb41b864cbcb8115313"/>
+        <topic label="GTKCATALOGMODEL_IS_LIST" href="group__GtkCatalogModel.html#gae2d2483fb0f8cf8eebd036ec4c1fbb83"/>
+        <topic label="GTKCATALOGMODEL_IS_LIST_CLASS" href="group__GtkCatalogModel.html#ga088837c11ecf641cdb1c271481305c55"/>
+        <topic label="GTKCATALOGMODEL_LIST_GET_CLASS" href="group__GtkCatalogModel.html#ga551b0e3f6729f6b4b03e84f7d7edad41"/>
+        <topic label="GTKCATALOGMODEL_TYPE_LIST" href="group__GtkCatalogModel.html#ga825c3b586d7014198a6521d52688a5f5"/>
+        <topic label="GtkCatalogModel_append_record" href="group__GtkCatalogModel.html#ga9db2d80542fb498f24a7a98a3c8b37b4"/>
+        <topic label="GtkCatalogModel_change_record" href="group__GtkCatalogModel.html#ga15ca1d2f9b1eb7ae6577ea17846a1367"/>
+        <topic label="GtkCatalogModel_get_type" href="group__GtkCatalogModel.html#ga2085390f66b0f2353e043cedc7037a2d"/>
+        <topic label="GtkCatalogModel_insert_record" href="group__GtkCatalogModel.html#ga98ffaceae96f8457675f7fd025842f6c"/>
+        <topic label="GtkCatalogModel_new" href="group__GtkCatalogModel.html#ga113f141feccff1fd3c4ab9581ee92fe6"/>
+        <topic label="GtkCatalogModel_remove_record" href="group__GtkCatalogModel.html#gaaa18696a43ce08985f84ce2a406933d5"/>
+      </topic>
+      <topic label="GtkCustomerModel.h" href="GtkCustomerModel_8h.html">
+        <topic label="GTKCUSTOMERMODEL" href="group__GtkCustomerModel.html#ga75031bb34535282b4906531c39578f7c"/>
+        <topic label="GTKCUSTOMERMODEL_CLASS" href="group__GtkCustomerModel.html#ga441697cc5a5077a1f89454fedb485630"/>
+        <topic label="GTKCUSTOMERMODEL_IS_LIST" href="group__GtkCustomerModel.html#ga4a41fa000b3bc76fd69d73d8fa8cf648"/>
+        <topic label="GTKCUSTOMERMODEL_IS_LIST_CLASS" href="group__GtkCustomerModel.html#ga8ed58a5019ae446da16f8649d53609ad"/>
+        <topic label="GTKCUSTOMERMODEL_LIST_GET_CLASS" href="group__GtkCustomerModel.html#gaa253327a2960ff5ecbfced4490595e12"/>
+        <topic label="GTKCUSTOMERMODEL_TYPE_LIST" href="group__GtkCustomerModel.html#ga9da64829312943c283a175c04fb6fc1d"/>
+        <topic label="GtkCustomerModel_append_record" href="group__GtkCustomerModel.html#ga740f604e984c1a1bdcf8686f77a1641b"/>
+        <topic label="GtkCustomerModel_change_record" href="group__GtkCustomerModel.html#ga6dc833e658a293271ddf8f44e5bc528a"/>
+        <topic label="GtkCustomerModel_get_type" href="group__GtkCustomerModel.html#gac5cc050a4867bff4661c6b69d0cc4c69"/>
+        <topic label="GtkCustomerModel_insert_record" href="group__GtkCustomerModel.html#ga684fad5cef4f73d6d92488ebad0acf57"/>
+        <topic label="GtkCustomerModel_new" href="group__GtkCustomerModel.html#ga97b902acd6f4166b4b2661fd6aa21f1a"/>
+        <topic label="GtkCustomerModel_remove_record" href="group__GtkCustomerModel.html#ga99592941d1c02172bcdca1712027e564"/>
+      </topic>
+      <topic label="MainWindow.h" href="MainWindow_8h.html">
+        <topic label="MainWindow_create" href="group__App.html#ga0f92704dd268924f59a056459a53d495"/>
+      </topic>
+      <topic label="MyString.h" href="MyString_8h.html">
+        <topic label="compareString" href="group__String.html#ga4b46ba5548144c504541e44984e653e5"/>
+        <topic label="concatenateString" href="group__String.html#gaa720b9d342564aec0b8efcd0745e1c68"/>
+        <topic label="copyString" href="group__String.html#gaef359aab543339a378d8247e661e36ac"/>
+        <topic label="copyStringWithLength" href="group__String.html#ga3ba088cb15769ef98b5e1ed2e616e71a"/>
+        <topic label="duplicateString" href="group__String.html#gad2854302f1c0bf1ba2ac7641b8d4bf24"/>
+        <topic label="icaseCompareString" href="group__String.html#ga1634dfbc4cda450105bfda7559bd7822"/>
+        <topic label="icaseEndWith" href="group__String.html#ga0acbcf159197d2a7712ab8d971eb7167"/>
+        <topic label="icaseStartWith" href="group__String.html#ga9c72da87ac0cc63c1bb220736fcd0f60"/>
+        <topic label="indexOfChar" href="group__String.html#ga075e7e4f03a915360b1544ec3889cda6"/>
+        <topic label="indexOfString" href="group__String.html#ga89d6145d45edcbd7e2f63766761dbac7"/>
+        <topic label="insertString" href="group__String.html#ga3131b6ede1444bb8a37b873c1fd12596"/>
+        <topic label="makeLowerCaseString" href="group__String.html#ga24474e839219f968eb6703cc91890448"/>
+        <topic label="makeUpperCaseString" href="group__String.html#ga94cb2e274b32093588f987e530249f68"/>
+        <topic label="stringLength" href="group__String.html#ga8f17f5657bf553c530528f6bce3b38bb"/>
+        <topic label="subString" href="group__String.html#ga12dc12edb22fe03d1359ff45ae149271"/>
+        <topic label="toLowerChar" href="group__String.html#ga4e545641f98651d4fb8299b407721f9b"/>
+        <topic label="toUpperChar" href="group__String.html#ga1e11de02c22aeef39426d501072c678f"/>
+      </topic>
+      <topic label="MyStringUnit.h" href="MyStringUnit_8h.html">
+        <topic label="test_MyString" href="MyStringUnit_8h.html#abf33ab2163761fe0ec881d932f0248f3"/>
+      </topic>
+      <topic label="Operator.h" href="Operator_8h.html">
+        <topic label="Operator_identify" href="group__Operator.html#ga2fadfdfb6628763e4688d163f61e294a"/>
+        <topic label="Operator_manage" href="group__Operator.html#ga8433c15a18c9ec1c7bcc0ac157ea6365"/>
+      </topic>
+      <topic label="OperatorTable.h" href="OperatorTable_8h.html">
+        <topic label="OPERATORTABLE_MAXNAMESIZE" href="group__OperatorTable.html#ga4744ce294a17b76a8760c09a88f2058a"/>
+        <topic label="OPERATORTABLE_MAXPASSWORDSIZE" href="group__OperatorTable.html#ga04cde054f97d7582da84e36b759c6856"/>
+        <topic label="OPERATORDB_FILENAME" href="group__OperatorTable.html#gac2d35b6fa759c767fcd18df44b8bc13a"/>
+      </topic>
+      <topic label="OperatorTableUnit.h" href="OperatorTableUnit_8h.html">
+        <topic label="test_OperatorTable" href="OperatorTableUnit_8h.html#a84ad4256c0638892d10787688611286a"/>
+      </topic>
+      <topic label="Print.h" href="Print_8h.html">
+        <topic label="Print_preview" href="group__Print.html#gad98ad0399c2fee28e9e7c6d2f74525dd"/>
+        <topic label="PrintFormat_format" href="group__Print.html#ga439f9d07cf972958a4258d9b9b0ca164"/>
+      </topic>
+      <topic label="PrintFormat.h" href="PrintFormat_8h.html">
+        <topic label="PrintFormat_finalize" href="group__PrintFormat.html#gae5ac9cc9187e65c1a5dfa470babdec02"/>
+        <topic label="PrintFormat_init" href="group__PrintFormat.html#ga23df39266d2dd7a9c58b24582c2649db"/>
+        <topic label="PrintFormat_loadFromFile" href="group__PrintFormat.html#gab24280d4ce22865b9de5e6811a396faa"/>
+      </topic>
+      <topic label="PrintFormatUnit.h" href="PrintFormatUnit_8h.html">
+        <topic label="test_PrintFormat" href="PrintFormatUnit_8h.html#a74a9a3b1603168cc33ca049dcda161e1"/>
+      </topic>
+      <topic label="Quotation.h" href="Quotation_8h.html">
+        <topic label="Quotation_convertToBill" href="group__Quotation.html#gab94d323d46e6eb1c4f29ce8af4abe3f2"/>
+        <topic label="Quotation_display" href="group__Quotation.html#ga3e69cced2caba9255cd3534d3198087e"/>
+        <topic label="Quotation_load" href="group__Quotation.html#ga8b96d36eba53f240787601e99330b728"/>
+        <topic label="Quotation_new" href="group__Quotation.html#ga949073ac775dbfbfe2beabcd705d88b2"/>
+        <topic label="Quotation_open" href="group__Quotation.html#ga2d735e0cb5f3ee786c6c21dfda2976ad"/>
+        <topic label="Quotation_save" href="group__Quotation.html#ga9c63283cb7fe9b966d6d0111823fd441"/>
+      </topic>
+      <topic label="Registry.h" href="Registry_8h.html">
+        <topic label="__func__" href="Registry_8h.html#a7d6e1cf1a8d53f38471e9e9db3faf740"/>
+        <topic label="REGISTRY_USINGFUNCTION" href="Registry_8h.html#acf9f693da4c3eae7b4af21fc2f86fcd6"/>
+        <topic label="Registry_dumpUsage" href="Registry_8h.html#a7011b21a24e6f447a85079b0a1744efd"/>
+        <topic label="Registry_getUsage" href="Registry_8h.html#a3187b9695c4172b80429bdb1ec4f51e6"/>
+        <topic label="Registry_init" href="Registry_8h.html#adb5515276462ff6c3271b26100f6c8f3"/>
+        <topic label="Registry_usingFunction" href="Registry_8h.html#a0caca2fa092d5c0feb6bd61fc0eceba9"/>
+      </topic>
+      <topic label="UnitTest.h" href="UnitTest_8h.html">
+        <topic label="ASSERT" href="group__UnitTest.html#ga0966b817b229d48e5ffc7feab19a0be6"/>
+        <topic label="ASSERT_EQUAL" href="group__UnitTest.html#ga07fc9e3c2fa55f275fe572e4bb251316"/>
+        <topic label="ASSERT_EQUAL_DOUBLE" href="group__UnitTest.html#gac0d4e17fdbe3f5ff8259f519d8a83973"/>
+        <topic label="ASSERT_EQUAL_STRING" href="group__UnitTest.html#gadc6e9fd7e1a6de46fe249b6acc1ea809"/>
+        <topic label="ASSERT_NOT_EQUAL" href="group__UnitTest.html#gab5429200bb3a859fbfa99b52ec314883"/>
+        <topic label="ASSERT_NOT_EQUAL_STRING" href="group__UnitTest.html#gab4c0e748e5a9f7ac2c7f6f1fcd332fc4"/>
+        <topic label="BEGIN_TESTS" href="group__UnitTest.html#gac5bac33688f7989a651226752508d64f"/>
+        <topic label="END_TESTS" href="group__UnitTest.html#ga6fb525f503f98aa262cf08158d924a1f"/>
+        <topic label="RUN_TEST" href="group__UnitTest.html#ga6d22b2e20a26b0d72b5c15912b4e211e"/>
+        <topic label="endtest" href="group__UnitTest.html#ga290914cb7b61339efbd93ff591435fbd"/>
+        <topic label="packageTestsEnabled" href="group__UnitTest.html#ga6c3e03858ed655eaf5f8880bc8156dbf"/>
+        <topic label="runtest" href="group__UnitTest.html#ga4a1df91db551d0a4f51a7239911e28fc"/>
+      </topic>
+    </topic>
+    <topic label="Globals" href="globals.html">
+      <topic label="All" href="globals.html">
+        <topic label="_" href="globals.html"/>
+        <topic label="a" href="globals_a.html"/>
+        <topic label="b" href="globals_b.html"/>
+        <topic label="c" href="globals_c.html"/>
+        <topic label="d" href="globals_d.html"/>
+        <topic label="e" href="globals_e.html"/>
+        <topic label="f" href="globals_f.html"/>
+        <topic label="g" href="globals_g.html"/>
+        <topic label="i" href="globals_i.html"/>
+        <topic label="m" href="globals_m.html"/>
+        <topic label="n" href="globals_n.html"/>
+        <topic label="o" href="globals_o.html"/>
+        <topic label="p" href="globals_p.html"/>
+        <topic label="q" href="globals_q.html"/>
+        <topic label="r" href="globals_r.html"/>
+        <topic label="s" href="globals_s.html"/>
+        <topic label="t" href="globals_t.html"/>
+        <topic label="u" href="globals_u.html"/>
+        <topic label="w" href="globals_w.html"/>
+      </topic>
+      <topic label="Functions" href="globals_func.html"/>
+      <topic label="Variables" href="globals_vars.html"/>
+      <topic label="Typedefs" href="globals_type.html"/>
+      <topic label="Enumerations" href="globals_enum.html"/>
+      <topic label="Enumerator" href="globals_eval.html"/>
+      <topic label="Macros" href="globals_defs.html"/>
+    </topic>
+  </topic>
+</toc>

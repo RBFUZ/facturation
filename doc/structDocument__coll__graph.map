@@ -1,0 +1,4 @@
+<map id="Document" name="Document">
+<area shape="rect" id="node2" href="$structCustomerRecord.html" title="A customer record. " alt="" coords="5,42,133,163"/>
+<area shape="rect" id="node3" href="$structDocumentRow.html" title="Structure representing a row in a document (as a cell in a simple linked list. " alt="" coords="158,5,271,200"/>
+</map>

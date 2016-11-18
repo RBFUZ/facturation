@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="Facturation" />
+		<Option makefile_is_custom="1" />
+		<Option compiler="gcc" />
+		<Option extended_obj_names="1" />
+		<Build>
+			<Target title="debug">
+				<Option output="debug/facturation" prefix_auto="0" extension_auto="0" />
+				<Option working_dir="debug" />
+				<Option object_output="debug" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Option use_console_runner="1" />
+				<MakeCommands>
+					<Build command="$make -f $makefile debug/facturation" />
+					<CompileFile command="" />
+					<Clean command="$make -f $makefile clean" />
+					<DistClean command="$make -f $makefile clean" />
+					<AskRebuildNeeded command="$make -q -f $makefile debug/facturation" />
+					<SilentBuild command="$make -f $makefile debug/facturation &gt; $(CMD_NULL)" />
+				</MakeCommands>
+			</Target>
+			<Target title="release">
+				<Option output="release/facturation" prefix_auto="0" extension_auto="0" />
+				<Option working_dir="release" />
+				<Option object_output="release" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Option use_console_runner="1" />
+				<MakeCommands>
+					<Build command="$make release/facturation" />
+					<CompileFile command="" />
+					<Clean command="$make clean" />
+					<DistClean command="make clean" />
+					<AskRebuildNeeded command="$make -q -f $makefile release/facturation" />
+					<SilentBuild command="$make release/facturation &gt; $(CMD_NULL)" />
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="include/App.h" />
+		<Unit filename="include/Bill.h" />
+		<Unit filename="include/Catalog.h" />
+		<Unit filename="include/CatalogDB.h" />
+		<Unit filename="include/CatalogDBUnit.h" />
+		<Unit filename="include/CatalogRecord.h" />
+		<Unit filename="include/CatalogRecordEditor.h" />
+		<Unit filename="include/CatalogRecordUnit.h" />
+		<Unit filename="include/Config.h" />
+		<Unit filename="include/Customer.h" />
+		<Unit filename="include/CustomerDB.h" />
+		<Unit filename="include/CustomerDBUnit.h" />
+		<Unit filename="include/CustomerRecord.h" />
+		<Unit filename="include/CustomerRecordEditor.h" />
+		<Unit filename="include/CustomerRecordUnit.h" />
+		<Unit filename="include/Dictionary.h" />
+		<Unit filename="include/DictionaryUnit.h" />
+		<Unit filename="include/Document.h" />
+		<Unit filename="include/DocumentEditor.h" />
+		<Unit filename="include/DocumentRowList.h" />
+		<Unit filename="include/DocumentRowListUnit.h" />
+		<Unit filename="include/DocumentUnit.h" />
+		<Unit filename="include/DocumentUtil.h" />
+		<Unit filename="include/DocumentUtilUnit.h" />
+		<Unit filename="include/EncryptDecrypt.h" />
+		<Unit filename="include/EncryptDecryptUnit.h" />
+		<Unit filename="include/GtkCatalogModel.h" />
+		<Unit filename="include/GtkCustomerModel.h" />
+		<Unit filename="include/MainWindow.h" />
+		<Unit filename="include/MyString.h" />
+		<Unit filename="include/MyStringUnit.h" />
+		<Unit filename="include/Operator.h" />
+		<Unit filename="include/OperatorTable.h" />
+		<Unit filename="include/OperatorTableUnit.h" />
+		<Unit filename="include/Print.h" />
+		<Unit filename="include/PrintFormat.h" />
+		<Unit filename="include/PrintFormatUnit.h" />
+		<Unit filename="include/Quotation.h" />
+		<Unit filename="include/Registry.h" />
+		<Unit filename="include/UnitTest.h" />
+		<Unit filename="include/provided/CatalogDB.h" />
+		<Unit filename="include/provided/CatalogRecord.h" />
+		<Unit filename="include/provided/CustomerDB.h" />
+		<Unit filename="include/provided/CustomerRecord.h" />
+		<Unit filename="include/provided/Dictionary.h" />
+		<Unit filename="include/provided/Document.h" />
+		<Unit filename="include/provided/DocumentRowList.h" />
+		<Unit filename="include/provided/DocumentUtil.h" />
+		<Unit filename="include/provided/EncryptDecrypt.h" />
+		<Unit filename="include/provided/MyString.h" />
+		<Unit filename="include/provided/OperatorTable.h" />
+		<Unit filename="include/provided/PrintFormat.h" />
+		<Unit filename="include/user/CatalogDB.h" />
+		<Unit filename="include/user/CatalogRecord.h" />
+		<Unit filename="include/user/CustomerDB.h" />
+		<Unit filename="include/user/CustomerRecord.h" />
+		<Unit filename="include/user/Dictionary.h" />
+		<Unit filename="include/user/Document.h" />
+		<Unit filename="include/user/DocumentRowList.h" />
+		<Unit filename="include/user/DocumentUtil.h" />
+		<Unit filename="include/user/EncryptDecrypt.h" />
+		<Unit filename="include/user/MyString.h" />
+		<Unit filename="include/user/OperatorTable.h" />
+		<Unit filename="include/user/PrintFormat.h" />
+		<Unit filename="src/App.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/Bill.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/Catalog.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/CatalogDB.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/CatalogDBUnit.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/CatalogRecord.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/CatalogRecordEditor.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/CatalogRecordUnit.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/Customer.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/CustomerDB.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/CustomerDBUnit.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/CustomerRecord.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/CustomerRecordEditor.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/CustomerRecordUnit.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/Dictionary.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/DictionaryUnit.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/Document.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/DocumentEditor.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/DocumentRowList.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/DocumentRowListUnit.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/DocumentUnit.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/DocumentUtil.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/DocumentUtilUnit.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/EncryptDecrypt.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/EncryptDecryptUnit.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/GtkCatalogModel.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/GtkCustomerModel.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/MainWindow.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/MyString.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/MyStringUnit.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/Operator.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/OperatorTable.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/OperatorTableUnit.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/Print.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/PrintFormat.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/PrintFormatUnit.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/Quotation.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Extensions>
+			<envvars />
+			<code_completion />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

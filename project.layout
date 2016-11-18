@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_layout_file>
+	<ActiveTarget name="debug" />
+	<File name="include/CustomerRecord.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1532" topLine="24" />
+		</Cursor>
+	</File>
+	<File name="src/CatalogDBUnit.c" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="4656" topLine="118" />
+		</Cursor>
+	</File>
+	<File name="src/CustomerDB.c" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="4685" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src/OperatorTable.c" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2520" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src/DocumentUtil.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2118" topLine="106" />
+		</Cursor>
+	</File>
+	<File name="include/OperatorTable.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1426" topLine="12" />
+		</Cursor>
+	</File>
+	<File name="src/DocumentUtilUnit.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1010" topLine="9" />
+		</Cursor>
+	</File>
+	<File name="src/CustomerRecordUnit.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1004" topLine="68" />
+		</Cursor>
+	</File>
+	<File name="src/OperatorTableUnit.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="7696" topLine="175" />
+		</Cursor>
+	</File>
+	<File name="src/CustomerRecord.c" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3354" topLine="66" />
+		</Cursor>
+	</File>
+	<File name="src/CustomerDBUnit.c" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1646" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src/CatalogDB.c" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="6377" topLine="204" />
+		</Cursor>
+	</File>
+	<File name="src/CatalogRecordUnit.c" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="965" topLine="20" />
+		</Cursor>
+	</File>
+	<File name="src/MyString.c" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="5351" topLine="153" />
+		</Cursor>
+	</File>
+	<File name="src/EncryptDecrypt.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1026" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="include/CatalogRecord.h" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1305" topLine="30" />
+		</Cursor>
+	</File>
+	<File name="src/CatalogRecord.c" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="9706" topLine="240" />
+		</Cursor>
+	</File>
+	<File name="src/DocumentUnit.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="14" />
+		</Cursor>
+	</File>
+	<File name="src/MyStringUnit.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="7549" topLine="229" />
+		</Cursor>
+	</File>
+	<File name="src/App.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2155" topLine="66" />
+		</Cursor>
+	</File>
+</CodeBlocks_layout_file>

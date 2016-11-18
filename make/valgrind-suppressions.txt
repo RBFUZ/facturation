@@ -1,0 +1,93 @@
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   ...
+   fun:MainWindow_createMenuBar
+   fun:MainWindow_create
+   fun:App_run
+   fun:main
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   ...
+   fun:call_init
+   fun:_dl_init
+   obj:*
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   ...
+   fun:g_simple_async_result_complete
+   obj:*
+   fun:g_main_context_dispatch
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   ...
+   fun:gtk_window_add_accel_group
+   fun:MainWindow_create
+   fun:App_run
+   fun:main
+}
+{
+   <insert_a_suppression_name_here> 
+   Memcheck:Leak
+   ...
+   fun:g_object_new
+   fun:MainWindow_createMenuBar
+   fun:MainWindow_create
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   ...
+   fun:g_closure_invoke
+   obj:*
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   ...
+   fun:g_type_create_instance
+   obj:*
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   ...
+   fun:g_thread_new
+   ...
+   obj:*
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   ...
+   obj:/usr/lib/x86_64-linux-gnu/*
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   ...
+   fun:draw_box
+   ...
+   fun:gtk_widget_event_internal
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Param
+   writev(vector[...])
+   ...
+   fun:gdk_window_process_all_updates
+   fun:gtk_container_idle_sizer
+   fun:gdk_threads_dispatch
+   fun:g_main_context_dispatch
+   obj:*
+}

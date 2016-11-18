@@ -1,0 +1,13 @@
+.NAME Format de devis n°1
+.HEADER
+l'entete
+	sur
+		plusieurs
+			lignes
+.ROW
+une ligne
+.FOOTER
+le pied
+de
+page
+.END

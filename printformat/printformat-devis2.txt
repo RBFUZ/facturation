@@ -1,0 +1,32 @@
+.NAME Format de devis n°2
+.HEADER
+Entreprise Bidule
+64 Avenue de l'imaginaire
+99999 Le Paradis
+
+                                      %CUSTOMER.NAME{case=U,max=20}%
+                                      %CUSTOMER.ADDRESS{max=20}%
+                                      %CUSTOMER.PORTALCODE%
+                                      %CUSTOMER.TOWN{max=20}%
+
+              %TYPEDOCUMENT% n°%DOCNUMBER%
+
+Document établi le %EDITDATE% par %OPERATOR%.
+Durée de validité : %EXPIRYDATE%
+
+Objet : %OBJECT%
+
+----------------------------------------------------------------------
+|Quantité|Unité   |Prix de   |Réduction |Prix final|Taux  |Prix TTC  |
+|        |        |vente HT  |          |HT        |TVA   |          |
+.ROW
+|--------+--------+----------+----------+----------+------+----------|
+|%DESIGNATION{min=68,max=68}%|
+|%QUANTITY{precision=2,min=8}%|%UNITY{min=8,max=8}%|%SELLINGPRICE{precision=2,min=10}%|%DISCOUNT{precision=2,min=10}%|%SOLDPRICE{precision=2,min=10}%|%RATEOFVAT{precision=2,min=5}%%%|%FINALPRICE{precision=2,min=10}%|
+.FOOTER
+----------------------------------------------------------+----------|
+                                                Total HT  |%SUMWITHOUTVAT{precision=2,min=10}%|
+                                                Total TVA |%SUMOFVAT{precision=2,min=10}%|
+                                                Total TTC |%SUMWITHVAT{precision=2,min=10}%|
+                                                          ------------
+.END

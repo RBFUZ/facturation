@@ -1,0 +1,25 @@
+var CatalogRecord_8h =
+[
+    [ "CATALOGRECORD_BASEPRICE_SIZE", "group__CatalogRecord.html#ga8cba57b0349aa39f25f4045c3265b565", null ],
+    [ "CATALOGRECORD_CODE_SIZE", "group__CatalogRecord.html#gae956f89c18cfd0827de08aa5f085c469", null ],
+    [ "CATALOGRECORD_DESIGNATION_SIZE", "group__CatalogRecord.html#gad1a4b447cc7cb551c46107a30ebb976d", null ],
+    [ "CATALOGRECORD_MAXSTRING_SIZE", "group__CatalogRecord.html#ga27759839e5e939fd24482caa85d43248", null ],
+    [ "CATALOGRECORD_RATEOFVAT_SIZE", "group__CatalogRecord.html#ga5c33824e0196b66137d2352d6dda5d66", null ],
+    [ "CATALOGRECORD_SELLINGPRICE_SIZE", "group__CatalogRecord.html#ga6f7b339d4828c8351a78c436dbeb907c", null ],
+    [ "CATALOGRECORD_SIZE", "group__CatalogRecord.html#ga1dd6da61c893e0ee8f798e8ce72c3698", null ],
+    [ "CATALOGRECORD_UNITY_SIZE", "group__CatalogRecord.html#ga59b416c0023f88bd9ffa58449ae37919", null ],
+    [ "CatalogRecord_getValue_basePrice", "group__CatalogRecord.html#ga4742e9230111b8a692013b3d47e470b6", null ],
+    [ "CatalogRecord_getValue_code", "group__CatalogRecord.html#gafcafd99c3d08b34ebd0b92e4a2a655c0", null ],
+    [ "CatalogRecord_getValue_designation", "group__CatalogRecord.html#ga588e8fe39d8653cd9c4bd1dcb098ac82", null ],
+    [ "CatalogRecord_getValue_rateOfVAT", "group__CatalogRecord.html#gaa5b25b15d8cec570c6f9b260488b91df", null ],
+    [ "CatalogRecord_getValue_sellingPrice", "group__CatalogRecord.html#ga637f0697b591384b32e757a9c64df877", null ],
+    [ "CatalogRecord_getValue_unity", "group__CatalogRecord.html#ga4394b55731a78be99f4559aae9f0d05f", null ],
+    [ "CatalogRecord_isValueValid_code", "group__CatalogRecord.html#gab3208e5d1d0eb1809e5bc131e5ea7b3f", null ],
+    [ "CatalogRecord_isValueValid_positiveNumber", "group__CatalogRecord.html#gae683eee41f4412e8aca7de9315ddad4a", null ],
+    [ "CatalogRecord_setValue_basePrice", "group__CatalogRecord.html#gad8abecdcea62c1080810a4a6a7c66ff4", null ],
+    [ "CatalogRecord_setValue_code", "group__CatalogRecord.html#ga7249287e27ce879033fe61286a2dee83", null ],
+    [ "CatalogRecord_setValue_designation", "group__CatalogRecord.html#ga3e90278bd5e98ef2de93f320bc296469", null ],
+    [ "CatalogRecord_setValue_rateOfVAT", "group__CatalogRecord.html#ga95c45d2a1453d964a367ee47ca7270c4", null ],
+    [ "CatalogRecord_setValue_sellingPrice", "group__CatalogRecord.html#gad0dc66f5db2ddb1ad9880066588cb478", null ],
+    [ "CatalogRecord_setValue_unity", "group__CatalogRecord.html#gac9b4a719fb92942bc0810438f63355ca", null ]
+];

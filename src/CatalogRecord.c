@@ -60,10 +60,10 @@ int IMPLEMENT(CatalogRecord_isValueValid_positiveNumber)(const char * value)
  */
 void IMPLEMENT(CatalogRecord_setValue_code)(CatalogRecord * record, const char * value)
 {
+    free(record->code);
+
     if (CatalogRecord_isValueValid_code(value) == 1)
-    {
-        copyStringWithLength(record->code, value, stringLength(value)+1);
-    }
+        record->code = duplicateString(value);
     else
         fatalError("Error : value is not a valid code.");
 }
@@ -74,7 +74,8 @@ void IMPLEMENT(CatalogRecord_setValue_code)(CatalogRecord * record, const char *
  */
 void IMPLEMENT(CatalogRecord_setValue_designation)(CatalogRecord * record, const char * value)
 {
-    copyStringWithLength(record->designation, value, stringLength(value)+1);
+    free(record->designation);
+    record->designation = duplicateString(value);
 }
 
 /** Static function to set the unity field from a string
@@ -83,7 +84,8 @@ void IMPLEMENT(CatalogRecord_setValue_designation)(CatalogRecord * record, const
  */
 void IMPLEMENT(CatalogRecord_setValue_unity)(CatalogRecord * record, const char * value)
 {
-    copyStringWithLength(record->unity, value, stringLength(value)+1);
+    free(record->unity);
+    record->unity = duplicateString(value);
 }
 
 /** Static function to set the basePrice field from a string
@@ -216,9 +218,9 @@ void IMPLEMENT(CatalogRecord_init)(CatalogRecord * record)
     record->designation = duplicateString("");
     record->unity = duplicateString("");
 
-    memset(record->code, 0, CATALOGRECORD_CODE_SIZE);
-    memset(record->designation, 0, CATALOGRECORD_DESIGNATION_SIZE);
-    memset(record->unity, 0, CATALOGRECORD_UNITY_SIZE);
+    memset(record->code, '\0', 1);
+    memset(record->designation, '\0', 1);
+    memset(record->unity, '\0', 1);
 
     record->basePrice = 0;
     record->sellingPrice = 0;
@@ -241,22 +243,45 @@ void IMPLEMENT(CatalogRecord_finalize)(CatalogRecord * record)
  */
 void IMPLEMENT(CatalogRecord_read)(CatalogRecord * record, FILE * file)
 {
-    char stringBinaryCode[CATALOGRECORD_CODE_SIZE] = "";
-    char stringBinaryBasePrice[CATALOGRECORD_BASEPRICE_SIZE] = "";
-    char stringBinarySellingPrice[CATALOGRECORD_SELLINGPRICE_SIZE] = "";
-    char stringBinaryRateOfVAT[CATALOGRECORD_RATEOFVAT_SIZE] = "";
+    char buffer[CATALOGRECORD_SIZE];
 
-    testError(fread(stringBinaryCode, CATALOGRECORD_CODE_SIZE, 1, file), record, file);
-    testError(fread(record->designation, CATALOGRECORD_DESIGNATION_SIZE, 1, file), record, file);
-    testError(fread(record->unity, CATALOGRECORD_UNITY_SIZE, 1, file), record, file);
-    testError(fread(stringBinaryBasePrice, CATALOGRECORD_BASEPRICE_SIZE, 1, file), record, file);
-    testError(fread(stringBinarySellingPrice, CATALOGRECORD_SELLINGPRICE_SIZE, 1, file), record, file);
-    testError(fread(stringBinaryRateOfVAT, CATALOGRECORD_RATEOFVAT_SIZE, 1, file), record, file);
+    memset(buffer, '\0', sizeof(char) * CATALOGRECORD_CODE_SIZE);
 
-    CatalogRecord_setValue_code(record, stringBinaryCode);
-    CatalogRecord_setValue_basePrice(record, stringBinaryBasePrice);
-    CatalogRecord_setValue_sellingPrice(record, stringBinarySellingPrice);
-    CatalogRecord_setValue_rateOfVAT(record, stringBinaryRateOfVAT);
+    if (fread(buffer, sizeof(char) * CATALOGRECORD_CODE_SIZE, 1, file) < 1)
+        fatalError("fread error : return value is not valid.");
+
+    CatalogRecord_setValue_code(record, buffer);
+
+
+    memset(buffer, '\0', sizeof(char) * CATALOGRECORD_DESIGNATION_SIZE);
+
+    if (fread(buffer, sizeof(char) * CATALOGRECORD_DESIGNATION_SIZE, 1, file) < 1)
+        fatalError("fread error : return value is not valid.");
+
+    CatalogRecord_setValue_designation(record, buffer);
+
+
+    memset(buffer, '\0', sizeof(char) * CATALOGRECORD_UNITY_SIZE);
+
+    if (fread(buffer, sizeof(char) * CATALOGRECORD_UNITY_SIZE, 1, file) < 1)
+        fatalError("fread error : return value is not valid.");
+
+    CatalogRecord_setValue_unity(record, buffer);
+
+
+    if(fread(&record->basePrice, CATALOGRECORD_BASEPRICE_SIZE, 1, file) < 1)
+        fatalError("fread error : return value is not valid.");
+
+
+    if(fread(&record->sellingPrice, CATALOGRECORD_SELLINGPRICE_SIZE, 1, file) < 1)
+        fatalError("fread error : return value is not valid.");
+
+
+    if(fread(&record->rateOfVAT, CATALOGRECORD_RATEOFVAT_SIZE, 1, file) < 1)
+        fatalError("fread error : return value is not valid.");
+
+    int a = CATALOGRECORD_SIZE * 3;
+    a += 1;
 }
 
 /** Write a record to a file
@@ -265,19 +290,35 @@ void IMPLEMENT(CatalogRecord_read)(CatalogRecord * record, FILE * file)
  */
 void IMPLEMENT(CatalogRecord_write)(CatalogRecord * record, FILE * file)
 {
-    char basePriceA[CATALOGRECORD_BASEPRICE_SIZE] = "";
-    sprintf (basePriceA, "%.2f", record->basePrice);
+    char buffer[CATALOGRECORD_SIZE];
 
-    char selling[CATALOGRECORD_SELLINGPRICE_SIZE] = "";
-    sprintf (selling, "%.2f", record->sellingPrice);
+    memset(buffer, '\0', sizeof(char) * CATALOGRECORD_CODE_SIZE);
+    copyStringWithLength(buffer, record->code, CATALOGRECORD_CODE_SIZE);
 
-    char rate[CATALOGRECORD_RATEOFVAT_SIZE] = "";
-    sprintf (rate, "%.2f", record->rateOfVAT);
+    if(fwrite(buffer, sizeof(char) * CATALOGRECORD_CODE_SIZE, 1, file) < 1)
+        fatalError("fwrite error : return value is not valid.");
 
-    testError(fwrite(record->code, CATALOGRECORD_CODE_SIZE, 1, file), record, file);
-    testError(fwrite(record->designation, CATALOGRECORD_DESIGNATION_SIZE, 1, file), record, file);
-    testError(fwrite(record->unity, CATALOGRECORD_UNITY_SIZE, 1, file), record, file);
-    testError(fwrite(basePriceA, CATALOGRECORD_BASEPRICE_SIZE, 1, file), record, file);
-    testError(fwrite(selling, CATALOGRECORD_SELLINGPRICE_SIZE, 1, file), record, file);
-    testError(fwrite(rate, CATALOGRECORD_RATEOFVAT_SIZE, 1, file), record, file);
+
+    memset(buffer, '\0', sizeof(char) * CATALOGRECORD_DESIGNATION_SIZE);
+    copyStringWithLength(buffer, record->designation, CATALOGRECORD_DESIGNATION_SIZE);
+
+    if(fwrite(buffer, sizeof(char) * CATALOGRECORD_DESIGNATION_SIZE, 1, file) < 1)
+        fatalError("fwrite error : return value is not valid.");
+
+
+    memset(buffer, '\0', sizeof(char) * CATALOGRECORD_UNITY_SIZE);
+    copyStringWithLength(buffer, record->unity, CATALOGRECORD_UNITY_SIZE);
+
+    if(fwrite(buffer, sizeof(char) * CATALOGRECORD_UNITY_SIZE, 1, file) < 1)
+        fatalError("fwrite error : return value is not valid.");
+
+
+    if(fwrite(&record->basePrice, CATALOGRECORD_BASEPRICE_SIZE, 1, file) < 1)
+        fatalError("fwrite error : return value is not valid.");
+
+    if(fwrite(&record->sellingPrice, CATALOGRECORD_SELLINGPRICE_SIZE, 1, file) < 1)
+        fatalError("fwrite error : return value is not valid.");
+
+    if(fwrite(&record->rateOfVAT, CATALOGRECORD_RATEOFVAT_SIZE, 1, file) < 1)
+        fatalError("fwrite error : return value is not valid.");
 }

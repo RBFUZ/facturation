@@ -115,11 +115,10 @@ char * IMPLEMENT(formatDate)(int day, int month, int year)
  */
 void IMPLEMENT(writeString)(const char * str, FILE * file)
 {
-    /**if (fwrite(str, stringLength(str), 1, file) < 1)
-        fatalError("fwrite error : return value is not valid.");*/
+    size_t result = fwrite(str, stringLength(str), 1, file);
 
-    size_t a = fwrite(str, stringLength(str), 1, file);
-    a += 1;
+    if (result < 1 && stringLength(str) != 0)
+        fatalError("fwrite error : return value is not valid.");
 
     if (fwrite("\3", 1, 1, file) < 1)
         fatalError("fwrite error : return value is not valid.");
@@ -143,12 +142,15 @@ char * IMPLEMENT(readString)(FILE * file)
         fatalError("malloc error : Allocation of char * newString failed.");
 
     memset(newString, '\0', sizeof(char) * sizeOfString+1);
-    fseek(file, -(int)sizeOfString - 1, SEEK_CUR);
 
-    /**if (fread(newString, sizeOfString, 1, file) < 1)
-        fatalError("fread error : return value is not valid.");*/
-    size_t a = fread(newString, sizeOfString, 1, file);
-    a += 1;
+    if (sizeOfString == 0)
+        return newString;
+    else
+    {
+        fseek(file, -(int)sizeOfString - 1, SEEK_CUR);
+        if (fread(newString, sizeOfString, 1, file) < 1)
+            fatalError("fread error : return value is not valid.");
+    }
 
     fseek(file, 1, SEEK_CUR);
 

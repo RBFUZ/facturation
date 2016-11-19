@@ -178,7 +178,12 @@ char * IMPLEMENT(CatalogRecord_getValue_unity)(CatalogRecord * record)
 char * IMPLEMENT(CatalogRecord_getValue_basePrice)(CatalogRecord * record)
 {
     char copyBasePrice[CATALOGRECORD_CODE_SIZE] = "";
-    sprintf (copyBasePrice, "%.2f", record->basePrice);
+
+    if (record->basePrice <= (int)record->basePrice)
+        sprintf (copyBasePrice, "%.f", record->basePrice);
+    else
+        sprintf (copyBasePrice, "%.2f", record->basePrice);
+
     return duplicateString(copyBasePrice);
 }
 
@@ -191,7 +196,12 @@ char * IMPLEMENT(CatalogRecord_getValue_basePrice)(CatalogRecord * record)
 char * IMPLEMENT(CatalogRecord_getValue_sellingPrice)(CatalogRecord * record)
 {
     char copySellingPrice[CATALOGRECORD_SELLINGPRICE_SIZE] = "";
-    sprintf (copySellingPrice, "%.2f", record->sellingPrice);
+
+    if (record->sellingPrice <= (int)record->sellingPrice)
+        sprintf (copySellingPrice, "%.f", record->sellingPrice);
+    else
+        sprintf (copySellingPrice, "%.2f", record->sellingPrice);
+
     return duplicateString(copySellingPrice);
 }
 
@@ -204,7 +214,12 @@ char * IMPLEMENT(CatalogRecord_getValue_sellingPrice)(CatalogRecord * record)
 char * IMPLEMENT(CatalogRecord_getValue_rateOfVAT)(CatalogRecord * record)
 {
     char copyRateOfVAT[CATALOGRECORD_RATEOFVAT_SIZE] = "";
-    sprintf (copyRateOfVAT, "%.2f", record->rateOfVAT);
+
+    if (record->rateOfVAT <= (int)record->rateOfVAT)
+        sprintf (copyRateOfVAT, "%.f", record->rateOfVAT);
+    else
+        sprintf (copyRateOfVAT, "%.2f", record->rateOfVAT);
+
     return duplicateString(copyRateOfVAT);
 }
 

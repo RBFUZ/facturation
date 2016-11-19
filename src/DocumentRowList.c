@@ -93,16 +93,46 @@ void IMPLEMENT(DocumentRow_destroy)(DocumentRow * row)
 /** Initialize a list of rows
  * @param list the address of the pointer on the first cell of the list
  */
-void IMPLEMENT(DocumentRowList_init)(DocumentRow ** list) {
-    provided_DocumentRowList_init(list);
+void IMPLEMENT(DocumentRowList_init)(DocumentRow ** list)
+{
+    *list = NULL;
 }
 
 /** Finalize a list of rows
  * @param list the address of the pointer on the first cell of the list
  * @note Each row of the list are destroyer using DocumentRow_destroy()
  */
-void IMPLEMENT(DocumentRowList_finalize)(DocumentRow ** list) {
-    provided_DocumentRowList_finalize(list);
+void IMPLEMENT(DocumentRowList_finalize)(DocumentRow ** list)
+{
+    if (list != NULL)
+    {
+        DocumentRow * tempA;
+
+        while (*list != NULL)
+        {
+            DocumentRow * tempN;
+
+            tempN = *list;
+            tempA = *list;
+
+            while (tempN->next != NULL)
+            {
+                tempA = tempN;
+                tempN = tempN->next;
+            }
+
+            if (tempN == tempA)
+            {
+                DocumentRow_destroy(tempN);
+                *list = NULL;
+            }
+            else
+            {
+                tempA->next = NULL;
+                DocumentRow_destroy(tempN);
+            }
+        }
+    }
 }
 
 /** Get a pointer on the rowIndex-th row of the list
@@ -160,14 +190,86 @@ void IMPLEMENT(DocumentRowList_removeRow)(DocumentRow ** list, DocumentRow * pos
  * @param row the row
  * @param file the opened file
  */
-void IMPLEMENT(DocumentRow_writeRow)(DocumentRow * row, FILE * file) {
-    provided_DocumentRow_writeRow(row, file);
+void IMPLEMENT(DocumentRow_writeRow)(DocumentRow * row, FILE * file)
+{
+    char buffer[127UL] = "";
+
+    writeString(row->code, file);
+    writeString(row->designation, file);
+
+    memset(buffer, '\0', 127UL);
+    if (row->quantity <= (int)row->quantity)
+        sprintf (buffer, "%.f", row->quantity);
+    else
+        sprintf (buffer, "%.2f", row->quantity);
+    writeString(buffer, file);
+
+    writeString(row->unity, file);
+
+    memset(buffer, '\0', 127UL);
+    if (row->basePrice <= (int)row->basePrice)
+        sprintf (buffer, "%.f", row->basePrice);
+    else
+        sprintf (buffer, "%.2f", row->basePrice);
+    writeString(buffer, file);
+
+    memset(buffer, '\0', 127UL);
+    if (row->sellingPrice <= (int)row->sellingPrice)
+        sprintf (buffer, "%.f", row->sellingPrice);
+    else
+        sprintf (buffer, "%.2f", row->sellingPrice);
+    writeString(buffer, file);
+
+    memset(buffer, '\0', 127UL);
+    if (row->discount <= (int)row->discount)
+        sprintf (buffer, "%.f", row->discount);
+    else
+        sprintf (buffer, "%.2f", row->discount);
+    writeString(buffer, file);
+
+    memset(buffer, '\0', 127UL);
+    if (row->rateOfVAT <= (int)row->rateOfVAT)
+        sprintf (buffer, "%.f", row->rateOfVAT);
+    else
+        sprintf (buffer, "%.2f", row->rateOfVAT);
+    writeString(buffer, file);
 }
 
 /** Read a row from a file
  * @param file the opened file
  * @return a new row created on the heap filled with the data
  */
-DocumentRow * IMPLEMENT(DocumentRow_readRow)(FILE * file) {
-    return provided_DocumentRow_readRow(file);
+DocumentRow * IMPLEMENT(DocumentRow_readRow)(FILE * file)
+{
+    DocumentRow * row = DocumentRow_create();
+    char * buffer = NULL;
+    DocumentRow_finalize(row);
+
+
+    row->code = readString(file);
+    row->designation = readString(file);
+
+    buffer = readString(file);
+    sscanf (buffer, "%lf", &row->quantity);
+    free(buffer);
+
+    row->unity = readString(file);
+
+    buffer = readString(file);
+    sscanf (buffer, "%lf", &row->basePrice);
+    free(buffer);
+
+    buffer = readString(file);
+    sscanf (buffer, "%lf", &row->sellingPrice);
+    free(buffer);
+
+    buffer = readString(file);
+    sscanf (buffer, "%lf", &row->discount);
+    free(buffer);
+
+    buffer = readString(file);
+    sscanf (buffer, "%lf", &row->rateOfVAT);
+    free(buffer);
+
+    return row;
 }

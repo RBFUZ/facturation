@@ -106,30 +106,30 @@ void IMPLEMENT(DocumentRowList_finalize)(DocumentRow ** list)
 {
     if (list != NULL)
     {
-        DocumentRow * tempA;
+        DocumentRow * rowEnd;
 
         while (*list != NULL)
         {
-            DocumentRow * tempN;
+            DocumentRow * rowBeforeEnd;
 
-            tempN = *list;
-            tempA = *list;
+            rowEnd = *list;
+            rowBeforeEnd = *list;
 
-            while (tempN->next != NULL)
+            while (rowEnd->next != NULL)
             {
-                tempA = tempN;
-                tempN = tempN->next;
+                rowBeforeEnd = rowEnd;
+                rowEnd = rowEnd->next;
             }
 
-            if (tempN == tempA)
+            if (rowEnd == rowBeforeEnd)
             {
-                DocumentRow_destroy(tempN);
+                DocumentRow_destroy(rowEnd);
                 *list = NULL;
             }
             else
             {
-                tempA->next = NULL;
-                DocumentRow_destroy(tempN);
+                rowBeforeEnd->next = NULL;
+                DocumentRow_destroy(rowEnd);
             }
         }
     }
@@ -140,24 +140,61 @@ void IMPLEMENT(DocumentRowList_finalize)(DocumentRow ** list)
  * @param rowIndex the index of the requested row
  * @return a pointer on the rowIndex-th row of the list or NULL if the list contains less rows than the requested one
  */
-DocumentRow * IMPLEMENT(DocumentRowList_get)(DocumentRow * list, int rowIndex) {
-    return provided_DocumentRowList_get(list, rowIndex);
+DocumentRow * IMPLEMENT(DocumentRowList_get)(DocumentRow * list, int rowIndex)
+{
+    if (rowIndex >= DocumentRowList_getRowCount(list))
+        return NULL;
+
+    DocumentRow * rowIndexTh = list;
+
+    while (rowIndex != 0 && rowIndexTh->next != NULL)
+    {
+        rowIndexTh = rowIndexTh->next;
+        rowIndex--;
+    }
+
+    return rowIndexTh;
 }
 
 /**
  * Get the number of rows in the list
  * @param list the pointer on the first cell of the list
  */
-int IMPLEMENT(DocumentRowList_getRowCount)(DocumentRow * list) {
-    return provided_DocumentRowList_getRowCount(list);
+int IMPLEMENT(DocumentRowList_getRowCount)(DocumentRow * list)
+{
+    DocumentRow * rowEnd = list;
+    int count = 0;
+
+    if (list != NULL)
+    {
+        count = 1;
+
+        while (rowEnd->next != NULL)
+        {
+            rowEnd = rowEnd->next;
+            count++;
+        }
+    }
+    return count;
 }
 
 /** Add a row at the end of the list
  * @param list the address of the pointer on the first cell of the list
  * @param row the row to add
  */
-void IMPLEMENT(DocumentRowList_pushBack)(DocumentRow ** list, DocumentRow * row) {
-    provided_DocumentRowList_pushBack(list, row);
+void IMPLEMENT(DocumentRowList_pushBack)(DocumentRow ** list, DocumentRow * row)
+{
+    DocumentRow * rowCount = *list;
+    int rowCountOfList = DocumentRowList_getRowCount(rowCount);
+
+    if (rowCount == NULL)
+        *list = row;
+    else
+    {
+        rowCount = DocumentRowList_get(rowCount, rowCountOfList-1);
+        rowCount->next = row;
+    }
+    row->next = NULL;
 }
 
 /** Insert a row before a given row
@@ -165,8 +202,22 @@ void IMPLEMENT(DocumentRowList_pushBack)(DocumentRow ** list, DocumentRow * row)
  * @param position a pointer on the positioning row
  * @param row the row to insert
  */
-void IMPLEMENT(DocumentRowList_insertBefore)(DocumentRow ** list, DocumentRow * position, DocumentRow * row) {
-    provided_DocumentRowList_insertBefore(list, position, row);
+void IMPLEMENT(DocumentRowList_insertBefore)(DocumentRow ** list, DocumentRow * position, DocumentRow * row)
+{
+    DocumentRow * rowTemp = *list;
+
+    if (*list == position)
+        *list = row;
+    else
+    {
+        while (rowTemp-> next != position)
+        {
+            rowTemp = rowTemp->next;
+        }
+        rowTemp->next = row;
+    }
+    row->next = position;
+
 }
 
 /** Insert a row after a given row
@@ -174,16 +225,48 @@ void IMPLEMENT(DocumentRowList_insertBefore)(DocumentRow ** list, DocumentRow * 
  * @param position a pointer on the positioning row
  * @param row the row to insert
  */
-void IMPLEMENT(DocumentRowList_insertAfter)(DocumentRow ** list, DocumentRow * position, DocumentRow * row) {
-    provided_DocumentRowList_insertAfter(list, position, row);
+void IMPLEMENT(DocumentRowList_insertAfter)(DocumentRow ** list, DocumentRow * position, DocumentRow * row)
+{
+    DocumentRow * rowTemp = *list;
+
+    if (*list == NULL)
+    {
+        *list = row;
+        row->next = NULL;
+    }
+    else if (position->next == NULL)
+        DocumentRowList_pushBack(list, row);
+    else
+    {
+        rowTemp = position;
+        rowTemp = rowTemp->next;
+        row->next = rowTemp;
+        position->next = row;
+    }
 }
 
 /** Remove a row from the list
  * @param list the address of the pointer on the first cell of the list
  * @param position the row to remove
  */
-void IMPLEMENT(DocumentRowList_removeRow)(DocumentRow ** list, DocumentRow * position) {
-    provided_DocumentRowList_removeRow(list, position);
+void IMPLEMENT(DocumentRowList_removeRow)(DocumentRow ** list, DocumentRow * position)
+{
+    DocumentRow * rowTempAfter = *list;
+    DocumentRow * rowTempBefore = *list;
+
+    while (rowTempBefore->next != position)
+        rowTempBefore = rowTempBefore->next;
+
+    if (rowTempAfter->next == NULL)
+        DocumentRowList_init(list);
+    else if (position->next == NULL)
+        rowTempBefore->next = NULL;
+    else
+    {
+        rowTempAfter = position->next;
+        rowTempBefore->next = rowTempAfter;
+        DocumentRow_destroy(position);
+    }
 }
 
 /** Write a row in a binary file

@@ -24,30 +24,70 @@
  * @param row the row
  * @warning an initialized row must be finalized by DocumentRow_finalize() to free all resources
  */
-void IMPLEMENT(DocumentRow_init)(DocumentRow * row) {
-    provided_DocumentRow_init(row);
+void IMPLEMENT(DocumentRow_init)(DocumentRow * row)
+{
+    row->code = (char*) malloc(sizeof(char) * 16UL);
+
+    if (row->code == NULL)
+        fatalError("malloc error : Allocation of row->code failed.");
+
+    row->designation = (char*) malloc(sizeof(char) * 127UL);
+
+    if (row->designation == NULL)
+        fatalError("malloc error : Allocation of row->designation failed.");
+
+    row->quantity = 0;
+
+    row->unity = (char*) malloc(sizeof(char) * 20UL);
+
+    if (row->unity == NULL)
+        fatalError("malloc error : Allocation of row->unity failed.");
+
+    row->basePrice = 0;
+    row->sellingPrice = 0;
+    row->discount = 0;
+    row->rateOfVAT = 0;
+
+    memset(row->code, '\0', sizeof(char) * 16UL);
+    memset(row->designation, '\0', sizeof(char) * 127UL);
+    memset(row->unity, '\0', sizeof(char) * 20UL);
+
+    row->next = NULL;
 }
 
 /** Finalize a row
  * @param row the row
  * @warning document must have been initialized
  */
-void IMPLEMENT(DocumentRow_finalize)(DocumentRow * row) {
-    provided_DocumentRow_finalize(row);
+void IMPLEMENT(DocumentRow_finalize)(DocumentRow * row)
+{
+    free(row->code);
+    free(row->designation);
+    free(row->unity);
+    row->next = NULL;
 }
 
 /** Create a new row on the heap and initialize it
  * @return the new row
  */
-DocumentRow * IMPLEMENT(DocumentRow_create)(void) {
-    return provided_DocumentRow_create();
+DocumentRow * IMPLEMENT(DocumentRow_create)(void)
+{
+    DocumentRow * row = malloc(sizeof(DocumentRow));
+
+    if (row == NULL)
+        fatalError("malloc error : Allocation of DocumentRow * row failed.");
+
+    DocumentRow_init(row);
+    return row;
 }
 
 /** Finalize and destroy a row previously created on the heap
  * @param row the row
  */
-void IMPLEMENT(DocumentRow_destroy)(DocumentRow * row) {
-    provided_DocumentRow_destroy(row);
+void IMPLEMENT(DocumentRow_destroy)(DocumentRow * row)
+{
+    DocumentRow_finalize(row);
+    free(row);
 }
 
 /** Initialize a list of rows

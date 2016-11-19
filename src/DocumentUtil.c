@@ -113,8 +113,16 @@ char * IMPLEMENT(formatDate)(int day, int month, int year)
  * @param str the string
  * @param file the file
  */
-void IMPLEMENT(writeString)(const char * str, FILE * file) {
-    provided_writeString(str,file);
+void IMPLEMENT(writeString)(const char * str, FILE * file)
+{
+    /**if (fwrite(str, stringLength(str), 1, file) < 1)
+        fatalError("fwrite error : return value is not valid.");*/
+
+    size_t a = fwrite(str, stringLength(str), 1, file);
+    a += 1;
+
+    if (fwrite("\3", 1, 1, file) < 1)
+        fatalError("fwrite error : return value is not valid.");
 }
 
 /** Read a string from a binary file
@@ -122,8 +130,29 @@ void IMPLEMENT(writeString)(const char * str, FILE * file) {
  * @return a new string created on the heap which contains the read string
  * @see writeString()
  */
-char * IMPLEMENT(readString)(FILE * file) {
-    return provided_readString(file);
+char * IMPLEMENT(readString)(FILE * file)
+{
+    size_t sizeOfString = 0;
+
+    while (fgetc(file) != '\3')
+        sizeOfString++;
+
+    char * newString = (char*) malloc(sizeof(char) * sizeOfString + 1);
+
+    if (newString == NULL)
+        fatalError("malloc error : Allocation of char * newString failed.");
+
+    memset(newString, '\0', sizeof(char) * sizeOfString+1);
+    fseek(file, -(int)sizeOfString - 1, SEEK_CUR);
+
+    /**if (fread(newString, sizeOfString, 1, file) < 1)
+        fatalError("fread error : return value is not valid.");*/
+    size_t a = fread(newString, sizeOfString, 1, file);
+    a += 1;
+
+    fseek(file, 1, SEEK_CUR);
+
+    return newString;
 }
 
 

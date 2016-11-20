@@ -19,7 +19,7 @@
 
 #include <CustomerRecord.h>
 
-void testError(size_t nbrOpSuccess, CustomerRecord * record, FILE * file);
+void testError(size_t nbrOpSuccess, char * pointRecord, CustomerRecord * record, FILE * file);
 
 void IMPLEMENT(CustomerRecord_setValue_name)(CustomerRecord * record, const char * value)
 {
@@ -74,23 +74,23 @@ void IMPLEMENT(CustomerRecord_finalize)(CustomerRecord * UNUSED(record)){
 
 void IMPLEMENT(CustomerRecord_read)(CustomerRecord * record, FILE * file)
 {
-    testError(fread(record->name, CUSTOMERRECORD_NAME_SIZE, 1, file), record, file);
-    testError(fread(record->address, CUSTOMERRECORD_ADDRESS_SIZE, 1, file), record, file);
-    testError(fread(record->postalCode, CUSTOMERRECORD_POSTALCODE_SIZE, 1, file), record, file);
-    testError(fread(record->town, CUSTOMERRECORD_TOWN_SIZE, 1, file), record, file);
+    testError(fread(record->name, CUSTOMERRECORD_NAME_SIZE, 1, file), record->name, record, file);
+    testError(fread(record->address, CUSTOMERRECORD_ADDRESS_SIZE, 1, file), record->address, record,  file);
+    testError(fread(record->postalCode, CUSTOMERRECORD_POSTALCODE_SIZE, 1, file), record->postalCode, record, file);
+    testError(fread(record->town, CUSTOMERRECORD_TOWN_SIZE, 1, file), record->town, record, file);
 }
 
 void IMPLEMENT(CustomerRecord_write)(CustomerRecord * record, FILE * file)
 {
-    testError(fwrite(record->name, CUSTOMERRECORD_NAME_SIZE, 1, file), record, file);
-    testError(fwrite(record->address, CUSTOMERRECORD_ADDRESS_SIZE, 1, file), record, file);
-    testError(fwrite(record->postalCode, CUSTOMERRECORD_POSTALCODE_SIZE, 1, file), record, file);
-    testError(fwrite(record->town, CUSTOMERRECORD_TOWN_SIZE, 1, file), record, file);
+    testError(fwrite(record->name, CUSTOMERRECORD_NAME_SIZE, 1, file), record->name, record, file);
+    testError(fwrite(record->address, CUSTOMERRECORD_ADDRESS_SIZE, 1, file), record->address, record, file);
+    testError(fwrite(record->postalCode, CUSTOMERRECORD_POSTALCODE_SIZE, 1, file), record->postalCode, record, file);
+    testError(fwrite(record->town, CUSTOMERRECORD_TOWN_SIZE, 1, file), record->town, record, file);
 }
 
-void testError(size_t nbrOpSuccess, CustomerRecord * record, FILE * file)
+void testError(size_t nbrOpSuccess, char * pointRecord, CustomerRecord * record, FILE * file)
 {
-    if(nbrOpSuccess < 1)
+    if(nbrOpSuccess < 1 && stringLength(pointRecord) != 0)
     {
         fclose(file);
         free(record);

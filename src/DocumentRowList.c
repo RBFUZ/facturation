@@ -142,10 +142,23 @@ void IMPLEMENT(DocumentRowList_finalize)(DocumentRow ** list)
  */
 DocumentRow * IMPLEMENT(DocumentRowList_get)(DocumentRow * list, int rowIndex)
 {
-    if (rowIndex >= DocumentRowList_getRowCount(list))
-        return NULL;
-
     DocumentRow * rowIndexTh = list;
+    DocumentRow * rowEnd = list;
+    int countRow = 0;
+
+    if (list != NULL)
+    {
+        countRow = 1;
+
+        while (rowEnd->next != NULL)
+        {
+            rowEnd = rowEnd->next;
+            countRow++;
+        }
+    }
+
+    if (rowIndex >= countRow)
+        return NULL;
 
     while (rowIndex != 0 && rowIndexTh->next != NULL)
     {
@@ -185,13 +198,15 @@ int IMPLEMENT(DocumentRowList_getRowCount)(DocumentRow * list)
 void IMPLEMENT(DocumentRowList_pushBack)(DocumentRow ** list, DocumentRow * row)
 {
     DocumentRow * rowCount = *list;
-    int rowCountOfList = DocumentRowList_getRowCount(rowCount);
 
     if (rowCount == NULL)
         *list = row;
     else
     {
-        rowCount = DocumentRowList_get(rowCount, rowCountOfList-1);
+        while (rowCount->next != NULL)
+        {
+            rowCount = rowCount->next;
+        }
         rowCount->next = row;
     }
     row->next = NULL;
@@ -254,17 +269,35 @@ void IMPLEMENT(DocumentRowList_removeRow)(DocumentRow ** list, DocumentRow * pos
     DocumentRow * rowTempAfter = *list;
     DocumentRow * rowTempBefore = *list;
 
-    while (rowTempBefore->next != position)
-        rowTempBefore = rowTempBefore->next;
-
-    if (rowTempAfter->next == NULL)
+    if (*list == NULL)
+        fatalError("Error : List not contains rows.");
+    else if (rowTempAfter->next == NULL)
         DocumentRowList_init(list);
-    else if (position->next == NULL)
-        rowTempBefore->next = NULL;
     else
     {
-        rowTempAfter = position->next;
-        rowTempBefore->next = rowTempAfter;
+        if (*list == position)
+        {
+            if (position->next == NULL)
+                DocumentRowList_init(list);
+            else
+            {
+                rowTempAfter = position->next;
+                *list = rowTempAfter;
+            }
+        }
+        else
+        {
+            while (rowTempBefore->next != position)
+                rowTempBefore = rowTempBefore->next;
+
+            if (position->next == NULL)
+                rowTempBefore->next = NULL;
+            else
+            {
+                rowTempAfter = position->next;
+                rowTempBefore->next = rowTempAfter;
+            }
+        }
         DocumentRow_destroy(position);
     }
 }

@@ -25,7 +25,25 @@
  */
 Dictionary * IMPLEMENT(Dictionary_create)(void)
 {
-  return provided_Dictionary_create();
+    Dictionary * dictionary = malloc(sizeof(Dictionary));
+
+    if (dictionary == NULL)
+        fatalError("malloc error : Attribution of Dictionary * dictionary on the heap failed");
+
+    dictionary->count = 0;
+
+    dictionary->entries = malloc (sizeof(DictionaryEntry));
+
+    if (dictionary->entries == NULL)
+        fatalError("malloc error : Attribution of dictionary->entries on the heap failed");
+
+    dictionary->entries->type = UNDEFINED_ENTRY;
+    dictionary->entries->name = malloc (sizeof(char) * 15UL);
+
+    if (dictionary->entries->name == NULL)
+        fatalError("malloc error : Attribution of dictionary->entries->name on the heap failed");
+
+    return dictionary;
 }
 
 /** Destroy a dictionary
@@ -43,7 +61,10 @@ void IMPLEMENT(Dictionary_destroy)(Dictionary * dictionary)
  */
 DictionaryEntry * IMPLEMENT(Dictionary_getEntry)(Dictionary * dictionary, const char * name)
 {
-  return provided_Dictionary_getEntry(dictionary, name);
+    if (icaseCompareString(dictionary->entries->name, name) == 0)
+        return dictionary->entries;
+
+    return NULL;
 }
 
 /** Define or change a dictionary entry as a string
@@ -53,7 +74,7 @@ DictionaryEntry * IMPLEMENT(Dictionary_getEntry)(Dictionary * dictionary, const 
  */
 void IMPLEMENT(Dictionary_setStringEntry)(Dictionary * dictionary, const char * name, const char * value)
 {
-  provided_Dictionary_setStringEntry(dictionary, name, value);
+    provided_Dictionary_setStringEntry(dictionary, name, value);
 }
 
 /** Define or change a dictionary entry as a number

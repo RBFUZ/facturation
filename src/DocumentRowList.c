@@ -264,16 +264,22 @@ void IMPLEMENT(DocumentRowList_removeRow)(DocumentRow ** list, DocumentRow * pos
         fatalError("Error : List not contains rows.");
     else if (rowTemp->next == NULL && rowTemp == position)
         DocumentRowList_init(list);
+    else if (rowTemp == position)
+    {
+        *list = position->next;
+        DocumentRow_destroy(position);
+    }
     else
     {
         while (rowTemp->next != NULL && rowTemp->next != position)
         {
             rowTemp = rowTemp->next;
         }
-        if (rowTemp->next == NULL && rowTemp != position)
+        if (rowTemp->next != position)
             fatalError("Error : List not contains rows position.");
-        else
-            DocumentRow_destroy(position);
+
+        rowTemp->next = position->next;
+        DocumentRow_destroy(position);
     }
 }
 

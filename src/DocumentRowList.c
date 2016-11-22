@@ -26,19 +26,19 @@
  */
 void IMPLEMENT(DocumentRow_init)(DocumentRow * row)
 {
-    row->code = (char*) malloc(sizeof(char) * 16UL);
+    row->code = duplicateString("");
 
     if (row->code == NULL)
         fatalError("malloc error : Allocation of row->code failed.");
 
-    row->designation = (char*) malloc(sizeof(char) * 127UL);
+    row->designation = duplicateString("");
 
     if (row->designation == NULL)
         fatalError("malloc error : Allocation of row->designation failed.");
 
     row->quantity = 0;
 
-    row->unity = (char*) malloc(sizeof(char) * 20UL);
+    row->unity = duplicateString("");
 
     if (row->unity == NULL)
         fatalError("malloc error : Allocation of row->unity failed.");
@@ -48,9 +48,9 @@ void IMPLEMENT(DocumentRow_init)(DocumentRow * row)
     row->discount = 0;
     row->rateOfVAT = 0;
 
-    memset(row->code, '\0', sizeof(char) * 16UL);
-    memset(row->designation, '\0', sizeof(char) * 127UL);
-    memset(row->unity, '\0', sizeof(char) * 20UL);
+    memset(row->code, '\0', 1);
+    memset(row->designation, '\0', 1);
+    memset(row->unity, '\0', 1);
 
     row->next = NULL;
 }
@@ -143,28 +143,20 @@ void IMPLEMENT(DocumentRowList_finalize)(DocumentRow ** list)
 DocumentRow * IMPLEMENT(DocumentRowList_get)(DocumentRow * list, int rowIndex)
 {
     DocumentRow * rowIndexTh = list;
-    DocumentRow * rowEnd = list;
-    int countRow = 0;
+    int countRow = 1;
 
-    if (list != NULL)
+    if (list != NULL && rowIndex >= 0)
     {
-        countRow = 1;
-
-        while (rowEnd->next != NULL)
+        while (rowIndexTh->next != NULL && countRow-1 != rowIndex)
         {
-            rowEnd = rowEnd->next;
+            rowIndexTh = rowIndexTh->next;
             countRow++;
         }
+        if (countRow-1 != rowIndex)
+            return NULL;
     }
-
-    if (rowIndex >= countRow)
+    else
         return NULL;
-
-    while (rowIndex != 0 && rowIndexTh->next != NULL)
-    {
-        rowIndexTh = rowIndexTh->next;
-        rowIndex--;
-    }
 
     return rowIndexTh;
 }
@@ -266,39 +258,22 @@ void IMPLEMENT(DocumentRowList_insertAfter)(DocumentRow ** list, DocumentRow * p
  */
 void IMPLEMENT(DocumentRowList_removeRow)(DocumentRow ** list, DocumentRow * position)
 {
-    DocumentRow * rowTempAfter = *list;
-    DocumentRow * rowTempBefore = *list;
+    DocumentRow * rowTemp = *list;
 
     if (*list == NULL)
         fatalError("Error : List not contains rows.");
-    else if (rowTempAfter->next == NULL)
+    else if (rowTemp->next == NULL && rowTemp == position)
         DocumentRowList_init(list);
     else
     {
-        if (*list == position)
+        while (rowTemp->next != NULL && rowTemp->next != position)
         {
-            if (position->next == NULL)
-                DocumentRowList_init(list);
-            else
-            {
-                rowTempAfter = position->next;
-                *list = rowTempAfter;
-            }
+            rowTemp = rowTemp->next;
         }
+        if (rowTemp->next == NULL && rowTemp != position)
+            fatalError("Error : List not contains rows position.");
         else
-        {
-            while (rowTempBefore->next != position)
-                rowTempBefore = rowTempBefore->next;
-
-            if (position->next == NULL)
-                rowTempBefore->next = NULL;
-            else
-            {
-                rowTempAfter = position->next;
-                rowTempBefore->next = rowTempAfter;
-            }
-        }
-        DocumentRow_destroy(position);
+            DocumentRow_destroy(position);
     }
 }
 

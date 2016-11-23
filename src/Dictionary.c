@@ -61,8 +61,15 @@ void IMPLEMENT(Dictionary_destroy)(Dictionary * dictionary)
  */
 DictionaryEntry * IMPLEMENT(Dictionary_getEntry)(Dictionary * dictionary, const char * name)
 {
-    if (icaseCompareString(dictionary->entries->name, name) == 0)
+    int countTemp = dictionary->count;
+    int i = 0;
+
+    while (countTemp >= 0)
+    {
+        if (icaseCompareString(dictionary->entries->name+i, name) == 0)
         return dictionary->entries;
+        i += 3;
+    }
 
     return NULL;
 }

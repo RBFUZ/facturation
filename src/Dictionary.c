@@ -19,6 +19,7 @@
 
 #include <Dictionary.h>
 
+
 /** Create an empty dictionary on the heap
  * @return a new dictionary
  * @warning the dictionary should be destroyed using Dictionary_destroy()
@@ -31,17 +32,7 @@ Dictionary * IMPLEMENT(Dictionary_create)(void)
         fatalError("malloc error : Attribution of Dictionary * dictionary on the heap failed");
 
     dictionary->count = 0;
-
-    dictionary->entries = malloc (sizeof(DictionaryEntry));
-
-    if (dictionary->entries == NULL)
-        fatalError("malloc error : Attribution of dictionary->entries on the heap failed");
-
-    dictionary->entries->type = UNDEFINED_ENTRY;
-    dictionary->entries->name = malloc (sizeof(char) * 15UL);
-
-    if (dictionary->entries->name == NULL)
-        fatalError("malloc error : Attribution of dictionary->entries->name on the heap failed");
+    dictionary->entries = NULL;
 
     return dictionary;
 }
@@ -51,7 +42,7 @@ Dictionary * IMPLEMENT(Dictionary_create)(void)
  */
 void IMPLEMENT(Dictionary_destroy)(Dictionary * dictionary)
 {
-  provided_Dictionary_destroy(dictionary);
+    provided_Dictionary_destroy(dictionary);
 }
 
 /** Get a pointer on the entry associated with the given entry name
@@ -61,16 +52,19 @@ void IMPLEMENT(Dictionary_destroy)(Dictionary * dictionary)
  */
 DictionaryEntry * IMPLEMENT(Dictionary_getEntry)(Dictionary * dictionary, const char * name)
 {
-    int countTemp = dictionary->count;
     int i = 0;
+    int count = dictionary->count;
 
-    while (countTemp >= 0)
+    if (dictionary->entries == NULL)
+        return NULL;
+
+    while (count > 0)
     {
-        if (icaseCompareString(dictionary->entries->name+i, name) == 0)
-        return dictionary->entries;
-        i += 3;
+        if (icaseCompareString(dictionary->entries[i].name, name) == 0)
+            return &(dictionary->entries[i]);
+        count--;
+        i++;
     }
-
     return NULL;
 }
 
@@ -81,7 +75,37 @@ DictionaryEntry * IMPLEMENT(Dictionary_getEntry)(Dictionary * dictionary, const 
  */
 void IMPLEMENT(Dictionary_setStringEntry)(Dictionary * dictionary, const char * name, const char * value)
 {
-    provided_Dictionary_setStringEntry(dictionary, name, value);
+    DictionaryEntry * entryTemp = Dictionary_getEntry(dictionary, name);
+    size_t count = (size_t)dictionary->count;
+
+    if (entryTemp == NULL)
+    {
+        dictionary->count += 1;
+
+        if (dictionary->entries == NULL)
+        {
+            dictionary->entries = malloc(sizeof(DictionaryEntry));
+
+            if (dictionary->entries == NULL)
+                fatalError("error malloc : Attribution of dictionary->entries on the heap failed");
+        }
+        else
+            dictionary->entries = realloc(dictionary->entries, sizeof(DictionaryEntry) * count);
+
+        entryTemp = dictionary->entries + count - 1;
+        entryTemp->name = duplicateString(name);
+        entryTemp->value.stringValue = duplicateString(value);
+        entryTemp->type = STRING_ENTRY;
+    }
+    else
+    {
+        if (entryTemp->type == STRING_ENTRY)
+            free(entryTemp->value.stringValue);
+
+        entryTemp->value.stringValue = duplicateString(value);
+        entryTemp->type = STRING_ENTRY;
+    }
+    /*provided_Dictionary_setStringEntry(dictionary, name, value);*/
 }
 
 /** Define or change a dictionary entry as a number
@@ -91,7 +115,37 @@ void IMPLEMENT(Dictionary_setStringEntry)(Dictionary * dictionary, const char * 
  */
 void IMPLEMENT(Dictionary_setNumberEntry)(Dictionary * dictionary, const char * name, double value)
 {
-  provided_Dictionary_setNumberEntry(dictionary, name, value);
+    /*DictionaryEntry * entryTemp = Dictionary_getEntry(dictionary, name);
+    size_t count = (size_t)dictionary->count;
+
+    if (entryTemp == NULL)
+    {
+        dictionary->count += 1;
+
+        if (dictionary->entries == NULL)
+        {
+            dictionary->entries = malloc(sizeof(DictionaryEntry));
+
+            if (dictionary->entries == NULL)
+                fatalError("error malloc : Attribution of dictionary->entries on the heap failed");
+        }
+        else
+            dictionary->entries = realloc(dictionary->entries, sizeof(DictionaryEntry) * count);
+
+        entryTemp = dictionary->entries + count - 1;
+        entryTemp->name = duplicateString(name);
+        entryTemp->value.numberValue = value;
+        entryTemp->type = NUMBER_ENTRY;
+    }
+    else
+    {
+        if (entryTemp->type == STRING_ENTRY)
+            free(entryTemp->value.stringValue);
+
+        entryTemp->value.numberValue = value;
+        entryTemp->type = NUMBER_ENTRY;
+    }*/
+    provided_Dictionary_setNumberEntry(dictionary, name, value);
 }
 
 /** Create a new string on the heap which is the result of the formatting of format according to the dictionary content
@@ -102,5 +156,5 @@ void IMPLEMENT(Dictionary_setNumberEntry)(Dictionary * dictionary, const char * 
  */
 char * IMPLEMENT(Dictionary_format)(Dictionary * dictionary, const char * format)
 {
-  return provided_Dictionary_format(dictionary, format);
+    return provided_Dictionary_format(dictionary, format);
 }

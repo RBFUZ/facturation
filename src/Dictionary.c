@@ -42,7 +42,18 @@ Dictionary * IMPLEMENT(Dictionary_create)(void)
  */
 void IMPLEMENT(Dictionary_destroy)(Dictionary * dictionary)
 {
-    provided_Dictionary_destroy(dictionary);
+    int i = 0;
+
+    while (dictionary->count > i)
+    {
+        if (dictionary->entries[i].type == STRING_ENTRY)
+            free(dictionary->entries[i].value.stringValue);
+
+        free(dictionary->entries[i].name);
+        i++;
+    }
+    free(dictionary->entries);
+    free(dictionary);
 }
 
 /** Get a pointer on the entry associated with the given entry name
@@ -53,16 +64,14 @@ void IMPLEMENT(Dictionary_destroy)(Dictionary * dictionary)
 DictionaryEntry * IMPLEMENT(Dictionary_getEntry)(Dictionary * dictionary, const char * name)
 {
     int i = 0;
-    int count = dictionary->count;
 
     if (dictionary->entries == NULL)
         return NULL;
 
-    while (count > 0)
+    while (dictionary->count > i)
     {
         if (icaseCompareString(dictionary->entries[i].name, name) == 0)
             return &(dictionary->entries[i]);
-        count--;
         i++;
     }
     return NULL;
@@ -76,7 +85,6 @@ DictionaryEntry * IMPLEMENT(Dictionary_getEntry)(Dictionary * dictionary, const 
 void IMPLEMENT(Dictionary_setStringEntry)(Dictionary * dictionary, const char * name, const char * value)
 {
     DictionaryEntry * entryTemp = Dictionary_getEntry(dictionary, name);
-    size_t count = (size_t)dictionary->count;
 
     if (entryTemp == NULL)
     {
@@ -90,9 +98,14 @@ void IMPLEMENT(Dictionary_setStringEntry)(Dictionary * dictionary, const char * 
                 fatalError("error malloc : Attribution of dictionary->entries on the heap failed");
         }
         else
-            dictionary->entries = realloc(dictionary->entries, sizeof(DictionaryEntry) * count);
+        {
+            dictionary->entries = realloc(dictionary->entries, sizeof(DictionaryEntry) * (size_t)dictionary->count);
 
-        entryTemp = dictionary->entries + count - 1;
+            if (dictionary->entries == NULL)
+                fatalError("error realloc : Attribution of dictionary->entries on the heap failed");
+        }
+
+        entryTemp = dictionary->entries + (dictionary->count - 1);
         entryTemp->name = duplicateString(name);
         entryTemp->value.stringValue = duplicateString(value);
         entryTemp->type = STRING_ENTRY;
@@ -105,7 +118,6 @@ void IMPLEMENT(Dictionary_setStringEntry)(Dictionary * dictionary, const char * 
         entryTemp->value.stringValue = duplicateString(value);
         entryTemp->type = STRING_ENTRY;
     }
-    /*provided_Dictionary_setStringEntry(dictionary, name, value);*/
 }
 
 /** Define or change a dictionary entry as a number
@@ -115,8 +127,7 @@ void IMPLEMENT(Dictionary_setStringEntry)(Dictionary * dictionary, const char * 
  */
 void IMPLEMENT(Dictionary_setNumberEntry)(Dictionary * dictionary, const char * name, double value)
 {
-    /*DictionaryEntry * entryTemp = Dictionary_getEntry(dictionary, name);
-    size_t count = (size_t)dictionary->count;
+    DictionaryEntry * entryTemp = Dictionary_getEntry(dictionary, name);
 
     if (entryTemp == NULL)
     {
@@ -130,9 +141,14 @@ void IMPLEMENT(Dictionary_setNumberEntry)(Dictionary * dictionary, const char * 
                 fatalError("error malloc : Attribution of dictionary->entries on the heap failed");
         }
         else
-            dictionary->entries = realloc(dictionary->entries, sizeof(DictionaryEntry) * count);
+        {
+            dictionary->entries = realloc(dictionary->entries, sizeof(DictionaryEntry) * (size_t)dictionary->count);
 
-        entryTemp = dictionary->entries + count - 1;
+            if (dictionary->entries == NULL)
+                fatalError("error realloc : Attribution of dictionary->entries on the heap failed");
+        }
+
+        entryTemp = dictionary->entries + (dictionary->count - 1);
         entryTemp->name = duplicateString(name);
         entryTemp->value.numberValue = value;
         entryTemp->type = NUMBER_ENTRY;
@@ -144,8 +160,7 @@ void IMPLEMENT(Dictionary_setNumberEntry)(Dictionary * dictionary, const char * 
 
         entryTemp->value.numberValue = value;
         entryTemp->type = NUMBER_ENTRY;
-    }*/
-    provided_Dictionary_setNumberEntry(dictionary, name, value);
+    }
 }
 
 /** Create a new string on the heap which is the result of the formatting of format according to the dictionary content

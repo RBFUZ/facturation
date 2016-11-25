@@ -241,6 +241,5 @@ void IMPLEMENT(CatalogDB_writeRecord)(CatalogDB * catalogDB, int recordIndex, Ca
     }
     else
         CatalogDB_appendRecord(catalogDB, record);
-        provided_CatalogDB_writeRecord(catalogDB, recordIndex,record);
 }
 

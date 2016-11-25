@@ -115,12 +115,14 @@ char * IMPLEMENT(formatDate)(int day, int month, int year)
  */
 void IMPLEMENT(writeString)(const char * str, FILE * file)
 {
+    size_t nbrChara = stringLength(str);
+
+    if (fwrite(&nbrChara, sizeof(size_t), 1, file) < 1)
+        fatalError("fwrite error : return value is not valid.");
+
     size_t result = fwrite(str, stringLength(str), 1, file);
 
     if (result < 1 && stringLength(str) != 0)
-        fatalError("fwrite error : return value is not valid.");
-
-    if (fwrite("\3", 1, 1, file) < 1)
         fatalError("fwrite error : return value is not valid.");
 }
 
@@ -131,28 +133,22 @@ void IMPLEMENT(writeString)(const char * str, FILE * file)
  */
 char * IMPLEMENT(readString)(FILE * file)
 {
-    size_t sizeOfString = 0;
+    size_t nbrChara = 0;
 
-    while (fgetc(file) != '\3')
-        sizeOfString++;
+    if (fread(&nbrChara, sizeof(size_t), 1, file) < 1)
+        fatalError("fwrite error : return value is not valid.");
 
-    char * newString = (char*) malloc(sizeof(char) * sizeOfString + 1);
+    char * newString = (char*) malloc(sizeof(char) * nbrChara + 1);
 
     if (newString == NULL)
         fatalError("malloc error : Allocation of char * newString failed.");
 
-    memset(newString, '\0', sizeof(char) * sizeOfString+1);
+    memset(newString, '\0', sizeof(char) * nbrChara + 1);
 
-    if (sizeOfString == 0)
-        return newString;
-    else
-    {
-        fseek(file, -(int)sizeOfString - 1, SEEK_CUR);
-        if (fread(newString, sizeOfString, 1, file) < 1)
-            fatalError("fread error : return value is not valid.");
-    }
+    size_t result = fread(newString, nbrChara, 1, file);
 
-    fseek(file, 1, SEEK_CUR);
+    if (result < 1 && nbrChara != 0)
+        fatalError("fwrite error : return value is not valid.");
 
     return newString;
 }

@@ -78,23 +78,9 @@ void IMPLEMENT(PrintFormat_loadFromFile)(PrintFormat * format, const char * file
 
 static char * readLine(FILE * fichier)
 {
-    char * lineOfFile = (char*)malloc(sizeof(char) * 512);
-
-    if (lineOfFile == NULL)
-        fatalError("malloc error : Allocation of lineOfFile failed.");
-
-    memset(lineOfFile, '\0', 512);
-    lineOfFile = fgets(lineOfFile, 512, fichier);
-
-    if (lineOfFile == NULL)
-        fatalError("fgets error : read failed.");
-
-    lineOfFile = realloc(lineOfFile, sizeof(char) * stringLength(lineOfFile) +1);
-
-    if (lineOfFile == NULL)
-        fatalError("realloc error : Allocation of lineOfFile failed.");
-
-    return lineOfFile;
+    char lineOfFile[512];
+    memset(lineOfFile, '\0', sizeof(char) * 512);
+    return duplicateString(fgets(lineOfFile, 512, fichier));
 }
 
 
@@ -102,16 +88,16 @@ char * readMarked(FILE * file, const char * mark)
 {
     char * lineOfFile1 = readLine(file);
     char * lineOfFile2 = readLine(file);
+    char * lineOfFile3 = NULL;
 
-    if (icaseStartWith(mark, lineOfFile2) != 1)
+    while (icaseStartWith(mark, lineOfFile2) != 1)
     {
-        do
-        {
-            lineOfFile1 = concatenateString(lineOfFile1, lineOfFile2);
-            free(lineOfFile2);
-            lineOfFile2 = readLine(file);
-
-        }while (icaseStartWith(mark, lineOfFile2) != 1);
+        lineOfFile3 = concatenateString(lineOfFile1, lineOfFile2);
+        free(lineOfFile1);
+        free(lineOfFile2);
+        lineOfFile2 = readLine(file);
+        lineOfFile1 = duplicateString(lineOfFile3);
+        free(lineOfFile3);
     }
     free(lineOfFile2);
     copyStringWithLength(lineOfFile1, lineOfFile1, stringLength(lineOfFile1));

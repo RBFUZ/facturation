@@ -294,9 +294,6 @@ void IMPLEMENT(CatalogRecord_read)(CatalogRecord * record, FILE * file)
 
     if(fread(&record->rateOfVAT, CATALOGRECORD_RATEOFVAT_SIZE, 1, file) < 1)
         fatalError("fread error : return value is not valid.");
-
-    int a = CATALOGRECORD_SIZE * 3;
-    a += 1;
 }
 
 /** Write a record to a file

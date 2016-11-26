@@ -62,17 +62,17 @@ void IMPLEMENT(PrintFormat_loadFromFile)(PrintFormat * format, const char * file
     PrintFormat_finalize(format);
 
     lineOfFile1 = readLine(file);
-    /* FUITE ICI */
-    lineOfFile1 = subString(lineOfFile1+6, lineOfFile1 + stringLength(lineOfFile1) - 1);
-    format->name = duplicateString(lineOfFile1);
-    free(lineOfFile1);
+    copyStringWithLength(lineOfFile1, lineOfFile1 + 6, stringLength(lineOfFile1) - 6);
+    format->name = lineOfFile1;
 
     lineOfFile1 = readLine(file);
     free(lineOfFile1);
 
-    format->header = readMarked(file, ".ROW\n");
-    format->row = readMarked(file, ".FOOTER\n");
+    format->header = readMarked(file, ".ROW");
+    format->row = readMarked(file, ".FOOTER");
     format->footer = readMarked(file, ".END");
+
+    fclose(file);
 }
 
 
@@ -102,19 +102,18 @@ char * readMarked(FILE * file, const char * mark)
 {
     char * lineOfFile1 = readLine(file);
     char * lineOfFile2 = readLine(file);
-    char * stringReturn = NULL;
 
-    if (compareString(lineOfFile2, mark) != 0 )
+    if (icaseStartWith(mark, lineOfFile2) != 1)
     {
         do
         {
             lineOfFile1 = concatenateString(lineOfFile1, lineOfFile2);
             free(lineOfFile2);
             lineOfFile2 = readLine(file);
-        }while (compareString(lineOfFile2, mark) != 0);
+
+        }while (icaseStartWith(mark, lineOfFile2) != 1);
     }
-    stringReturn = subString(lineOfFile1, lineOfFile1 + stringLength(lineOfFile1) - 1);
-    free(lineOfFile1);
     free(lineOfFile2);
-    return stringReturn;
+    copyStringWithLength(lineOfFile1, lineOfFile1, stringLength(lineOfFile1));
+    return lineOfFile1;
 }

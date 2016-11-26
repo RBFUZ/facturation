@@ -221,8 +221,7 @@ void IMPLEMENT(CatalogDB_removeRecord)(CatalogDB * catalogDB, int recordIndex)
  */
 void IMPLEMENT(CatalogDB_readRecord)(CatalogDB * catalogDB, int recordIndex, CatalogRecord * record)
 {
-    rewind(catalogDB->file);
-    fseek(catalogDB->file, (int)sizeof(int) + (int)CATALOGRECORD_SIZE * recordIndex, SEEK_CUR);
+    fseek(catalogDB->file, (int)sizeof(int) + (int)CATALOGRECORD_SIZE * recordIndex, SEEK_SET);
     CatalogRecord_read(record, catalogDB->file);
 }
 

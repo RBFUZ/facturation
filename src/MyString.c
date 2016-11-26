@@ -247,7 +247,7 @@ char * IMPLEMENT(concatenateString)(const char * str1, const char * str2)
  * @param c the character to find
  * @return a pointer to the first occurrence of the character c in the string str if c is in str, NULL otherwise
  */
-const char * IMPLEMENT(indexOfChar)(const char *str, char c)
+const char * IMPLEMENT(indexOfChar)(const char * str, char c)
 {
     int i = 0;
     const char * resultat = NULL;

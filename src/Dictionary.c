@@ -19,6 +19,7 @@
 
 #include <Dictionary.h>
 
+char * (findCharInString)(const char * str, char c);
 
 /** Create an empty dictionary on the heap
  * @return a new dictionary
@@ -171,5 +172,110 @@ void IMPLEMENT(Dictionary_setNumberEntry)(Dictionary * dictionary, const char * 
  */
 char * IMPLEMENT(Dictionary_format)(Dictionary * dictionary, const char * format)
 {
-    return provided_Dictionary_format(dictionary, format);
+    DictionaryEntry * entry;
+    char buffer[30];
+    char * formated = (char*) malloc(sizeof(char) * 2);
+    char * charactere1 = NULL, * charactere2 = NULL;
+
+
+    if (formated == NULL)
+        fatalError("malloc error : Allocation of formated on the heap failed");
+
+    int sizeOfFormat = (int)stringLength(format), i = 0;
+
+    memset(buffer, '\0', sizeof(char) * 30);
+
+    while (format[i] != '%' && sizeOfFormat > i)
+        i++;
+
+    i++;
+    charactere1 = findCharInString(format+i, '{');
+
+    if (charactere1 == NULL)
+    {
+        charactere1 = findCharInString(format+i, '%');
+        copyStringWithLength(buffer, format+i, stringLength(format+i) - stringLength(charactere1) + 1);
+        entry = Dictionary_getEntry(dictionary, buffer);
+
+        memset(buffer, '\0', sizeof(char) * 30);
+
+        if (entry != NULL)
+        {
+            if (entry->type == STRING_ENTRY)
+                return duplicateString(entry->value.stringValue);
+            else if (entry->type == NUMBER_ENTRY)
+            {
+                sprintf (buffer, "%.2f", entry->value.numberValue);
+                return duplicateString(buffer);
+            }
+
+            else
+                return duplicateString("");
+        }
+        else
+            printf("ERROR : NAME NO SEARCH");
+    }
+
+    if (format[i] == '%')
+    {
+        formated[0] = '%';
+        return formated;
+    }
+
+    copyStringWithLength(buffer, format+i, stringLength(format+i) - stringLength(charactere1) + 1);
+    entry = Dictionary_getEntry(dictionary, buffer);
+
+    memset(buffer, '\0', sizeof(char) * 30);
+
+    if (entry == NULL)
+        printf("ERROR : NAME NO SEARCH");
+    else
+    {
+        charactere2 = findCharInString(charactere1+1, '=');
+        copyStringWithLength(buffer, charactere1+1, stringLength(charactere2) - stringLength(charactere1) + 1);
+    }
+
+
+
+
+
+    return formated;
 }
+
+
+
+
+char * (findCharInString)(const char * str, char c)
+{
+    int i = 0;
+    char * resultat = NULL;
+
+    while (str[i] != '\0' && resultat == NULL)
+    {
+        if (str[i] == c)
+        {
+            resultat = &str[i];
+        }
+        i++;
+    }
+    return resultat;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

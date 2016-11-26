@@ -27,31 +27,13 @@
 void IMPLEMENT(DocumentRow_init)(DocumentRow * row)
 {
     row->code = duplicateString("");
-
-    if (row->code == NULL)
-        fatalError("malloc error : Allocation of row->code failed.");
-
     row->designation = duplicateString("");
-
-    if (row->designation == NULL)
-        fatalError("malloc error : Allocation of row->designation failed.");
-
     row->quantity = 0;
-
     row->unity = duplicateString("");
-
-    if (row->unity == NULL)
-        fatalError("malloc error : Allocation of row->unity failed.");
-
     row->basePrice = 0;
     row->sellingPrice = 0;
     row->discount = 0;
     row->rateOfVAT = 0;
-
-    memset(row->code, '\0', 1);
-    memset(row->designation, '\0', 1);
-    memset(row->unity, '\0', 1);
-
     row->next = NULL;
 }
 

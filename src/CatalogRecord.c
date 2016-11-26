@@ -232,11 +232,6 @@ void IMPLEMENT(CatalogRecord_init)(CatalogRecord * record)
     record->code = duplicateString("");
     record->designation = duplicateString("");
     record->unity = duplicateString("");
-
-    memset(record->code, '\0', 1);
-    memset(record->designation, '\0', 1);
-    memset(record->unity, '\0', 1);
-
     record->basePrice = 0;
     record->sellingPrice = 0;
     record->rateOfVAT = 0;

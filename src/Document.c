@@ -21,8 +21,6 @@
 #include <DocumentUtil.h>
 #include <DocumentRowList.h>
 
-void testError(size_t nbrOpSuccess, CustomerRecord * record, FILE * file);
-
 /** Initialize a document
  * @param document a pointer to a document
  * @warning An initialized document must be finalized by Document_finalize() to free all resources

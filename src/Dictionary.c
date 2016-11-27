@@ -19,7 +19,7 @@
 
 #include <Dictionary.h>
 
-char * (findCharInString)(const char * str, char c);
+char * findCharInString(char * str, char c);
 
 /** Create an empty dictionary on the heap
  * @return a new dictionary
@@ -175,26 +175,29 @@ char * IMPLEMENT(Dictionary_format)(Dictionary * dictionary, const char * format
     DictionaryEntry * entry;
     char buffer[30];
     char * formated = (char*) malloc(sizeof(char) * 2);
+    char * copyFormat = (char*) malloc(sizeof(char) * stringLength(format) + 1);
     char * charactere1 = NULL, * charactere2 = NULL;
+
+    copyStringWithLength(copyFormat, format, stringLength(format) +1);
 
 
     if (formated == NULL)
         fatalError("malloc error : Allocation of formated on the heap failed");
 
-    int sizeOfFormat = (int)stringLength(format), i = 0;
+    int sizeOfFormat = (int)stringLength(copyFormat), i = 0;
 
     memset(buffer, '\0', sizeof(char) * 30);
 
-    while (format[i] != '%' && sizeOfFormat > i)
+    while (copyFormat[i] != '%' && sizeOfFormat > i)
         i++;
 
     i++;
-    charactere1 = findCharInString(format+i, '{');
+    charactere1 = findCharInString(copyFormat+i, '{');
 
     if (charactere1 == NULL)
     {
-        charactere1 = findCharInString(format+i, '%');
-        copyStringWithLength(buffer, format+i, stringLength(format+i) - stringLength(charactere1) + 1);
+        charactere1 = findCharInString(copyFormat+i, '%');
+        copyStringWithLength(buffer, copyFormat+i, stringLength(copyFormat+i) - stringLength(charactere1) + 1);
         entry = Dictionary_getEntry(dictionary, buffer);
 
         memset(buffer, '\0', sizeof(char) * 30);
@@ -216,13 +219,13 @@ char * IMPLEMENT(Dictionary_format)(Dictionary * dictionary, const char * format
             printf("ERROR : NAME NO SEARCH");
     }
 
-    if (format[i] == '%')
+    if (copyFormat[i] == '%')
     {
         formated[0] = '%';
         return formated;
     }
 
-    copyStringWithLength(buffer, format+i, stringLength(format+i) - stringLength(charactere1) + 1);
+    copyStringWithLength(buffer, copyFormat+i, stringLength(copyFormat+i) - stringLength(charactere1) + 1);
     entry = Dictionary_getEntry(dictionary, buffer);
 
     memset(buffer, '\0', sizeof(char) * 30);
@@ -245,7 +248,7 @@ char * IMPLEMENT(Dictionary_format)(Dictionary * dictionary, const char * format
 
 
 
-char * (findCharInString)(const char * str, char c)
+char * findCharInString(char * str, char c)
 {
     int i = 0;
     char * resultat = NULL;
@@ -260,22 +263,4 @@ char * (findCharInString)(const char * str, char c)
     }
     return resultat;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

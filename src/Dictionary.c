@@ -235,8 +235,36 @@ char * IMPLEMENT(Dictionary_format)(Dictionary * dictionary, const char * format
     else
     {
         charactere2 = findCharInString(charactere1+1, '=');
-        copyStringWithLength(buffer, charactere1+1, stringLength(charactere2) - stringLength(charactere1) + 1);
+        copyStringWithLength(buffer, charactere1+1, stringLength(charactere1) - stringLength(charactere2));
     }
+
+    if (entry->type == STRING_ENTRY)
+    {
+
+        if (buffer == "case")
+        {
+            if (charactere2[1] == 'U')
+                makeUpperCaseString()
+        }
+        else if (buffer == "min")
+        {
+
+        }
+        else if (buffer == "max")
+        {
+
+        }
+    }
+    else if (entry->type == NUMBER_ENTRY)
+    {
+
+    }
+    else
+    {
+        /* Traitement quand c'est UNDEFINED */
+    }
+
+
 
 
 

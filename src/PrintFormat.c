@@ -78,9 +78,20 @@ void IMPLEMENT(PrintFormat_loadFromFile)(PrintFormat * format, const char * file
 
 static char * readLine(FILE * fichier)
 {
-    char lineOfFile[512];
-    memset(lineOfFile, '\0', sizeof(char) * 512);
-    return duplicateString(fgets(lineOfFile, 512, fichier));
+    char * line = duplicateString("");
+    char buffer[512];
+    char * tmp = NULL;
+
+    while (fgets(buffer, sizeof(buffer), fichier) != NULL)
+    {
+        tmp = line;
+        line = concatenateString(line, buffer);
+        free(tmp);
+
+        if (buffer[stringLength(buffer) - 1] == '\n')
+            break;
+    }
+    return line;
 }
 
 

@@ -20,6 +20,10 @@
 #include <Dictionary.h>
 
 char * findCharInString(char * str, char c);
+char * formatString(DictionaryEntry * entry, char * buffer, char * charaEqual);
+char * formatNumber(DictionaryEntry * entry, char * buffer, char * charaEqual);
+char * valueAfterEqual(char * buffer, char * charaEqual);
+char * parameterNotFound(Dictionary * dictionary, char * buffer, char * copyFormat, int i);
 
 /** Create an empty dictionary on the heap
  * @return a new dictionary
@@ -174,105 +178,125 @@ char * IMPLEMENT(Dictionary_format)(Dictionary * dictionary, const char * format
 {
     DictionaryEntry * entry;
     char buffer[30];
-    char * formated = (char*) malloc(sizeof(char) * 2);
-    char * copyFormat = (char*) malloc(sizeof(char) * stringLength(format) + 1);
-    char * charactere1 = NULL, * charactere2 = NULL;
+    char * copyFormat = duplicateString(format);
+    char * charaAccolade = NULL, * charaEqual = NULL, * stringFormated = duplicateString("");
+    int sizeOfFormat = 0, i = 0;
 
     copyStringWithLength(copyFormat, format, stringLength(format) +1);
 
-
-    if (formated == NULL)
-        fatalError("malloc error : Allocation of formated on the heap failed");
-
-    int sizeOfFormat = (int)stringLength(copyFormat), i = 0;
-
-    memset(buffer, '\0', sizeof(char) * 30);
-
-    while (copyFormat[i] != '%' && sizeOfFormat > i)
-        i++;
-
-    i++;
-    charactere1 = findCharInString(copyFormat+i, '{');
-
-    if (charactere1 == NULL)
+    while (findCharInString(copyFormat+1, '%') != NULL || findCharInString(copyFormat+1, ',') != NULL)
     {
-        charactere1 = findCharInString(copyFormat+i, '%');
-        copyStringWithLength(buffer, copyFormat+i, stringLength(copyFormat+i) - stringLength(charactere1) + 1);
+        sizeOfFormat = (int)stringLength(copyFormat);
+        memset(buffer, '\0', sizeof(char) * 30);
+
+        while (copyFormat[i] != '%' && sizeOfFormat > i)
+            i++;
+
+        i++;
+        charaAccolade = findCharInString(copyFormat+i, '{');
+
+        if (charaAccolade == NULL)
+            stringFormated = concatenateString(stringFormated, parameterNotFound(dictionary, buffer, copyFormat, i));
+
+        if (copyFormat[i] == '%')
+            stringFormated = concatenateString(stringFormated, "%");
+
+        copyStringWithLength(buffer, copyFormat+i, stringLength(copyFormat+i) - stringLength(charaAccolade) + 1);
         entry = Dictionary_getEntry(dictionary, buffer);
 
         memset(buffer, '\0', sizeof(char) * 30);
 
-        if (entry != NULL)
+        if (entry == NULL)
         {
-            if (entry->type == STRING_ENTRY)
-                return duplicateString(entry->value.stringValue);
-            else if (entry->type == NUMBER_ENTRY)
-            {
-                sprintf (buffer, "%.2f", entry->value.numberValue);
-                return duplicateString(buffer);
-            }
-
-            else
-                return duplicateString("");
-        }
-        else
             printf("ERROR : NAME NO SEARCH");
-    }
-
-    if (copyFormat[i] == '%')
-    {
-        formated[0] = '%';
-        return formated;
-    }
-
-    copyStringWithLength(buffer, copyFormat+i, stringLength(copyFormat+i) - stringLength(charactere1) + 1);
-    entry = Dictionary_getEntry(dictionary, buffer);
-
-    memset(buffer, '\0', sizeof(char) * 30);
-
-    if (entry == NULL)
-        printf("ERROR : NAME NO SEARCH");
-    else
-    {
-        charactere2 = findCharInString(charactere1+1, '=');
-        copyStringWithLength(buffer, charactere1+1, stringLength(charactere1) - stringLength(charactere2));
-    }
-
-    if (entry->type == STRING_ENTRY)
-    {
-
-        if (buffer == "case")
-        {
-            if (charactere2[1] == 'U')
-                makeUpperCaseString()
+            return NULL;
         }
-        else if (buffer == "min")
-        {
 
-        }
-        else if (buffer == "max")
-        {
+        charaEqual = findCharInString(charaAccolade+1, '=');
+        copyStringWithLength(buffer, charaAccolade+1, stringLength(charaAccolade) - stringLength(charaEqual));
 
+        if (entry->type == STRING_ENTRY)
+            stringFormated = formatString(entry, buffer, charaEqual);
+
+        else if (entry->type == NUMBER_ENTRY)
+            stringFormated = formatNumber(entry, buffer, charaEqual);
+
+        else
+        {
+            printf("Error : Type value not defined");
+            return stringFormated;
         }
     }
-    else if (entry->type == NUMBER_ENTRY)
-    {
-
-    }
-    else
-    {
-        /* Traitement quand c'est UNDEFINED */
-    }
 
 
-
-
-
-
-
-    return formated;
+    return stringFormated;
 }
 
+
+
+char * formatString(DictionaryEntry * entry, char * buffer, char * charaEqual)
+{
+    char * copyValueStringEntry = duplicateString(entry->value.stringValue);
+
+    if (icaseCompareString(buffer, "case") == 0)
+    {
+        if (charaEqual[1] >= 'A' && charaEqual[1] <= 'Z')
+            makeUpperCaseString(copyValueStringEntry);
+        else if (charaEqual[1] >= 'a' && charaEqual[1] <= 'z')
+            makeLowerCaseString(copyValueStringEntry);
+    }
+    else if (icaseCompareString(buffer, "min") == 0)
+    {
+        while (atoi(valueAfterEqual(buffer, charaEqual)) > (int)stringLength(copyValueStringEntry))
+        {
+            int a = (int)stringLength(copyValueStringEntry);
+            copyValueStringEntry = insertString(copyValueStringEntry, a, " ", 1);
+        }
+    }
+    else if (icaseCompareString(buffer, "max") == 0)
+    {
+        copyStringWithLength(copyValueStringEntry, copyValueStringEntry, (size_t)atoi(valueAfterEqual(buffer, charaEqual))+1);
+    }
+    return copyValueStringEntry;
+}
+
+
+char * formatNumber(DictionaryEntry * entry, char * buffer, char * charaEqual)
+{
+    double copyValueEntryNumber = entry->value.numberValue;
+    char bufferForNumber[30];
+    memset(bufferForNumber, '\0', sizeof(char) * 30);
+
+    if (icaseCompareString(buffer, "precision") == 0)
+    {
+        buffer = valueAfterEqual(buffer, charaEqual);
+        sprintf (buffer, insertString("%.f", 2, buffer, (int)stringLength(buffer)), copyValueEntryNumber);
+    }
+    else if (icaseCompareString(buffer, "min") == 0)
+    {
+        sprintf(bufferForNumber, "%.2f", entry->value.numberValue);
+
+        while (atoi(valueAfterEqual(buffer, charaEqual)) > (int)stringLength(bufferForNumber))
+        {
+            buffer = insertString(buffer, 0, " ", 1);
+        }
+    }
+    return duplicateString(buffer);
+}
+
+
+char * valueAfterEqual(char * buffer, char * charaEqual)
+{
+    int i = 1;
+    memset(buffer, '\0', sizeof(char) * 30);
+
+    while (charaEqual[i] >= '0' && charaEqual[i] <= '9')
+    {
+        buffer[i-1] = charaEqual[i];
+        i++;
+    }
+    return buffer;
+}
 
 
 
@@ -290,5 +314,36 @@ char * findCharInString(char * str, char c)
         i++;
     }
     return resultat;
+}
+
+
+char * parameterNotFound(Dictionary * dictionary, char * buffer, char * copyFormat, int i)
+{
+    DictionaryEntry * entry;
+    char * result = NULL;
+
+    copyStringWithLength(buffer, copyFormat+i, stringLength(copyFormat+i) - stringLength(findCharInString(copyFormat+i, '%')) + 1);
+    entry = Dictionary_getEntry(dictionary, buffer);
+
+    memset(buffer, '\0', sizeof(char) * 30);
+
+    if (entry != NULL)
+    {
+        if (entry->type == STRING_ENTRY)
+            result = duplicateString(entry->value.stringValue);
+        else if (entry->type == NUMBER_ENTRY)
+        {
+            sprintf (buffer, "%.6f", entry->value.numberValue);
+            result = duplicateString(buffer);
+        }
+        else
+            result = duplicateString("");
+    }
+    else
+    {
+        printf("ERROR : %s NO SEARCH", buffer);
+        result = duplicateString("");
+    }
+    return result;
 }
 

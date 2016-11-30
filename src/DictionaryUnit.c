@@ -76,17 +76,17 @@ static void test_Dictionary_format(void)
   ASSERT_EQUAL_STRING(result, "10.200000");
   free(result);
 
-  /*result = Dictionary_format(dic, "%VAR1{precision=0}% %VAR1{precision=0}%");
+  result = Dictionary_format(dic, "%VAR1{precision=0}% %VAR1{precision=0}%");
   ASSERT_EQUAL_STRING(result, "10 10");
-  free(result);*/
+  free(result);
 
   result = Dictionary_format(dic, "%VAR1{precision=2}%");
   ASSERT_EQUAL_STRING(result, "10.20");
   free(result);
 
-  /*result = Dictionary_format(dic, "%VAR1{precision=2,min=10}%");
+  result = Dictionary_format(dic, "%VAR1{precision=2,min=10}%");
   ASSERT_EQUAL_STRING(result, "     10.20");
-  free(result);*/
+  free(result);
 
   result = Dictionary_format(dic, "%VAR2%");
   ASSERT_EQUAL_STRING(result, "abcDef");

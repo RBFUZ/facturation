@@ -20,10 +20,11 @@
 #include <Dictionary.h>
 
 char * findCharInString(char * str, char c);
-char * formatString(DictionaryEntry * entry, char * buffer, char * charaEqual);
-char * formatNumber(DictionaryEntry * entry, char * buffer, char * charaEqual);
+char * formatString(char * copyValueStringEntry, char * buffer, char * charaEqual);
+char * formatNumber(char * copyValueEntryNumber, char * buffer, char * charaEqual);
 char * valueAfterEqual(char * buffer, char * charaEqual);
-char * parameterNotFound(Dictionary * dictionary, char * buffer, char * copyFormat, int i);
+char * parameterNotFound(Dictionary * dictionary, char * buffer, char * copyFormat);
+char * setCursorEndOfModele(char * copyFormat);
 
 /** Create an empty dictionary on the heap
  * @return a new dictionary
@@ -178,66 +179,103 @@ char * IMPLEMENT(Dictionary_format)(Dictionary * dictionary, const char * format
 {
     DictionaryEntry * entry;
     char buffer[30];
-    char * copyFormat = duplicateString(format);
-    char * charaAccolade = NULL, * charaEqual = NULL, * stringFormated = duplicateString("");
-    int sizeOfFormat = 0, i = 0;
+    char bufferForNumberEntry[30];
+    char * copyFormat = duplicateString(format), * charaAccolade = NULL, * charaEqual = NULL, * stringFormatedFinal = duplicateString(""), * stringFormated = duplicateString("");
 
-    copyStringWithLength(copyFormat, format, stringLength(format) +1);
+    copyStringWithLength(copyFormat, format+1, stringLength(format) +1);
 
-    while (findCharInString(copyFormat+1, '%') != NULL || findCharInString(copyFormat+1, ',') != NULL)
+    while (copyFormat[1] != '\0')
     {
-        sizeOfFormat = (int)stringLength(copyFormat);
         memset(buffer, '\0', sizeof(char) * 30);
+        memset(bufferForNumberEntry, '\0', sizeof(char) * 30);
 
-        while (copyFormat[i] != '%' && sizeOfFormat > i)
-            i++;
-
-        i++;
-        charaAccolade = findCharInString(copyFormat+i, '{');
+        charaAccolade = findCharInString(copyFormat, '{');
 
         if (charaAccolade == NULL)
-            stringFormated = concatenateString(stringFormated, parameterNotFound(dictionary, buffer, copyFormat, i));
-
-        if (copyFormat[i] == '%')
-            stringFormated = concatenateString(stringFormated, "%");
-
-        copyStringWithLength(buffer, copyFormat+i, stringLength(copyFormat+i) - stringLength(charaAccolade) + 1);
-        entry = Dictionary_getEntry(dictionary, buffer);
-
-        memset(buffer, '\0', sizeof(char) * 30);
-
-        if (entry == NULL)
         {
-            printf("ERROR : NAME NO SEARCH");
-            return NULL;
+            stringFormatedFinal = concatenateString(stringFormated, parameterNotFound(dictionary, buffer, copyFormat));
+            copyFormat = setCursorEndOfModele(copyFormat);
         }
-
-        charaEqual = findCharInString(charaAccolade+1, '=');
-        copyStringWithLength(buffer, charaAccolade+1, stringLength(charaAccolade) - stringLength(charaEqual));
-
-        if (entry->type == STRING_ENTRY)
-            stringFormated = formatString(entry, buffer, charaEqual);
-
-        else if (entry->type == NUMBER_ENTRY)
-            stringFormated = formatNumber(entry, buffer, charaEqual);
-
+        else if(copyFormat[0] == '%')
+        {
+            stringFormatedFinal = concatenateString(stringFormated, "%");
+            copyFormat = setCursorEndOfModele(copyFormat);
+        }
         else
         {
-            printf("Error : Type value not defined");
-            return stringFormated;
+            copyStringWithLength(buffer, copyFormat, stringLength(copyFormat) - stringLength(charaAccolade) + 1);
+            entry = Dictionary_getEntry(dictionary, buffer);
+            memset(buffer, '\0', sizeof(char) * 30);
+
+            if (entry == NULL)
+            {
+                printf("ERROR : NAME NO SEARCH");
+                return NULL;
+            }
+
+            charaEqual = findCharInString(copyFormat, '=');
+            copyStringWithLength(buffer, charaAccolade+1, stringLength(charaAccolade) - stringLength(charaEqual));
+
+            if (entry->type == STRING_ENTRY)
+            {
+                copyStringWithLength(stringFormated, stringFormatedFinal, stringLength(stringFormatedFinal));
+                free(stringFormatedFinal);
+                stringFormatedFinal = concatenateString(stringFormated, formatString(duplicateString(entry->value.stringValue), buffer, charaEqual));
+                copyFormat = setCursorEndOfModele(copyFormat);
+
+                if (copyFormat[0] == ',')
+                {
+                    charaEqual = findCharInString(copyFormat, '=');
+                    memset(buffer, '\0', sizeof(char) * 30);
+                    copyStringWithLength(buffer, copyFormat+1, stringLength(copyFormat+1) - stringLength(charaEqual)+1);
+                    copyStringWithLength(stringFormated, stringFormatedFinal, stringLength(stringFormatedFinal));
+                    free(stringFormatedFinal);
+                    stringFormatedFinal = formatString(duplicateString(stringFormated), buffer, charaEqual);
+                    copyStringWithLength(copyFormat, charaEqual + stringLength(valueAfterEqual(buffer, charaEqual)) + 1, stringLength(charaEqual) - stringLength(valueAfterEqual(buffer, charaEqual)));
+                }
+            }
+            else if (entry->type == NUMBER_ENTRY)
+            {
+                sprintf (bufferForNumberEntry, "%f", entry->value.numberValue);
+                copyStringWithLength(stringFormated, stringFormatedFinal, stringLength(stringFormatedFinal) +1);
+                free(stringFormatedFinal);
+                stringFormatedFinal = concatenateString(stringFormated, formatNumber(duplicateString(bufferForNumberEntry), buffer, charaEqual));
+                copyFormat = setCursorEndOfModele(copyFormat);
+
+                if (copyFormat[0] == ',')
+                {
+                    charaEqual = findCharInString(copyFormat, '=');
+                    memset(buffer, '\0', sizeof(char) * 30);
+                    copyStringWithLength(buffer, copyFormat+1, stringLength(copyFormat+1) - stringLength(charaEqual) +1);
+                    copyStringWithLength(stringFormated, stringFormatedFinal, stringLength(stringFormatedFinal) +1);
+                    free(stringFormatedFinal);
+                    stringFormatedFinal = formatNumber(duplicateString(stringFormated), buffer, charaEqual);
+                    copyStringWithLength(copyFormat, charaEqual + stringLength(valueAfterEqual(buffer, charaEqual)) + 1, stringLength(charaEqual) - stringLength(valueAfterEqual(buffer, charaEqual)));
+                }
+            }
+            else
+            {
+                printf("Error : Type value not defined");
+                return stringFormated;
+            }
         }
+
+        if (copyFormat[1] != '\0')
+        {
+            copyFormat = copyFormat + 3;
+            copyStringWithLength(stringFormated, stringFormatedFinal, stringLength(stringFormatedFinal) + 1);
+            free(stringFormatedFinal);
+            stringFormatedFinal = insertString(stringFormated, (int)stringLength(stringFormated), " ", 1);
+        }
+
     }
-
-
-    return stringFormated;
+    return stringFormatedFinal;
 }
 
 
 
-char * formatString(DictionaryEntry * entry, char * buffer, char * charaEqual)
+char * formatString(char * copyValueStringEntry, char * buffer, char * charaEqual)
 {
-    char * copyValueStringEntry = duplicateString(entry->value.stringValue);
-
     if (icaseCompareString(buffer, "case") == 0)
     {
         if (charaEqual[1] >= 'A' && charaEqual[1] <= 'Z')
@@ -261,28 +299,32 @@ char * formatString(DictionaryEntry * entry, char * buffer, char * charaEqual)
 }
 
 
-char * formatNumber(DictionaryEntry * entry, char * buffer, char * charaEqual)
+char * formatNumber(char * result, char * buffer, char * charaEqual)
 {
-    double copyValueEntryNumber = entry->value.numberValue;
-    char bufferForNumber[30];
-    memset(bufferForNumber, '\0', sizeof(char) * 30);
+    double doubleOfCopy = 0.0;
+    int valueAfterEqualInt = 0;
+    char * copyOfResult = duplicateString("");
 
     if (icaseCompareString(buffer, "precision") == 0)
     {
+        doubleOfCopy = atof(result);
         buffer = valueAfterEqual(buffer, charaEqual);
-        sprintf (buffer, insertString("%.f", 2, buffer, (int)stringLength(buffer)), copyValueEntryNumber);
+        sprintf (result, insertString("%.f", 2, buffer, (int)stringLength(buffer)), doubleOfCopy);
     }
     else if (icaseCompareString(buffer, "min") == 0)
     {
-        sprintf(bufferForNumber, "%.2f", entry->value.numberValue);
+        valueAfterEqualInt = atoi(valueAfterEqual(buffer, charaEqual));
 
-        while (atoi(valueAfterEqual(buffer, charaEqual)) > (int)stringLength(bufferForNumber))
+        while (valueAfterEqualInt > (int)stringLength(result))
         {
-            buffer = insertString(buffer, 0, " ", 1);
+            copyStringWithLength(copyOfResult, result, stringLength(result) + 1);
+            free(result);
+            result = insertString(copyOfResult, 0, " ", 1);
         }
     }
-    return duplicateString(buffer);
+    return duplicateString(result);
 }
+
 
 
 char * valueAfterEqual(char * buffer, char * charaEqual)
@@ -317,12 +359,12 @@ char * findCharInString(char * str, char c)
 }
 
 
-char * parameterNotFound(Dictionary * dictionary, char * buffer, char * copyFormat, int i)
+char * parameterNotFound(Dictionary * dictionary, char * buffer, char * copyFormat)
 {
     DictionaryEntry * entry;
     char * result = NULL;
 
-    copyStringWithLength(buffer, copyFormat+i, stringLength(copyFormat+i) - stringLength(findCharInString(copyFormat+i, '%')) + 1);
+    copyStringWithLength(buffer, copyFormat, stringLength(copyFormat) - stringLength(findCharInString(copyFormat, '%')) + 1);
     entry = Dictionary_getEntry(dictionary, buffer);
 
     memset(buffer, '\0', sizeof(char) * 30);
@@ -345,5 +387,16 @@ char * parameterNotFound(Dictionary * dictionary, char * buffer, char * copyForm
         result = duplicateString("");
     }
     return result;
+}
+
+
+char * setCursorEndOfModele(char * copyFormat)
+{
+    int i = 0;
+
+    while (copyFormat[i] != ',' && copyFormat[i] != '%')
+        i++;
+
+    return &copyFormat[i];
 }
 

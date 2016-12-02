@@ -19,20 +19,18 @@
 
 #include <CatalogRecord.h>
 
-void testError(size_t nbrOpSuccess, CatalogRecord * record, FILE * file);
-
 /** Static function which test if a code only contains numbers and letters
  * @param  value the value to test
  * @return true if the code is valid, false otherwise
  */
 int IMPLEMENT(CatalogRecord_isValueValid_code)(const char * value)
 {
-    int i = 0;
+    int count = 0;
 
-    while (value[i] != '\0')
+    while (value[count] != '\0')
     {
-        if ((value[i] >= 'a' && value[i] <= 'z') || (value[i] >= 'A' && value[i] <= 'Z') || (value[i] >= '0' && value[i] <= '9'))
-            i++;
+        if ((value[count] >= 'a' && value[count] <= 'z') || (value[count] >= 'A' && value[count] <= 'Z') || (value[count] >= '0' && value[count] <= '9'))
+            count++;
         else
             return 0;
     }

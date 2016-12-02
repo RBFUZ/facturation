@@ -27,10 +27,10 @@
  */
 OperatorTable * IMPLEMENT(OperatorTable_create)(void)
 {
-    OperatorTable * emptyStruct =  malloc(sizeof(OperatorTable));
+    OperatorTable * emptyStruct = (OperatorTable*) malloc(sizeof(OperatorTable));
 
     if (emptyStruct == NULL)
-        fatalError("Error : Attribution of OperatorTable * emptyStruct on the heap failed");
+        fatalError("malloc error : Attribution of OperatorTable * emptyStruct on the heap failed");
 
     emptyStruct->recordCount = 0;
     emptyStruct->records = NULL;
@@ -68,9 +68,6 @@ void IMPLEMENT(OperatorTable_destroy)(OperatorTable * table)
 OperatorTable * IMPLEMENT(OperatorTable_loadFromFile)(const char * filename)
 {
     OperatorTable * newTable = OperatorTable_create();
-
-    if (newTable == NULL)
-        fatalError("malloc error : Allocation of OperatorTable * newTable failed.");
 
     FILE * file = fopen(filename, "r+");
 
@@ -157,7 +154,7 @@ int IMPLEMENT(OperatorTable_getRecordCount)(OperatorTable * table)
  */
 const char * IMPLEMENT(OperatorTable_getName)(OperatorTable * table, int recordIndex)
 {
-    char * getNameOperator;
+    char * getNameOperator = NULL;
 
     if (recordIndex > OperatorTable_getRecordCount(table) || recordIndex < 0)
         fatalError("Error : Operator doesn't exist");
@@ -174,7 +171,7 @@ const char * IMPLEMENT(OperatorTable_getName)(OperatorTable * table, int recordI
  */
 const char * IMPLEMENT(OperatorTable_getPassword)(OperatorTable * table, int recordIndex)
 {
-    char * getPasswordOperator;
+    char * getPasswordOperator = NULL;
 
     if (recordIndex > OperatorTable_getRecordCount(table) || recordIndex < 0)
         fatalError("Error : Operator doesn't exist");
@@ -191,20 +188,20 @@ const char * IMPLEMENT(OperatorTable_getPassword)(OperatorTable * table, int rec
  */
 int IMPLEMENT(OperatorTable_findOperator)(OperatorTable * table, const char * name)
 {
-    int i = 0, recordIndex = -1;
-    char * nameOperator;
+    int count = 0, recordIndex = -1;
+    char * nameOperator = NULL;
 
-    while (i < OperatorTable_getRecordCount(table) && recordIndex != 0)
+    while (count < OperatorTable_getRecordCount(table) && recordIndex != 0)
     {
-        nameOperator = table->records[i][0];
+        nameOperator = table->records[count][0];
         recordIndex = icaseCompareString(nameOperator, name);
-        i++;
+        count++;
     }
     if (recordIndex != 0)
     {
-        i = 0;
+        count = 0;
     }
-    return i - 1;
+    return count - 1;
 }
 
 /** Define or change the password of an operator
@@ -232,20 +229,20 @@ int IMPLEMENT(OperatorTable_setOperator)(OperatorTable * table, const char * nam
             table->records = (char***) malloc(sizeof(char **));
 
             if (table->records == NULL)
-                fatalError("Error : Attribution of table->records on the heap failed");
+                fatalError("malloc error : Attribution of table->records on the heap failed");
         }
         else
     	{
             table->records = (char ***)realloc(table->records, sizeof(char **) * ((size_t)recordCount + 1));
 
             if (table->records == NULL)
-                fatalError("Error : Realloc of table->records failed");
+                fatalError("realloc error : Realloc of table->records failed");
         }
 
 	table->records[recordCount] = (char**) malloc(sizeof(char *) * 2);
 
 	if (table->records[0] == NULL)
-		fatalError("Error : Attribution of table->records on the heap failed");
+		fatalError("malloc error : Attribution of table->records on the heap failed");
 
 	table->records[recordCount][0] = duplicateString(name);
 	table->records[recordCount][1] = duplicateString(password);

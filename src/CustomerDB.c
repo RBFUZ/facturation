@@ -23,6 +23,10 @@
 
 const char * CUSTOMERDB_FILENAME = BASEPATH "/data/Customer.db";
 
+/** Function to create a new CustomerDb on the heap
+ * @param filename the filename of database
+ * @return the new CustomerDB
+ */
 CustomerDB * IMPLEMENT(CustomerDB_create)(const char * filename)
 {
     CustomerDB * customerDB = malloc(sizeof(CustomerDB));
@@ -51,6 +55,10 @@ CustomerDB * IMPLEMENT(CustomerDB_create)(const char * filename)
     return customerDB;
 }
 
+/** Function to open an exist database of CustomerDb
+ * @param filename the filename of database
+ * @return the new CustomerDB
+ */
 CustomerDB * IMPLEMENT(CustomerDB_open)(const char * filename)
 {
     CustomerDB * customerDB = malloc(sizeof(CustomerDB));
@@ -78,6 +86,10 @@ CustomerDB * IMPLEMENT(CustomerDB_open)(const char * filename)
     return customerDB;
 }
 
+/** Function to choose between open of create a CustomerDB
+ * @param filename the filename of database
+ * @return the new CustomerDB
+ */
 CustomerDB * IMPLEMENT(CustomerDB_openOrCreate)(const char * filename)
 {
     FILE * file = fopen(filename, "rb+");
@@ -87,6 +99,10 @@ CustomerDB * IMPLEMENT(CustomerDB_openOrCreate)(const char * filename)
         return CustomerDB_open(filename);
 }
 
+/** Function to close a CustomerDB (freeing all resources)
+ * @param filename the filename of database
+ * @return the new CustomerDB
+ */
 void IMPLEMENT(CustomerDB_close)(CustomerDB * customerDB)
 {
     rewind(customerDB->file);
@@ -100,10 +116,15 @@ void IMPLEMENT(CustomerDB_close)(CustomerDB * customerDB)
     free(customerDB);
 }
 
+/** Function to get the record count of CustomerDB
+ * @param customerBD a pointer to the CustomerDB
+ * @return the number of record count
+ */
 int IMPLEMENT(CustomerDB_getRecordCount)(CustomerDB * customerDB)
 {
     return customerDB->recordCount;
 }
+
 
 char * CustomerDB_getFieldValueAsString(CustomerDB * customerDB, int recordIndex, int field) {
     char * content = NULL;
@@ -118,6 +139,10 @@ char * CustomerDB_getFieldValueAsString(CustomerDB * customerDB, int recordIndex
     return content;
 }
 
+/** Function to set a new record at the end of file
+ * @param customerBD a pointer to the CustomerDB
+ * @param record a pointer to the CustomerRecord
+ */
 void IMPLEMENT(CustomerDB_appendRecord)(CustomerDB * customerDB, CustomerRecord *record)
 {
     customerDB->recordCount += 1;
@@ -126,6 +151,11 @@ void IMPLEMENT(CustomerDB_appendRecord)(CustomerDB * customerDB, CustomerRecord 
     rewind(customerDB->file);
 }
 
+/** Function to insert a new record located by record index position
+ * @param customerBD a pointer to the CustomerDB
+ * @param recordIndex a integer contain the position of the new record
+ * @param record a pointer to the CustomerRecord
+ */
 void IMPLEMENT(CustomerDB_insertRecord)(CustomerDB * customerDB, int recordIndex, CustomerRecord * record)
 {
     int recordCount = CustomerDB_getRecordCount(customerDB);
@@ -147,7 +177,10 @@ void IMPLEMENT(CustomerDB_insertRecord)(CustomerDB * customerDB, int recordIndex
     CustomerDB_writeRecord(customerDB, recordIndex, record);
 }
 
-
+/** Function to remove a record located by record index position
+ * @param customerBD a pointer to the CustomerDB
+ * @param recordIndex a integer contain the position of the new record
+ */
 void IMPLEMENT(CustomerDB_removeRecord)(CustomerDB * customerDB, int recordIndex)
 {
     int recordCount = CustomerDB_getRecordCount(customerDB);
@@ -173,6 +206,11 @@ void IMPLEMENT(CustomerDB_removeRecord)(CustomerDB * customerDB, int recordIndex
     free(recordCopie);
 }
 
+/** Function to read a record located in a file
+ * @param customerBD a pointer to the CustomerDB
+ * @param recordIndex a integer contain the position of the record to read
+ * @param record a pointer to the CustomerRecord
+ */
 void IMPLEMENT(CustomerDB_readRecord)(CustomerDB * customerDB, int recordIndex, CustomerRecord * record)
 {
     rewind(customerDB->file);
@@ -181,6 +219,11 @@ void IMPLEMENT(CustomerDB_readRecord)(CustomerDB * customerDB, int recordIndex, 
     CustomerRecord_read(record, customerDB->file);
 }
 
+/** Function to write a record located in a file
+ * @param customerBD a pointer to the CustomerDB
+ * @param recordIndex a integer contain the position of the record to read
+ * @param record a pointer to the CustomerRecord
+ */
 void IMPLEMENT(CustomerDB_writeRecord)(CustomerDB * customerDB, int recordIndex, CustomerRecord * record)
 {
     if (recordIndex < CustomerDB_getRecordCount(customerDB))

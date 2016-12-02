@@ -64,20 +64,18 @@ char IMPLEMENT(toUpperChar)(char c)
  */
 int IMPLEMENT(compareString)(const char * str1, const char * str2)
 {
-    size_t i = 0;
+    size_t count = 0;
     int result = 0;
 
-    while (i <= stringLength(str1) && result == 0)
+    while (count <= stringLength(str1) && result == 0)
     {
-        if (str1[i] < str2[i])
-        {
+        if (str1[count] < str2[count])
             result = -1;
-        }
-        else if (str1[i] > str2[i])
-        {
+
+        else if (str1[count] > str2[count])
             result = 1;
-        }
-            i++;
+
+            count++;
     }
     return result;
 }
@@ -92,20 +90,18 @@ int IMPLEMENT(compareString)(const char * str1, const char * str2)
  */
 int IMPLEMENT(icaseCompareString)(const char * str1, const char * str2)
 {
-    size_t i = 0;
+    size_t count = 0;
     int result = 0;
 
-    while (i <= stringLength(str1) && result == 0)
+    while (count <= stringLength(str1) && result == 0)
     {
-        if (toLowerChar(str1[i]) < toLowerChar(str2[i]))
-        {
+        if (toLowerChar(str1[count]) < toLowerChar(str2[count]))
             result = -1;
-        }
-        else if (toLowerChar(str1[i]) > toLowerChar(str2[i]))
-        {
+
+        else if (toLowerChar(str1[count]) > toLowerChar(str2[count]))
             result = 1;
-        }
-            i++;
+
+            count++;
     }
     return result;
 }
@@ -116,12 +112,11 @@ int IMPLEMENT(icaseCompareString)(const char * str1, const char * str2)
  */
 size_t IMPLEMENT(stringLength)(const char * str)
 {
-    size_t i = 0;
-    while (str[i] != '\0')
-    {
-        i++;
-    }
-    return i;
+    size_t count = 0;
+    while (str[count] != '\0')
+        count++;
+
+    return count;
 }
 
 /** Copy the string pointed to by src, including the terminating null byte ('\\0'), to the buffer pointed to by dest.
@@ -130,10 +125,9 @@ size_t IMPLEMENT(stringLength)(const char * str)
  * @param dest the destination string
  * @param src the source string
  */
-void IMPLEMENT(copyString)(char * dest, const char * src) {
-    fprintf(stderr,
-            "You should avoid strcpy and copyString. Use strncpy or copyStringWithLength instead\n");
-    copyStringWithLength(dest, src, INT_MAX);
+void IMPLEMENT(copyString)(char * dest, const char * src)
+{
+    copyStringWithLength(dest, src, stringLength(src) + 1);
 }
 
 /** Copy the first destSize characters of the string pointed to by src, including the terminating null byte ('\\0'), to the buffer pointed to by dest.
@@ -146,13 +140,13 @@ void IMPLEMENT(copyString)(char * dest, const char * src) {
  */
 void IMPLEMENT(copyStringWithLength)(char * dest, const char * src, size_t destSize)
 {
-    size_t i = 0;
-    while ((src[i] != '\0') && (i+1 < destSize))
+    size_t count = 0;
+    while ((src[count] != '\0') && (count+1 < destSize))
     {
-        dest[i] = src[i];
-        i++;
+        dest[count] = src[count];
+        count++;
     }
-    dest[i] = '\0';
+    dest[count] = '\0';
 }
 
 /** Like the strdup() function. It creates a copy of the string on the heap.
@@ -166,7 +160,7 @@ char * IMPLEMENT(duplicateString)(const char * str)
     char * copyStr = (char*)malloc(sizeChaine);
 
     if (copyStr == NULL)
-        fatalError("Error : Allocation of copyStr on the heap with malloc failed");
+        fatalError("malloc error : Allocation of copyStr on the heap failed");
 
     copyStringWithLength(copyStr, str, sizeChaine);
     return copyStr;
@@ -179,17 +173,15 @@ char * IMPLEMENT(duplicateString)(const char * str)
  */
 int IMPLEMENT(icaseStartWith)(const char * start, const char * str)
 {
-    int i = 0, result = 0;
+    int count = 0, result = 0;
 
-    while (toLowerChar(start[i]) == toLowerChar(str[i]) && start[i] != '\0')
+    while (toLowerChar(start[count]) == toLowerChar(str[count]) && start[count] != '\0')
     {
-        i++;
+        count++;
         result = 1;
     }
-    if (start[i] != '\0')
-    {
+    if (start[count] != '\0')
         result = 0;
-    }
 
     return result;
 }
@@ -212,9 +204,7 @@ int IMPLEMENT(icaseEndWith)(const char * end, const char * str)
         result = 1;
     }
     if (toLowerChar(str[sizeOfStr]) != toLowerChar(end[sizeOfEnd]))
-    {
         result = 0;
-    }
 
     return result;
 }
@@ -234,7 +224,7 @@ char * IMPLEMENT(concatenateString)(const char * str1, const char * str2)
     char * concatStr = (char*)malloc(sizeOfStr1 + sizeOfStr2 + 1);
 
     if (concatStr == NULL)
-        fatalError("Error : Allocation of concatStr on the heap with malloc failed");
+        fatalError("malloc error : Allocation of concatStr on the heap failed");
 
     copyStringWithLength(concatStr, str1,sizeOfStr1 + 1);
     copyStringWithLength(concatStr + sizeOfStr1, str2, sizeOfStr2 + 1);
@@ -249,16 +239,15 @@ char * IMPLEMENT(concatenateString)(const char * str1, const char * str2)
  */
 const char * IMPLEMENT(indexOfChar)(const char * str, char c)
 {
-    int i = 0;
+    int count = 0;
     const char * resultat = NULL;
 
-    while (str[i] != '\0' && resultat == NULL)
+    while (str[count] != '\0' && resultat == NULL)
     {
-        if (str[i] == c)
-        {
-            resultat = &str[i];
-        }
-        i++;
+        if (str[count] == c)
+            resultat = &str[count];
+
+        count++;
     }
     return resultat;
 }
@@ -284,20 +273,20 @@ const char * IMPLEMENT(indexOfChar)(const char * str, char c)
  */
 char * IMPLEMENT(subString)(const char * start, const char * end)
 {
-    size_t i = 0;
+    size_t count = 0;
     size_t diffLengthStartEnd = (size_t)end-(size_t)start;
-    char * copyChaine = (char*)malloc(diffLengthStartEnd + 1);
+    char * cpyString = (char*)malloc(diffLengthStartEnd + 1);
 
-    if (copyChaine == NULL)
-        fatalError("Error : Allocation of copyChaine on the heap with malloc failed");
+    if (cpyString == NULL)
+        fatalError("malloc error : Allocation of cpyString on the heap failed");
 
-    while (i != diffLengthStartEnd)
+    while (count != diffLengthStartEnd)
     {
-        copyChaine[i] = start[i];
-        i++;
+        cpyString[count] = start[count];
+        count++;
     }
-    copyChaine[i] = '\0';
-    return copyChaine;
+    cpyString[count] = '\0';
+    return cpyString;
 }
 
 /** Like the strstr() function. It returns a pointer to the first occurrence of the string aiguille in the string meule_de_foin.
@@ -307,30 +296,29 @@ char * IMPLEMENT(subString)(const char * start, const char * end)
  */
 const char * IMPLEMENT(indexOfString)(const char *meule_de_foin, const char *aiguille)
 {
-    int compt1 = 0, compt2 = 0;
+    int count1 = 0, count2 = 0;
     const char * result = NULL;
 
-    while (meule_de_foin[compt1] != '\0' && compt2 != -1)
+    while (meule_de_foin[count1] != '\0' && count2 != -1)
     {
-        if (meule_de_foin[compt1] == aiguille[compt2])
+        if (meule_de_foin[count1] == aiguille[count2])
         {
-            compt1++;
-            compt2++;
-            if (aiguille[compt2] == '\0')
+            count1++;
+            count2++;
+            if (aiguille[count2] == '\0')
             {
-                compt2 = -1;
-                result = &meule_de_foin[compt1];
+                count2 = -1;
+                result = &meule_de_foin[count1];
                 result -= stringLength(aiguille);
             }
         }
         else
         {
-            if (compt2 != 0)
-            {
-                compt1--;
-            }
-            compt1++;
-            compt2 = 0;
+            if (count2 != 0)
+                count1--;
+
+            count1++;
+            count2 = 0;
         }
     }
     return result;
@@ -341,11 +329,11 @@ const char * IMPLEMENT(indexOfString)(const char *meule_de_foin, const char *aig
  */
 void IMPLEMENT(makeUpperCaseString)(char * str)
 {
-    int i = 0;
-    while (str[i] != '\0')
+    int count = 0;
+    while (str[count] != '\0')
     {
-        str[i] = toUpperChar(str[i]);
-        i++;
+        str[count] = toUpperChar(str[count]);
+        count++;
     }
 }
 
@@ -354,11 +342,11 @@ void IMPLEMENT(makeUpperCaseString)(char * str)
  */
 void IMPLEMENT(makeLowerCaseString)(char * str)
 {
-    int i = 0;
-    while (str[i] != '\0')
+    int count = 0;
+    while (str[count] != '\0')
     {
-        str[i] = toLowerChar(str[i]);
-        i++;
+        str[count] = toLowerChar(str[count]);
+        count++;
     }
 }
 
@@ -373,35 +361,35 @@ void IMPLEMENT(makeLowerCaseString)(char * str)
  */
 char * IMPLEMENT(insertString)(const char * src, int insertPosition, const char * toBeInserted, int insertLength)
 {
-    int compt1 = 0, compt2 = 0;
+    int count1 = 0, count2 = 0;
     char * copySrc = (char*)malloc(stringLength(src) + stringLength(toBeInserted) + 1);
 
     if (copySrc == NULL)
-        fatalError("Error : Allocation of copySrc on the heap with malloc failed");
+        fatalError("malloc error : Allocation of copySrc on the heap failed");
 
-    while (src[compt1] != '\0' || compt2 == 0)
+    while (src[count1] != '\0' || count2 == 0)
     {
-        if (compt2 != 0)
+        if (count2 != 0)
         {
-            copySrc[compt1+insertLength] = src[compt1];
-            compt1++;
+            copySrc[count1+insertLength] = src[count1];
+            count1++;
         }
-        else if (compt1 != insertPosition)
+        else if (count1 != insertPosition)
         {
-            copySrc[compt1] = src[compt1];
-            compt1++;
+            copySrc[count1] = src[count1];
+            count1++;
         }
         else
         {
-            while (toBeInserted[compt2] != '\0' && compt2 < insertLength)
+            while (toBeInserted[count2] != '\0' && count2 < insertLength)
             {
-                copySrc[compt1] = toBeInserted[compt2];
-                compt2++;
-                compt1++;
+                copySrc[count1] = toBeInserted[count2];
+                count2++;
+                count1++;
             }
-            compt1 -= insertLength;
+            count1 -= insertLength;
         }
     }
-    copySrc[compt1+insertLength] = '\0';
+    copySrc[count1+insertLength] = '\0';
     return copySrc;
 }

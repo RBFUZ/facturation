@@ -54,7 +54,7 @@ void IMPLEMENT(DocumentRow_finalize)(DocumentRow * row)
  */
 DocumentRow * IMPLEMENT(DocumentRow_create)(void)
 {
-    DocumentRow * row = malloc(sizeof(DocumentRow));
+    DocumentRow * row = (DocumentRow *) malloc(sizeof(DocumentRow));
 
     if (row == NULL)
         fatalError("malloc error : Allocation of DocumentRow * row failed.");

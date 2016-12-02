@@ -19,48 +19,84 @@
 
 #include <CustomerRecord.h>
 
-void testError(size_t nbrOpSuccess, char * pointRecord, CustomerRecord * record, FILE * file);
+static void testError(size_t nbrOpSuccess, char * pointRecord, CustomerRecord * record, FILE * file);
 
+
+/** Static function to set the name field from a string
+ * @param record a pointer to the record
+ * @param value the value
+ */
 void IMPLEMENT(CustomerRecord_setValue_name)(CustomerRecord * record, const char * value)
 {
     copyStringWithLength(record->name, value, stringLength(value)+1);
 }
 
+/** Static function to set the address field from a string
+ * @param record a pointer to the record
+ * @param value the value
+ */
 void IMPLEMENT(CustomerRecord_setValue_address)(CustomerRecord * record, const char * value)
 {
     copyStringWithLength(record->address, value, stringLength(value)+1);
 }
 
+/** Static function to set the postal code field from a string
+ * @param record a pointer to the record
+ * @param value the value
+ */
 void IMPLEMENT(CustomerRecord_setValue_postalCode)(CustomerRecord * record, const char * value)
 {
     copyStringWithLength(record->postalCode, value, stringLength(value)+1);
 }
 
+/** Static function to set the town field from a string
+ * @param record a pointer to the record
+ * @param value the value
+ */
 void IMPLEMENT(CustomerRecord_setValue_town)(CustomerRecord * record, const char * value)
 {
     copyStringWithLength(record->town, value, stringLength(value)+1);
 }
 
+/** Function to get the name field from a record
+ * @param record a pointer to the record
+ * @return a new string on the heap of name
+ */
 char * IMPLEMENT(CustomerRecord_getValue_name)(CustomerRecord * record)
 {
     return duplicateString(record->name);
 }
 
+/** Function to get the address field from a record
+ * @param record a pointer to the record
+ * @return a new string on the heap of address
+ */
 char * IMPLEMENT(CustomerRecord_getValue_address)(CustomerRecord * record)
 {
     return duplicateString(record->address);
 }
 
+/** Function to get the postal code field from a record
+ * @param record a pointer to the record
+ * @return a new string on the heap of postal code
+ */
 char * IMPLEMENT(CustomerRecord_getValue_postalCode)(CustomerRecord * record)
 {
     return duplicateString(record->postalCode);
 }
 
+/** Function to get the town field from a record
+ * @param record a pointer to the record
+ * @return a new string on the heap of town
+ */
 char * IMPLEMENT(CustomerRecord_getValue_town)(CustomerRecord * record)
 {
     return duplicateString(record->town);
 }
 
+/** Static function to init all fields from a record
+ * @param record a pointer to the record
+ */
 void IMPLEMENT(CustomerRecord_init)(CustomerRecord * record)
 {
     memset(record->name, 0, CUSTOMERRECORD_NAME_SIZE);
@@ -69,9 +105,16 @@ void IMPLEMENT(CustomerRecord_init)(CustomerRecord * record)
     memset(record->town, 0, CUSTOMERRECORD_TOWN_SIZE);
 }
 
+/** Static function to freeing all fields from a record
+ * @param record a pointer to the record
+ */
 void IMPLEMENT(CustomerRecord_finalize)(CustomerRecord * UNUSED(record)){
 }
 
+/** Static function to read all fields from a record to a file
+ * @param record a pointer to the record
+ * @param file a file
+ */
 void IMPLEMENT(CustomerRecord_read)(CustomerRecord * record, FILE * file)
 {
     testError(fread(record->name, CUSTOMERRECORD_NAME_SIZE, 1, file), record->name, record, file);
@@ -80,6 +123,10 @@ void IMPLEMENT(CustomerRecord_read)(CustomerRecord * record, FILE * file)
     testError(fread(record->town, CUSTOMERRECORD_TOWN_SIZE, 1, file), record->town, record, file);
 }
 
+/** Static function to write all fields from a record to a file
+ * @param record a pointer to the record
+ * @param file a file
+ */
 void IMPLEMENT(CustomerRecord_write)(CustomerRecord * record, FILE * file)
 {
     testError(fwrite(record->name, CUSTOMERRECORD_NAME_SIZE, 1, file), record->name, record, file);
@@ -88,7 +135,13 @@ void IMPLEMENT(CustomerRecord_write)(CustomerRecord * record, FILE * file)
     testError(fwrite(record->town, CUSTOMERRECORD_TOWN_SIZE, 1, file), record->town, record, file);
 }
 
-void testError(size_t nbrOpSuccess, char * pointRecord, CustomerRecord * record, FILE * file)
+/** Static function to test if fwrite and fread works correctly
+ * @param nbrOpSuccess the return value of function
+ * @param pointRecord a pointer to the record filed
+ * @param record a pointer to the record
+ * @param file a file
+ */
+static void testError(size_t nbrOpSuccess, char * pointRecord, CustomerRecord * record, FILE * file)
 {
     if(nbrOpSuccess < 1 && stringLength(pointRecord) != 0)
     {

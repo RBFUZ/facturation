@@ -22,61 +22,65 @@
 static char encode(char key1, char decoded);
 static char decode(char key, char encoded);
 
+
+/** Encrypt a string by Vigenere method.
+ * @param src the string to encrypt
+ * @param key the string content the key
+ */
 void IMPLEMENT(encrypt)(const char * key, char * str) {
-    size_t i = 0, j = 0;
+    size_t count1 = 0, count2 = 0;
 
     makeLowerCaseString(str);
 
-    while(str[i] != '\0')
+    while(str[count1] != '\0')
     {
-        if(key[j] == '\0')
-        {
-            j = 0;
-        }
+        if(key[count2] == '\0')
+            count2 = 0;
 
-        if(str[i] >= 'a' && str[i] <= 'z')
-        {
-            str[i] = encode(key[j], str[i]);
-        }
+        if(str[count1] >= 'a' && str[count1] <= 'z')
+            str[count1] = encode(key[count2], str[count1]);
 
         else
-        {
-            j--;
-        }
+            count2--;
 
-        i++;
-        j++;
+        count1++;
+        count2++;
     }
 }
+
+
+/** Decrypt a string by Vigenere method.
+ * @param src the string to Decrypt
+ * @param key the string content the key
+ */
 void IMPLEMENT(decrypt)(const char * key, char * str) {
-    size_t i = 0, j = 0;
+    size_t count1 = 0, count2 = 0;
 
     makeLowerCaseString(str);
 
-    while(str[i] != '\0')
+    while(str[count1] != '\0')
     {
-        if(key[j] == '\0')
-        {
-            j = 0;
-        }
+        if(key[count2] == '\0')
+            count2 = 0;
 
-        if(str[i] >= 'a' && str[i] <= 'z')
-        {
-            str[i] = decode(key[j], str[i]);
-        }
+        if(str[count1] >= 'a' && str[count1] <= 'z')
+            str[count1] = decode(key[count2], str[count1]);
 
         else
-        {
-            j--;
-        }
+            count2--;
 
-        i++;
-        j++;
+        count1++;
+        count2++;
     }
 }
 
-static char encode(char key, char decoded) {
-    int resultat = 0, total = 0;
+/** Encode a string by Vigenere method.
+ * @param src the string to encode
+ * @param key the string content the key
+ */
+static char encode(char key, char decoded)
+{
+    int result = 0, total = 0;
     char encoded;
 
     decoded = toLowerChar(decoded);
@@ -84,14 +88,12 @@ static char encode(char key, char decoded) {
 
     if(decoded >= 'a' && decoded <= 'z')
     {
-        resultat = decoded + key - 2 * 'a';
+        result = decoded + key - 2 * 'a';
 
-        if(resultat > 'z' - 'a')
-        {
-            resultat -= 'z' - 'a' - 1;
-        }
+        if(result > 'z' - 'a')
+            result -= 'z' - 'a' - 1;
 
-        total = 'a' + resultat;
+        total = 'a' + result;
         encoded = (char)total;
     }
 
@@ -103,7 +105,13 @@ static char encode(char key, char decoded) {
     return encoded;
 }
 
-static char decode(char key, char encoded) {
+
+/** Decode a string by Vigenere method.
+ * @param src the string to decode
+ * @param key the string content the key
+ */
+static char decode(char key, char encoded)
+{
     char decoded;
     int convertInt;
 
@@ -127,9 +135,7 @@ static char decode(char key, char encoded) {
     }
 
     else
-    {
         decoded = (char)encoded;
-    }
 
     return decoded;
 }

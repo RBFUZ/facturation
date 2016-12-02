@@ -19,16 +19,15 @@
 
 #include <Dictionary.h>
 
-char * findCharInString(char * str, char c);
-char * formatString(char * copyValueStringEntry, char * buffer, char * charaEqual);
-char * formatNumber(char * copyValueEntryNumber, char * buffer, char * charaEqual);
-char * valueAfterEqual(char * buffer, char * charaEqual);
-char * parameterNotFound(Dictionary * dictionary, char * copyFormat);
-char * ifModeleIsComplete(Dictionary * dictionary, char * copyFormat, char * stringFormated, char * stringFormatedFinal, char * charaAccolade);
-char * formatSecondParameterNumber(char * charaEqual, char * copyFormat, char * buffer, char * stringFormated, char * stringFormatedFinal);
-char * formatSecondParameterString(char * charaEqual, char * copyFormat, char * buffer, char * stringFormated, char * stringFormatedFinal);
-
-void setCursorEndOfModele(char * copyFormat);
+static char * findCharInString(char * str, char c);
+static char * formatString(char * copyValueStringEntry, char * buffer, char * charaEqual);
+static char * formatNumber(char * copyValueEntryNumber, char * buffer, char * charaEqual);
+static char * valueAfterEqual(char * buffer, char * charaEqual);
+static char * parameterNotFound(Dictionary * dictionary, char * copyFormat);
+static char * ifModeleIsComplete(Dictionary * dictionary, char * copyFormat, char * stringFormated, char * stringFormatedFinal, char * charaAccolade);
+static char * formatSecondParameterNumber(char * charaEqual, char * copyFormat, char * buffer, char * stringFormated, char * stringFormatedFinal);
+static char * formatSecondParameterString(char * charaEqual, char * copyFormat, char * buffer, char * stringFormated, char * stringFormatedFinal);
+static void setCursorEndOfModele(char * copyFormat);
 
 /** Create an empty dictionary on the heap
  * @return a new dictionary
@@ -36,7 +35,7 @@ void setCursorEndOfModele(char * copyFormat);
  */
 Dictionary * IMPLEMENT(Dictionary_create)(void)
 {
-    Dictionary * dictionary = malloc(sizeof(Dictionary));
+    Dictionary * dictionary = (Dictionary*) malloc(sizeof(Dictionary));
 
     if (dictionary == NULL)
         fatalError("malloc error : Attribution of Dictionary * dictionary on the heap failed");
@@ -102,7 +101,7 @@ void IMPLEMENT(Dictionary_setStringEntry)(Dictionary * dictionary, const char * 
 
         if (dictionary->entries == NULL)
         {
-            dictionary->entries = malloc(sizeof(DictionaryEntry));
+            dictionary->entries = (DictionaryEntry*) malloc(sizeof(DictionaryEntry));
 
             if (dictionary->entries == NULL)
                 fatalError("error malloc : Attribution of dictionary->entries on the heap failed");
@@ -145,7 +144,7 @@ void IMPLEMENT(Dictionary_setNumberEntry)(Dictionary * dictionary, const char * 
 
         if (dictionary->entries == NULL)
         {
-            dictionary->entries = malloc(sizeof(DictionaryEntry));
+            dictionary->entries = (DictionaryEntry*) malloc(sizeof(DictionaryEntry));
 
             if (dictionary->entries == NULL)
                 fatalError("error malloc : Attribution of dictionary->entries on the heap failed");
@@ -230,7 +229,14 @@ char * IMPLEMENT(Dictionary_format)(Dictionary * dictionary, const char * format
     return stringFormatedFinal;
 }
 
-
+/** Function is called when model is complete to format a string or number
+ * @param dictionary the dictionary
+ * @param copyFormat a copy of format
+ * @param stringFormated a temporary string
+ * @param stringFormatedFinal the future string returned
+ * @param charaAccolade a string contain accolade charactere
+ * @return a pointer to the string formated
+ */
 char * ifModeleIsComplete(Dictionary * dictionary, char * copyFormat, char * stringFormated, char * stringFormatedFinal, char * charaAccolade)
 {
     DictionaryEntry * entry;
@@ -280,10 +286,18 @@ char * ifModeleIsComplete(Dictionary * dictionary, char * copyFormat, char * str
     return stringFormatedFinal;
 }
 
-
+/** Function format the string
+ * @param copyValueStringEntry a copy of string value entry
+ * @param buffer a buffer
+ * @param charaEqual a string contain equal charactere
+ * @return a pointer to the string formated
+ */
 char * formatString(char * copyValueStringEntry, char * buffer, char * charaEqual)
 {
     char * charTemp = (char*)malloc(sizeof(char) * stringLength(copyValueStringEntry) + 1);
+
+    if (charTemp == NULL)
+                fatalError("error malloc : Attribution of charTemp on the heap failed");
 
     copyStringWithLength(charTemp, copyValueStringEntry, stringLength(copyValueStringEntry) + 1);
 
@@ -313,7 +327,12 @@ char * formatString(char * copyValueStringEntry, char * buffer, char * charaEqua
     return copyValueStringEntry;
 }
 
-
+/** Function format the number
+ * @param result a copy of number value entry
+ * @param buffer a buffer
+ * @param charaEqual a string contain equal charactere
+ * @return a pointer to the string formated
+ */
 char * formatNumber(char * result, char * buffer, char * charaEqual)
 {
     double doubleOfCopy = 0.0;
@@ -346,7 +365,11 @@ char * formatNumber(char * result, char * buffer, char * charaEqual)
 }
 
 
-
+/** Function search and return the value after equal charactere
+ * @param buffer a buffer
+ * @param charaEqual a string contain equal charactere
+ * @return the string contain the number after equal charactere
+ */
 char * valueAfterEqual(char * buffer, char * charaEqual)
 {
     int i = 1;
@@ -361,7 +384,11 @@ char * valueAfterEqual(char * buffer, char * charaEqual)
 }
 
 
-
+/** Function search a charactere in a string.
+ * @param str a string
+ * @param c charactere to find
+ * @return a pointer to the charactere found
+ */
 char * findCharInString(char * str, char c)
 {
     int i = 0;
@@ -378,7 +405,14 @@ char * findCharInString(char * str, char c)
     return resultat;
 }
 
-
+/** Function format the string a second time
+ * @param charaEqual a string contain a equal charactere
+ * @param copyFormat a string contain a copy of format
+ * @param buffer a buffer
+ * @param stringFormated a temporary string
+ * @param stringFormatedFinal the future returned value
+ * @return a pointer to the new string formated
+ */
 char * formatSecondParameterString(char * charaEqual, char * copyFormat, char * buffer, char * stringFormated, char * stringFormatedFinal)
 {
     charaEqual = findCharInString(copyFormat, '=');
@@ -391,7 +425,14 @@ char * formatSecondParameterString(char * charaEqual, char * copyFormat, char * 
     return stringFormatedFinal;
 }
 
-
+/** Function format the string a second time
+ * @param charaEqual a string contain a equal charactere
+ * @param copyFormat a string contain a copy of format
+ * @param buffer a buffer
+ * @param stringFormated a temporary string
+ * @param stringFormatedFinal the future returned value
+ * @return a pointer to the new string formated
+ */
 char * formatSecondParameterNumber(char * charaEqual, char * copyFormat, char * buffer, char * stringFormated, char * stringFormatedFinal)
 {
     charaEqual = findCharInString(copyFormat, '=');
@@ -405,7 +446,12 @@ char * formatSecondParameterNumber(char * charaEqual, char * copyFormat, char * 
 }
 
 
-
+/** Function is called when model haven't parameter
+ * @param dictionary a dictionary
+ * @param copyFormat a string contain a copy of format
+ * @param buffer a buffer
+ * @return a pointer to the new string formated
+ */
 char * parameterNotFound(Dictionary * dictionary, char * copyFormat)
 {
     DictionaryEntry * entry;
@@ -434,7 +480,10 @@ char * parameterNotFound(Dictionary * dictionary, char * copyFormat)
     return result;
 }
 
-
+/** Function cut a part of string formated (model one)
+ * @param copyFormat a string contain a copy of format
+ * @return a pointer to the new string copyFormat
+ */
 void setCursorEndOfModele(char * copyFormat)
 {
     size_t i = 1;

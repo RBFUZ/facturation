@@ -21,7 +21,7 @@
 #include <Dictionary.h>
 
 static char * readLine(FILE * fichier);
-char * readMarked(FILE * file, const char * mark);
+static char * readMarked(FILE * file, const char * mark);
 
 /** Initialize a print format
  * @param format a print format
@@ -75,7 +75,10 @@ void IMPLEMENT(PrintFormat_loadFromFile)(PrintFormat * format, const char * file
     fclose(file);
 }
 
-
+/** Function read one line in a file
+ * @param fichier a file
+ * @return the new string
+ */
 static char * readLine(FILE * fichier)
 {
     char * line = duplicateString("");
@@ -94,8 +97,12 @@ static char * readLine(FILE * fichier)
     return line;
 }
 
-
-char * readMarked(FILE * file, const char * mark)
+/** Function read a part of model
+ * @param file a file
+ * @param mark the name to the part of model
+ * @return the new string
+ */
+static char * readMarked(FILE * file, const char * mark)
 {
     char * lineOfFile1 = readLine(file);
     char * lineOfFile2 = readLine(file);

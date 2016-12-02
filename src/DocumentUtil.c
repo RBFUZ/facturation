@@ -19,7 +19,7 @@
 
 #include <DocumentUtil.h>
 
-size_t countCharOfInt(long id, int base);
+static size_t countCharOfInt(long id, int base);
 
 
 /** Create a new string on the heap which represents the parameter as a number in basis 36.
@@ -34,7 +34,7 @@ char * IMPLEMENT(computeDocumentNumber)(long id)
     char * stringBase36 = (char*)calloc(nbrCharInId, sizeof(char));
 
     if (stringBase36 == NULL)
-        printf("ERREUR");
+        fatalError("calloc error : Allocation of stringBase36 on the heap failed");
 
     while (nbrCharInId > 1)
     {
@@ -62,34 +62,34 @@ char * IMPLEMENT(computeDocumentNumber)(long id)
  */
 char * IMPLEMENT(formatDate)(int day, int month, int year)
 {
-    int i = 0, temp = year;
+    int count = 0, temp = year;
     char * date2String = (char*)malloc(11 * sizeof(char));
 
     if (date2String == NULL)
-        fatalError("Erreur d'attribution d'une chaine sur le tas");
+        fatalError("malloc error : Allocation of date2String on the heap failed");
 
-    while (i < 10)
+    while (count < 10)
     {
-        switch (i)
+        switch (count)
         {
         case 2:
-            date2String[i] = '/';
-            i++;
+            date2String[count] = '/';
+            count++;
             break;
         case 5:
-            date2String[i] = '/';
-            i++;
+            date2String[count] = '/';
+            count++;
             break;
         default:
-            date2String[i] = 'a';
-            i++;
+            date2String[count] = 'a';
+            count++;
             break;
         }
     }
-    i--;
-    while (i >= 0)
+    count--;
+    while (count >= 0)
     {
-        switch(i)
+        switch(count)
         {
         case 2:
             temp = day;
@@ -98,11 +98,11 @@ char * IMPLEMENT(formatDate)(int day, int month, int year)
             temp = month;
             break;
         default:
-            date2String[i] = (char)((temp % 10) + '0');
+            date2String[count] = (char)((temp % 10) + '0');
             temp = temp / 10;
             break;
         }
-        i--;
+        count--;
     }
     date2String[10] = '\0';
     return date2String;
@@ -138,7 +138,7 @@ char * IMPLEMENT(readString)(FILE * file)
     if (fread(&nbrChara, sizeof(size_t), 1, file) < 1)
         fatalError("fwrite error : return value is not valid.");
 
-    char * newString = (char*) malloc(sizeof(char) * nbrChara + 1);
+    char * newString = (char*)malloc(sizeof(char) * nbrChara + 1);
 
     if (newString == NULL)
         fatalError("malloc error : Allocation of char * newString failed.");
@@ -154,8 +154,12 @@ char * IMPLEMENT(readString)(FILE * file)
 }
 
 
-
-size_t countCharOfInt(long id, int base)
+/** Count the number of letter in integer
+ * @param id the number to count
+ * @param base the base to convert the number
+ * @return a new size_t that contain the number of letter in integer taking into consideration the base
+ */
+static size_t countCharOfInt(long id, int base)
 {
 	size_t compt = 0;
 

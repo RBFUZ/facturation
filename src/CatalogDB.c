@@ -151,8 +151,9 @@ char * CatalogDB_getFieldValueAsString(CatalogDB * catalogDB, int recordIndex, i
  */
 void IMPLEMENT(CatalogDB_appendRecord)(CatalogDB * catalogDB, CatalogRecord *record)
 {
+    rewind(catalogDB->file);
+    fseek(catalogDB->file, (int)sizeof(int) + (int)CATALOGRECORD_SIZE * catalogDB->recordCount, SEEK_CUR);
     catalogDB->recordCount += 1;
-    fseek(catalogDB->file, 0, SEEK_END);
     CatalogRecord_write(record, catalogDB->file);
     rewind(catalogDB->file);
 }

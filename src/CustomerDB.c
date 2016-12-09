@@ -145,8 +145,9 @@ char * CustomerDB_getFieldValueAsString(CustomerDB * customerDB, int recordIndex
  */
 void IMPLEMENT(CustomerDB_appendRecord)(CustomerDB * customerDB, CustomerRecord *record)
 {
+    rewind(customerDB->file);
+    fseek(customerDB->file, (int)sizeof(int) + (int)CUSTOMERRECORD_SIZE * customerDB->recordCount, SEEK_CUR);
     customerDB->recordCount += 1;
-    fseek(customerDB->file, 0, SEEK_END);
     CustomerRecord_write(record, customerDB->file);
     rewind(customerDB->file);
 }

@@ -69,10 +69,10 @@ OperatorTable * IMPLEMENT(OperatorTable_loadFromFile)(const char * filename)
 {
     OperatorTable * newTable = OperatorTable_create();
 
-    FILE * file = fopen(filename, "r+");
+    FILE * file = fopen(filename, "r");
 
     if (file == NULL)
-        return NULL;
+        return newTable;
 
     fseek(file, 0, SEEK_END);
     long endOfFile = ftell(file);
@@ -107,7 +107,7 @@ OperatorTable * IMPLEMENT(OperatorTable_loadFromFile)(const char * filename)
  */
 void IMPLEMENT(OperatorTable_saveToFile)(OperatorTable * table, const char * filename)
 {
-    FILE * file = fopen(filename, "wt+");
+    FILE * file = fopen(filename, "w");
 
     if (file == NULL)
         fatalError("Error : Opening file failed");

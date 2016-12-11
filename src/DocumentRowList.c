@@ -271,46 +271,30 @@ void IMPLEMENT(DocumentRowList_removeRow)(DocumentRow ** list, DocumentRow * pos
  */
 void IMPLEMENT(DocumentRow_writeRow)(DocumentRow * row, FILE * file)
 {
-    char buffer[127UL] = "";
+    char buffer[128UL] = "";
 
     writeString(row->code, file);
+    writeString(row->unity, file);
     writeString(row->designation, file);
 
-    memset(buffer, '\0', 127UL);
-    if (row->quantity <= (int)row->quantity)
-        sprintf (buffer, "%.f", row->quantity);
-    else
-        sprintf (buffer, "%.2f", row->quantity);
+    memset(buffer, '\0', 128UL);
+    sprintf (buffer, "%.2f", row->quantity);
     writeString(buffer, file);
 
-    writeString(row->unity, file);
-
-    memset(buffer, '\0', 127UL);
-    if (row->basePrice <= (int)row->basePrice)
-        sprintf (buffer, "%.f", row->basePrice);
-    else
-        sprintf (buffer, "%.2f", row->basePrice);
+    memset(buffer, '\0', 128UL);
+    sprintf (buffer, "%.2f", row->basePrice);
     writeString(buffer, file);
 
-    memset(buffer, '\0', 127UL);
-    if (row->sellingPrice <= (int)row->sellingPrice)
-        sprintf (buffer, "%.f", row->sellingPrice);
-    else
-        sprintf (buffer, "%.2f", row->sellingPrice);
+    memset(buffer, '\0', 128UL);
+    sprintf (buffer, "%.2f", row->sellingPrice);
     writeString(buffer, file);
 
-    memset(buffer, '\0', 127UL);
-    if (row->discount <= (int)row->discount)
-        sprintf (buffer, "%.f", row->discount);
-    else
-        sprintf (buffer, "%.2f", row->discount);
+    memset(buffer, '\0', 128UL);
+    sprintf (buffer, "%.2f", row->discount);
     writeString(buffer, file);
 
-    memset(buffer, '\0', 127UL);
-    if (row->rateOfVAT <= (int)row->rateOfVAT)
-        sprintf (buffer, "%.f", row->rateOfVAT);
-    else
-        sprintf (buffer, "%.2f", row->rateOfVAT);
+    memset(buffer, '\0', 128UL);
+    sprintf (buffer, "%.2f", row->rateOfVAT);
     writeString(buffer, file);
 }
 
@@ -324,15 +308,13 @@ DocumentRow * IMPLEMENT(DocumentRow_readRow)(FILE * file)
     char * buffer = NULL;
     DocumentRow_finalize(row);
 
-
     row->code = readString(file);
     row->designation = readString(file);
+    row->unity = readString(file);
 
     buffer = readString(file);
     sscanf (buffer, "%lf", &row->quantity);
     free(buffer);
-
-    row->unity = readString(file);
 
     buffer = readString(file);
     sscanf (buffer, "%lf", &row->basePrice);

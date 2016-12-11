@@ -71,7 +71,7 @@ static void test_Dictionary_format(void)
   ASSERT_EQUAL_STRING(result, "10");
   free(result);
 
-  /*No precision => default C précision : 6 digits*/
+  /* No precision => default C précision : 6 digits */
   result = Dictionary_format(dic, "%VAR1%");
   ASSERT_EQUAL_STRING(result, "10.200000");
   free(result);

@@ -20,13 +20,13 @@
 #include <App.h>
 
 /** Last name of the student. */
-const char * STUDENT_LASTNAME = "de La Motte-Picquet";
+const char * STUDENT_LASTNAME = "BOUTELOUP";
 /** First name of the student. */
-const char * STUDENT_FIRSTNAME = "Jean-Noel";
+const char * STUDENT_FIRSTNAME = "Remy";
 /** The current school years */
-const char * STUDENT_YEARS = "2013-2014";
+const char * STUDENT_YEARS = "2016-2017";
 /** The group of the students */
-const char * STUDENT_GROUP = "X";
+const char * STUDENT_GROUP = "3";
 
 /** The main function
  * @param argc the number of arguments of the program

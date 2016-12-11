@@ -29,6 +29,7 @@ static char * formatSecondParameterNumber(char * charaEqual, char * copyFormat, 
 static char * formatSecondParameterString(char * charaEqual, char * copyFormat, char * buffer, char * stringFormated, char * stringFormatedFinal);
 static void setCursorEndOfModele(char * copyFormat);
 
+
 /** Create an empty dictionary on the heap
  * @return a new dictionary
  * @warning the dictionary should be destroyed using Dictionary_destroy()
@@ -180,84 +181,112 @@ void IMPLEMENT(Dictionary_setNumberEntry)(Dictionary * dictionary, const char * 
  */
 char * IMPLEMENT(Dictionary_format)(Dictionary * dictionary, const char * format)
 {
-    char * copyFormat = duplicateString(format), * charaAccolade = NULL, * stringFormatedFinal = duplicateString(""), * copyOfParameterNotFound = NULL;
-    char stringFormated[30];
+    char * copyFormatSmall = NULL, * charaAccolade = NULL, * stringFormatedFinal = duplicateString(""), * copyOfParameterNotFound = NULL;
+    char stringFormated[2048] = "";
+    size_t movePourcentage = 0, beforePourcentage = 0;
 
-    memset(stringFormated, '\0', sizeof(char) * 30);
+    memset(stringFormated, '\0', sizeof(char) * 2048);
 
-    copyStringWithLength(copyFormat, format+1, stringLength(format) +1);
-
-    while (copyFormat[1] != '\0')
+    while (movePourcentage <= stringLength(format))
     {
-        charaAccolade = findCharInString(copyFormat, '{');
+        while (format[movePourcentage] != '%' && stringLength(format) != movePourcentage)
+            movePourcentage++;
+
+        copyStringWithLength(stringFormated, stringFormatedFinal, stringLength(stringFormatedFinal) + 1);
+        free(stringFormatedFinal);
+
+        if (stringLength(stringFormated) != 0)
+            stringFormatedFinal = insertString(stringFormated, (int)(movePourcentage - beforePourcentage), format + beforePourcentage, 1);
+
+        beforePourcentage = movePourcentage;
+
+        while (format[movePourcentage+1] != '%')
+            movePourcentage++;
+
+        copyFormatSmall = insertString("", 0 , format + beforePourcentage + 1, (int)(movePourcentage - beforePourcentage));
+
+        charaAccolade = findCharInString(copyFormatSmall, '{');
 
         if (charaAccolade == NULL)
         {
             copyStringWithLength(stringFormated, stringFormatedFinal, stringLength(stringFormatedFinal) + 1);
             free(stringFormatedFinal);
-            copyOfParameterNotFound = parameterNotFound(dictionary, copyFormat);
+            copyOfParameterNotFound = parameterNotFound(dictionary, copyFormatSmall);
             stringFormatedFinal = concatenateString(stringFormated, copyOfParameterNotFound);
-            setCursorEndOfModele(copyFormat);
+            setCursorEndOfModele(copyFormatSmall);
         }
-        else if(copyFormat[0] == '%')
+        else if(copyFormatSmall[0] == '%')
         {
             copyStringWithLength(stringFormated, stringFormatedFinal, stringLength(stringFormatedFinal) + 1);
             free(stringFormatedFinal);
             stringFormatedFinal = concatenateString(stringFormated, "%");
-            setCursorEndOfModele(copyFormat);
+            setCursorEndOfModele(copyFormatSmall);
         }
         else
-            stringFormatedFinal = ifModeleIsComplete(dictionary, copyFormat, stringFormated, stringFormatedFinal, charaAccolade);
-
-        if (copyFormat == NULL)
         {
-            printf("\n\n -- TRADUCTION OF MODEl FAILED -- \n\n");
-            return duplicateString("");
+            stringFormatedFinal = ifModeleIsComplete(dictionary, copyFormatSmall, stringFormated, stringFormatedFinal, charaAccolade);
         }
 
-        if (copyFormat[1] != '\0')
+        if (copyFormatSmall == NULL)
+            printf("\n\n -- TRADUCTION OF MODEl FAILED -- \n\n");
+
+        if (copyFormatSmall[1] != '\0')
         {
-            copyStringWithLength(copyFormat, copyFormat + 3, stringLength(copyFormat) -2);
+            copyStringWithLength(copyFormatSmall, copyFormatSmall + 3, stringLength(copyFormatSmall) -2);
             copyStringWithLength(stringFormated, stringFormatedFinal, stringLength(stringFormatedFinal) + 1);
             free(stringFormatedFinal);
             stringFormatedFinal = insertString(stringFormated, (int)stringLength(stringFormated), " ", 1);
         }
-
     }
-    free(copyFormat);
+    free(copyFormatSmall);
     free(copyOfParameterNotFound);
     return stringFormatedFinal;
-}
+    }
 
-/** Function is called when model is complete to format a string or number
+/**Function is called when model is complete to format a string or number
  * @param dictionary the dictionary
  * @param copyFormat a copy of format
  * @param stringFormated a temporary string
  * @param stringFormatedFinal the future string returned
  * @param charaAccolade a string contain accolade charactere
  * @return a pointer to the string formated
- */
+*/
+
 char * ifModeleIsComplete(Dictionary * dictionary, char * copyFormat, char * stringFormated, char * stringFormatedFinal, char * charaAccolade)
 {
     DictionaryEntry * entry;
-    char buffer[30], bufferForNumberEntry[30];
+    char buffer[1024] = "", bufferForNumberEntry[1024] = "";
     char * charaEqual = NULL;
     char * copyOfFormat = NULL;
 
-    memset(buffer, '\0', sizeof(char) * 30);
-    memset(bufferForNumberEntry, '\0', sizeof(char) * 30);
+    memset(buffer, '\0', sizeof(char) * 1024);
+    memset(bufferForNumberEntry, '\0', sizeof(char) * 1024);
     copyStringWithLength(buffer, copyFormat, stringLength(copyFormat) - stringLength(charaAccolade) + 1);
     entry = Dictionary_getEntry(dictionary, buffer);
 
+    FILE * test = fopen("/tmp/facturation/data/null", "a");
+    int i = 0;
+    while (i != dictionary->count)
+    {
+        fputs(dictionary->entries[i].name, test);
+        fputs("\n", test);
+        i++;
+    }
+
+    fputs(buffer, test);
+    fclose(test);
+
     if (entry == NULL)
-        return NULL;
+    {
+        fatalError("Entry not found !");
+    }
 
     charaEqual = findCharInString(copyFormat, '=');
     copyStringWithLength(buffer, charaAccolade+1, stringLength(charaAccolade) - stringLength(charaEqual));
 
     if (entry->type == STRING_ENTRY)
     {
-        copyStringWithLength(stringFormated, stringFormatedFinal, stringLength(stringFormatedFinal));
+        copyStringWithLength(stringFormated, stringFormatedFinal, stringLength(stringFormatedFinal) + 1);
         free(stringFormatedFinal);
         copyOfFormat = formatString(duplicateString(entry->value.stringValue), buffer, charaEqual);
         stringFormatedFinal = concatenateString(stringFormated, copyOfFormat);
@@ -265,12 +294,11 @@ char * ifModeleIsComplete(Dictionary * dictionary, char * copyFormat, char * str
 
         if (copyFormat[0] == ',')
             stringFormatedFinal = formatSecondParameterString(charaEqual, copyFormat, buffer, stringFormated, stringFormatedFinal);
-
     }
     else if (entry->type == NUMBER_ENTRY)
     {
         sprintf (bufferForNumberEntry, "%f", entry->value.numberValue);
-        copyStringWithLength(stringFormated, stringFormatedFinal, stringLength(stringFormatedFinal) +1);
+        copyStringWithLength(stringFormated, stringFormatedFinal, stringLength(stringFormatedFinal) + 1);
         free(stringFormatedFinal);
         copyOfFormat = formatNumber(duplicateString(bufferForNumberEntry), buffer, charaEqual);
         stringFormatedFinal = concatenateString(stringFormated, copyOfFormat);
@@ -286,12 +314,13 @@ char * ifModeleIsComplete(Dictionary * dictionary, char * copyFormat, char * str
     return stringFormatedFinal;
 }
 
-/** Function format the string
+/**Function format the string
  * @param copyValueStringEntry a copy of string value entry
  * @param buffer a buffer
  * @param charaEqual a string contain equal charactere
  * @return a pointer to the string formated
- */
+*/
+
 char * formatString(char * copyValueStringEntry, char * buffer, char * charaEqual)
 {
     char * charTemp = (char*)malloc(sizeof(char) * stringLength(copyValueStringEntry) + 1);
@@ -327,20 +356,21 @@ char * formatString(char * copyValueStringEntry, char * buffer, char * charaEqua
     return copyValueStringEntry;
 }
 
-/** Function format the number
+/**Function format the number
  * @param result a copy of number value entry
  * @param buffer a buffer
  * @param charaEqual a string contain equal charactere
  * @return a pointer to the string formated
- */
+*/
+
 char * formatNumber(char * result, char * buffer, char * charaEqual)
 {
     double doubleOfCopy = 0.0;
     int valueAfterEqualInt = 0;
-    char copyOfResult[30];
+    char copyOfResult[1024] = "";
     char * parameterOfSprintf = NULL;
 
-    memset(copyOfResult, '\0', sizeof(char) * 30);
+    memset(copyOfResult, '\0', sizeof(char) * 1024);
 
     if (icaseCompareString(buffer, "precision") == 0)
     {
@@ -365,15 +395,16 @@ char * formatNumber(char * result, char * buffer, char * charaEqual)
 }
 
 
-/** Function search and return the value after equal charactere
+/**Function search and return the value after equal charactere
  * @param buffer a buffer
  * @param charaEqual a string contain equal charactere
  * @return the string contain the number after equal charactere
- */
+*/
+
 char * valueAfterEqual(char * buffer, char * charaEqual)
 {
     int i = 1;
-    memset(buffer, '\0', sizeof(char) * 30);
+    memset(buffer, '\0', sizeof(char) * 1024);
 
     while (charaEqual[i] >= '0' && charaEqual[i] <= '9')
     {
@@ -388,7 +419,8 @@ char * valueAfterEqual(char * buffer, char * charaEqual)
  * @param str a string
  * @param c charactere to find
  * @return a pointer to the charactere found
- */
+*/
+
 char * findCharInString(char * str, char c)
 {
     int i = 0;
@@ -405,18 +437,19 @@ char * findCharInString(char * str, char c)
     return resultat;
 }
 
-/** Function format the string a second time
+/**Function format the string a second time
  * @param charaEqual a string contain a equal charactere
  * @param copyFormat a string contain a copy of format
  * @param buffer a buffer
  * @param stringFormated a temporary string
  * @param stringFormatedFinal the future returned value
  * @return a pointer to the new string formated
- */
+*/
+
 char * formatSecondParameterString(char * charaEqual, char * copyFormat, char * buffer, char * stringFormated, char * stringFormatedFinal)
 {
     charaEqual = findCharInString(copyFormat, '=');
-    memset(buffer, '\0', sizeof(char) * 30);
+    memset(buffer, '\0', sizeof(char) * 1024);
     copyStringWithLength(buffer, copyFormat+1, stringLength(copyFormat+1) - stringLength(charaEqual) + 1);
     copyStringWithLength(stringFormated, stringFormatedFinal, stringLength(stringFormatedFinal) + 1);
     free(stringFormatedFinal);
@@ -425,18 +458,19 @@ char * formatSecondParameterString(char * charaEqual, char * copyFormat, char * 
     return stringFormatedFinal;
 }
 
-/** Function format the string a second time
+/**Function format the string a second time
  * @param charaEqual a string contain a equal charactere
  * @param copyFormat a string contain a copy of format
  * @param buffer a buffer
  * @param stringFormated a temporary string
  * @param stringFormatedFinal the future returned value
  * @return a pointer to the new string formated
- */
+*/
+
 char * formatSecondParameterNumber(char * charaEqual, char * copyFormat, char * buffer, char * stringFormated, char * stringFormatedFinal)
 {
     charaEqual = findCharInString(copyFormat, '=');
-    memset(buffer, '\0', sizeof(char) * 30);
+    memset(buffer, '\0', sizeof(char) * 1024);
     copyStringWithLength(buffer, copyFormat+1, stringLength(copyFormat+1) - stringLength(charaEqual) + 1);
     copyStringWithLength(stringFormated, stringFormatedFinal, stringLength(stringFormatedFinal) + 1);
     free(stringFormatedFinal);
@@ -451,14 +485,15 @@ char * formatSecondParameterNumber(char * charaEqual, char * copyFormat, char * 
  * @param copyFormat a string contain a copy of format
  * @param buffer a buffer
  * @return a pointer to the new string formated
- */
+*/
+
 char * parameterNotFound(Dictionary * dictionary, char * copyFormat)
 {
     DictionaryEntry * entry;
     char * result = NULL;
-    char buffer[30];
+    char buffer[1024] = "";
 
-    memset(buffer, '\0', sizeof(char) * 30);
+    memset(buffer, '\0', sizeof(char) * 1024);
     copyStringWithLength(buffer, copyFormat, stringLength(copyFormat) - stringLength(findCharInString(copyFormat, '%')) + 1);
     entry = Dictionary_getEntry(dictionary, buffer);
 
@@ -468,7 +503,7 @@ char * parameterNotFound(Dictionary * dictionary, char * copyFormat)
             result = duplicateString(entry->value.stringValue);
         else if (entry->type == NUMBER_ENTRY)
         {
-            memset(buffer, '\0', sizeof(char) * 30);
+            memset(buffer, '\0', sizeof(char) * 1024);
             sprintf (buffer, "%.6f", entry->value.numberValue);
             result = duplicateString(buffer);
         }
@@ -480,10 +515,11 @@ char * parameterNotFound(Dictionary * dictionary, char * copyFormat)
     return result;
 }
 
-/** Function cut a part of string formated (model one)
+/**Function cut a part of string formated (model one)
  * @param copyFormat a string contain a copy of format
  * @return a pointer to the new string copyFormat
- */
+*/
+
 void setCursorEndOfModele(char * copyFormat)
 {
     size_t i = 1;
@@ -493,4 +529,5 @@ void setCursorEndOfModele(char * copyFormat)
 
     copyStringWithLength(copyFormat, copyFormat+i, stringLength(copyFormat) - i + 1);
 }
+
 
